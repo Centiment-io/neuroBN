@@ -6,11 +6,15 @@ Many research fields have benefit from the flexibility and expressiveness of the
 As it relates to neuroscience, this code base aims to perform the following general tasks:
 - <b><i>Function Connectivity Mapping</i></b> : looking for network-based relationships among variables of interest. This is
 known in the more general case as "Association Discovery".
-- <b><i>Feature Selection</i></b> : choosing the appropriate features (variables) to use in classifying a target variable, or otherwise
+- <b><i>Feature Selection</i></b> 
+	- choosing the appropriate features (variables) to use in classifying a target variable, or otherwise
 reducing the dimensionality of a large dataset.
-- <b><i>Supervised Classification</i></b> : predict class labels of new data from training data.
-- <b><i>Unsupervised Classification</i></b> : learning from data where the ground truth is unknown. One example of this task is "clustering" - assigning data into clusters of similar observations.
-- <b><i>Inference</i></b> : answering marginal or conditional probability queries, such as "what is the probability a person will develop dimentia given that he/she is 60 years old and had a stroke within the last five years?"
+- <b><i>Supervised Classification</i></b>
+	- predict class labels of new data from training data.
+- <b><i>Unsupervised Classification</i></b>
+	- learning from data where the ground truth is unknown. One example of this task is "clustering" - assigning data into clusters of similar observations.
+- <b><i>Inference</i></b>
+	- answering marginal or conditional probability queries, such as "what is the probability a person will develop dimentia given that he/she is 60 years old and had a stroke within the last five years?"
 
 <h2>Data</h2>
 
