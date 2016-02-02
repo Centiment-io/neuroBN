@@ -1,0 +1,97 @@
+{
+  "V": [
+    "Smoker", 
+    "Pollution", 
+    "Cancer", 
+    "Xray", 
+    "Dyspnoea"
+  ], 
+  "E": {
+    "Xray": [], 
+    "Dyspnoea": [], 
+    "Smoker": [
+      "Cancer"
+    ], 
+    "Cancer": [
+      "Xray", 
+      "Dyspnoea"
+    ], 
+    "Pollution": [
+      "Cancer"
+    ]
+  }, 
+  "F": {
+    "Xray": {
+      "values": [
+        "positive", 
+        "negative"
+      ], 
+      "parents": [
+        "Cancer"
+      ], 
+      "cpt": [
+        0.9, 
+        0.1, 
+        0.2, 
+        0.8
+      ]
+    }, 
+    "Dyspnoea": {
+      "values": [
+        "True", 
+        "False"
+      ], 
+      "parents": [
+        "Cancer"
+      ], 
+      "cpt": [
+        0.65, 
+        0.35, 
+        0.3, 
+        0.7
+      ]
+    }, 
+    "Smoker": {
+      "values": [
+        "True", 
+        "False"
+      ], 
+      "parents": [], 
+      "cpt": [
+        0.3, 
+        0.7
+      ]
+    }, 
+    "Cancer": {
+      "values": [
+        "True", 
+        "False"
+      ], 
+      "parents": [
+        "Pollution", 
+        "Smoker"
+      ], 
+      "cpt": [
+        0.03, 
+        0.97, 
+        0.05, 
+        0.95, 
+        0.001, 
+        0.999, 
+        0.02, 
+        0.98
+      ]
+    }, 
+    "Pollution": {
+      "values": [
+        "low", 
+        "high"
+      ], 
+      "parents": [], 
+      "cpt": [
+        0.9, 
+        0.1
+      ]
+    }
+  }
+}
