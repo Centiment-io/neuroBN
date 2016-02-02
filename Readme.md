@@ -34,14 +34,10 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 If you are a neuroscience researcher or student who thinks the incredible learning/classification/inference functionality of Bayesian networks can add value to your work or want to see support for a specific type of data, please contact me and I will either a) answer questions or give advice on how to get the most out of neuroBN or b) work with you to build custom functionality that integrates your work with the neuroBN code. Email me at ncullen.th@dartmouth.edu.
 
 
-<h2>References</h2>
-- [1] Bielza, C., Larranaga, P. "Bayesian networks in neuroscience: a survey"
-- [2] Daly, R., Shen, Q., Aitken, S. "Learning Bayesian networks: approaches and issues"
-- [3] Bielza, C., Li, G., Larranaga, P. "Multi-dimensional classification with Bayesian networks"
-- [4] Pham, D., Ruz, G. "Unsupervised training of Bayesian networks for data clustering"
+
 
 <h2>Survey of Existing Literature</h2>
-Below is a set of tables highlighting the use of Bayesian networks in the existing neuroscience literature. Please note that these tables are adapted directly from <i>Bielza, C., and Larranaga, P. "Bayesian networks in neuroscience: a survey"</i> ([1]) and are permitted under the Creative Commons License. Absolutely all credit for the following tables belongs to those two researchers.
+Below is a set of tables highlighting the use of Bayesian networks in the existing neuroscience literature. Please note that these tables are adapted directly from <i>Bielza, C., and Larranaga, P. "Bayesian networks in neuroscience: a survey"</i> ([1]) -- permitted under the Creative Commons License. Absolutely all credit for the following tables belongs to those two researchers.
 <h4>BNs with Morphological Data</h4>
 
 | Researchers | BN model | Aim | Application |
@@ -61,7 +57,26 @@ Below is a set of tables highlighting the use of Bayesian networks in the existi
 | Jung et al., 2010 | BN | Association | Neuronal synchrony from electrode signal recordings |
 | Pecevski et al., 2011 | BN | Inference | Emulate probabilistic inference through networks of spiking neurons |
 
+<h4>BNs with 'Omics Data</h4>
+| Researchers | BN model | Aim | Application |
+| Armañanzas et al., 2012 | Ensemble of BN classifiers | Association | Transcripts in AD |
+| Hullam et al., 2012 | BN | Association | SNPs in depression |
+| Zeng et al., 2013 | BN | Association | Cytokines and mRNA in cerebral ischemia |
+| Liang et al., 2007 | BN | Association | SNPs in childhood absence epilepsy |
+| Zhang et al., 2010 | BN | Association | Regulation network of the neuron-specific factor Nova (mice) |
+| Jiang et al., 2011 | BN | Association | SNPs in late onset AD |
+| Han et al., 2012 | BN | Association | SNPs in early onset autism |
+| Wei et al., 2011 | Model-averaged naive Bayes, selective naive Bayes |Sup. classification | Prediction of AD from SNPs |
+| Gollapalli et al., 2012 | Selective naive Bayes | Sup. classification | Mass spectrometry for predicting glioblastoma |
+| Belgard et al., 2011 | Naive Bayes | Sup. classification | Distinguish sequenced transcriptomes among layers I-VIb |
 
+
+
+<h2>References</h2>
+- [1] Bielza, C., Larranaga, P. "Bayesian networks in neuroscience: a survey"
+- [2] Daly, R., Shen, Q., Aitken, S. "Learning Bayesian networks: approaches and issues"
+- [3] Bielza, C., Li, G., Larranaga, P. "Multi-dimensional classification with Bayesian networks"
+- [4] Pham, D., Ruz, G. "Unsupervised training of Bayesian networks for data clustering"
 
 
 
