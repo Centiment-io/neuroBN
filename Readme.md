@@ -59,6 +59,7 @@ Below is a set of tables highlighting the use of Bayesian networks in the existi
 
 <h4>BNs with 'Omics Data</h4>
 | Researchers | BN model | Aim | Application |
+| ----------- | -------- | --- | ----------- |
 | Armañanzas et al., 2012 | Ensemble of BN classifiers | Association | Transcripts in AD |
 | Hullam et al., 2012 | BN | Association | SNPs in depression |
 | Zeng et al., 2013 | BN | Association | Cytokines and mRNA in cerebral ischemia |
