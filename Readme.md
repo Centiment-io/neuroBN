@@ -10,7 +10,7 @@ As it relates to neuroscience, this code base aims to perform the following gene
 
 
 <h2>References</h2>
-[1] Bielza, C., Larranaga, P. "Bayesian networks in neuroscience: a survey"
-[2] Daly, R., Shen, Q., Aitken, S. "Learning Bayesian networks: approaches and issues"
-[3] Bielza, C., Li, G., Larranaga, P. "Multi-dimensional classification with Bayesian networks"
-[4] Pham, D., Ruz, G. "Unsupervised training of Bayesian networks for data clustering"
+- [1] Bielza, C., Larranaga, P. "Bayesian networks in neuroscience: a survey"
+- [2] Daly, R., Shen, Q., Aitken, S. "Learning Bayesian networks: approaches and issues"
+- [3] Bielza, C., Li, G., Larranaga, P. "Multi-dimensional classification with Bayesian networks"
+- [4] Pham, D., Ruz, G. "Unsupervised training of Bayesian networks for data clustering"
