@@ -27,8 +27,8 @@ __author__ = """N. Cullen <ncullen.th@dartmouth.edu>"""
 from copy import copy
 import numpy as np
 
-from pyBN.classes.factor import Factor
-from pyBN.classes.factorization import Factorization
+from neuroBN.classes.factor import Factor
+from neuroBN.classes.factorization import Factorization
 
 
 def map_ve_e(bn,

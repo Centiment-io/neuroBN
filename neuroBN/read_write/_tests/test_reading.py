@@ -8,7 +8,7 @@ Reading
 __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
 import unittest
-from pyBN.readwrite.read import read_bn
+from neuroBN.readwrite.read import read_bn
 import os
 from os.path import dirname
 

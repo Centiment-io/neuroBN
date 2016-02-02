@@ -11,13 +11,13 @@ classifiers.
 from __future__ import division
 
 import numpy as np
-from pyBN.inference.marginal_approx import marginal_lws_a
+from neuroBN.inference.marginal_approx import marginal_lws_a
 
 
 def predict(data, target, classifier=None, method='nb'):
 	"""
 	Wrapper for a unified interface to the 
-	various classification algorithms. The pyBN
+	various classification algorithms. The neuroBN
 	user can call any algorithm from this function for
 	convienence.
 

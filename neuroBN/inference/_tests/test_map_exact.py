@@ -12,8 +12,8 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.readwrite.read import read_bn
-from pyBN.inference.map_exact import map_ve_e
+from neuroBN.readwrite.read import read_bn
+from neuroBN.inference.map_exact import map_ve_e
 
 class MapExactTestCase(unittest.TestCase):
 

@@ -40,11 +40,11 @@ import pandas as pd
 import networkx as nx
 import copy
 
-from pyBN.classes.bayesnet import BayesNet
-from pyBN.classes.factor import Factor
+from neuroBN.classes.bayesnet import BayesNet
+from neuroBN.classes.factor import Factor
 
-from pyBN.utils.chordal_bn import make_chordal
-from pyBN.utils.mst import minimum_spanning_tree
+from neuroBN.utils.chordal_bn import make_chordal
+from neuroBN.utils.mst import minimum_spanning_tree
 
 
 

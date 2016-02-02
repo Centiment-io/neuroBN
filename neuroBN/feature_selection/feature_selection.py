@@ -28,7 +28,7 @@ variable is independent of those variables.
 
 """
 
-from pyBN.structure_learn.constraint_based import *
+from neuroBN.structure_learn.constraint_based import *
 
 
 def fs_gambit(data, target):

@@ -12,7 +12,7 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.structure_learn.orient_edges import orient_edges_gs, orient_edges_pc
+from neuroBN.structure_learn.orient_edges import orient_edges_gs, orient_edges_pc
 
 
 class OrientEdgesTestCase(unittest.TestCase):

@@ -3,7 +3,7 @@
 Discretize Continuous Data
 **************************
 
-Since pyBN only handles Discrete Bayesian Networks,
+Since neuroBN only handles Discrete Bayesian Networks,
 and therefore only handles discrete data, it is
 important to have effective functions for 
 discretizing continuous data. This code aims to
@@ -21,7 +21,7 @@ def discretize(data, cols=None, bins=None):
 	Discretize the passed-in dataset. These
 	functions will rely on numpy and scipy
 	for speed and accuracy... no need to
-	reinvent the wheel here. Therefore, pyBN's
+	reinvent the wheel here. Therefore, neuroBN's
 	discretization methods are basically just
 	wrappers for existing methods.
 

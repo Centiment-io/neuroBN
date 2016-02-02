@@ -38,8 +38,8 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.classes.factor import Factor
-from pyBN.readwrite.read import read_bn
+from neuroBN.classes.factor import Factor
+from neuroBN.readwrite.read import read_bn
 
 
 class FactorTestCase(unittest.TestCase):

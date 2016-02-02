@@ -1,5 +1,5 @@
-from pyBN.classes.bayesnet import BayesNet
-from pyBN.classes.cliquetree import CliqueTree, Clique
-from pyBN.classes.clustergraph import ClusterGraph
-from pyBN.classes.factor import Factor
-from pyBN.classes.factorization import Factorization
+from neuroBN.classes.bayesnet import BayesNet
+from neuroBN.classes.cliquetree import CliqueTree, Clique
+from neuroBN.classes.clustergraph import ClusterGraph
+from neuroBN.classes.factor import Factor
+from neuroBN.classes.factorization import Factorization

@@ -12,7 +12,7 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.structure_learn.path_condition import pc
+from neuroBN.structure_learn.path_condition import pc
 
 
 class PCTestCase(unittest.TestCase):

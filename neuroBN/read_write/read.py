@@ -16,9 +16,9 @@ import json
 import numpy as np
 import copy
 
-from pyBN.classes.bayesnet import BayesNet
-from pyBN.classes.factor import Factor
-from pyBN.utils.topsort import topsort
+from neuroBN.classes.bayesnet import BayesNet
+from neuroBN.classes.factor import Factor
+from neuroBN.utils.topsort import topsort
 
 
 def read_bn(path):
@@ -144,7 +144,7 @@ def read_json(path):
     """
     Read a BayesNet object from the json format. This
     format has the ".bn" extension and is completely
-    unique to pyBN.
+    unique to neuroBN.
 
     Arguments
     ---------

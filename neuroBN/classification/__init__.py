@@ -1,1 +1,1 @@
-from pyBN.classification.classification import *
+from neuroBN.classification.classification import *

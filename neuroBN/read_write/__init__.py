@@ -1,2 +1,2 @@
-from pyBN.read_write.read import *
-from pyBN.read_write.write import *
+from neuroBN.read_write.read import *
+from neuroBN.read_write.write import *

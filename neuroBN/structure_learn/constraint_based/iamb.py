@@ -7,8 +7,8 @@ LEARNING ALGORITHM
 """
 
 import numpy as np
-from pyBN.utils.independence_tests import are_independent
-from pyBN.utils.orient_edges import orient_edges_MB
+from neuroBN.utils.independence_tests import are_independent
+from neuroBN.utils.orient_edges import orient_edges_MB
 
 def iamb(data, alpha=0.05):
 	"""

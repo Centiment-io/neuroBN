@@ -12,8 +12,8 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.utils.random_sample import random_sample
-from pyBN.readwrite.read import read_bn
+from neuroBN.utils.random_sample import random_sample
+from neuroBN.readwrite.read import read_bn
 
 
 class RandomSampleTestCase(unittest.TestCase):

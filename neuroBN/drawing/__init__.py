@@ -1,1 +1,1 @@
-from pyBN.drawing.draw import *
+from neuroBN.drawing.draw import *

@@ -12,7 +12,7 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.structure_learn.grow_shrink import gs
+from neuroBN.structure_learn.grow_shrink import gs
 
 
 

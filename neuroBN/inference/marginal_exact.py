@@ -25,8 +25,8 @@ References
 
 __author__ = """N. Cullen <ncullen.th@dartmouth.edu>"""
 
-from pyBN.classes.factor import Factor
-from pyBN.classes.factorization import Factorization
+from neuroBN.classes.factor import Factor
+from neuroBN.classes.factorization import Factorization
 from copy import deepcopy, copy
 import numpy as np
 import json

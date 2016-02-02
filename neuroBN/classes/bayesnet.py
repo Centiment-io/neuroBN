@@ -39,8 +39,8 @@ __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
 
 import numpy as np
-from pyBN.utils.class_equivalence import are_class_equivalent
-from pyBN.utils.topsort import topsort
+from neuroBN.utils.class_equivalence import are_class_equivalent
+from neuroBN.utils.topsort import topsort
 
 class BayesNet(object):
     """
@@ -279,7 +279,7 @@ class BayesNet(object):
         -----
 
         """
-        from pyBN.utils.topsort import topsort
+        from neuroBN.utils.topsort import topsort
 
         self.V = topsort(edge_dict)
         self.E = edge_dict

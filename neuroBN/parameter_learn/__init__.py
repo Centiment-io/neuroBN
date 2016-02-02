@@ -1,2 +1,2 @@
-from pyBN.parameter_learn.bayes import *
-from pyBN.parameter_learn.mle import *
+from neuroBN.parameter_learn.bayes import *
+from neuroBN.parameter_learn.mle import *

@@ -13,8 +13,8 @@ from os.path import dirname
 import numpy as np
 import pandas as pd
 
-from pyBN.readwrite.read import read_bn
-from pyBN.independence.markov_blanket import markov_blanket
+from neuroBN.readwrite.read import read_bn
+from neuroBN.independence.markov_blanket import markov_blanket
 
 class ConstraintTestsTestCase(unittest.TestCase):
 

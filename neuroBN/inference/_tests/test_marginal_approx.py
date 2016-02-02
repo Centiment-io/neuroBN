@@ -12,8 +12,8 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.inference.marginal_approx import marginal_fs_a, marginal_lws_a, marginal_gs_a
-from pyBN.readwrite.read import read_bn
+from neuroBN.inference.marginal_approx import marginal_fs_a, marginal_lws_a, marginal_gs_a
+from neuroBN.readwrite.read import read_bn
 
 class MarginalApproxTestCase(unittest.TestCase):
 

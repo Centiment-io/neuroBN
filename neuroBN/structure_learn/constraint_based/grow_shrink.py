@@ -35,10 +35,10 @@ NIPS 2000.
 
 __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
-from pyBN.utils.independence_tests import mi_test
-from pyBN.utils.orient_edges import orient_edges_MB
-from pyBN.utils.markov_blanket import resolve_markov_blanket
-from pyBN.classes.bayesnet import BayesNet
+from neuroBN.utils.independence_tests import mi_test
+from neuroBN.utils.orient_edges import orient_edges_MB
+from neuroBN.utils.markov_blanket import resolve_markov_blanket
+from neuroBN.classes.bayesnet import BayesNet
 
 from copy import copy
 import numpy as np

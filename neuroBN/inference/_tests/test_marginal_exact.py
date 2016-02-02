@@ -12,8 +12,8 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.readwrite.read import read_bn
-from pyBN.inference.marginal_exact import marginal_ve_e
+from neuroBN.readwrite.read import read_bn
+from neuroBN.inference.marginal_exact import marginal_ve_e
 
 
 

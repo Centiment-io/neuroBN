@@ -47,9 +47,9 @@ __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 import itertools
 import numpy as np
 
-from pyBN.utils.independence_tests import mi_test
-from pyBN.classes import BayesNet
-from pyBN.utils.orient_edges import orient_edges_CS
+from neuroBN.utils.independence_tests import mi_test
+from neuroBN.classes import BayesNet
+from neuroBN.utils.orient_edges import orient_edges_CS
 
 
 def pc(data, alpha=0.05):

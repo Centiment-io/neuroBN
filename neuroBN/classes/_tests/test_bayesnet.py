@@ -34,8 +34,8 @@ assertDictEqual(a, b)	dicts
 __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
 import unittest
-from pyBN.classes.bayesnet import BayesNet
-from pyBN.readwrite.read import read_bn
+from neuroBN.classes.bayesnet import BayesNet
+from neuroBN.readwrite.read import read_bn
 
 import os
 from os.path import dirname

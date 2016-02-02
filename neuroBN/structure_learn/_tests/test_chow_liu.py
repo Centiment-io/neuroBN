@@ -12,7 +12,7 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.structure_learn.chow_liu import chow_liu
+from neuroBN.structure_learn.chow_liu import chow_liu
 
 
 class ChowLiuTestCase(unittest.TestCase):

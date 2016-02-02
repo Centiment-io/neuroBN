@@ -12,8 +12,8 @@ connected graph. This is the Chow-Liu tree.
 
 __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
-from pyBN.utils.independence_tests import mi_test
-from pyBN.classes.bayesnet import BayesNet
+from neuroBN.utils.independence_tests import mi_test
+from neuroBN.classes.bayesnet import BayesNet
 import operator
 import numpy as np
 from numba import jit

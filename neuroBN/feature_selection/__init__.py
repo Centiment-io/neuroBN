@@ -1,1 +1,1 @@
-from pyBN.feature_selection.feature_selection import *
+from neuroBN.feature_selection.feature_selection import *

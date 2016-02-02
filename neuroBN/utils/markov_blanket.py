@@ -52,7 +52,7 @@ def resolve_markov_blanket(Mb, data):
 	of Markov Blankets for each node. Since an
 	undirected graph is returned, the edges still need to 
 	be oriented by calling some version of the 
-	"orient_edges" function in "pyBN.structure_learn.orient_edges" 
+	"orient_edges" function in "neuroBN.structure_learn.orient_edges" 
 	module.
 
 	This algorithm is adapted from Margaritis, but also see [3]

@@ -4,7 +4,7 @@ Factorization
 Class
 *************
 """
-from pyBN.classes.factor import Factor
+from neuroBN.classes.factor import Factor
 
 from collections import OrderedDict
 from copy import copy,deepcopy

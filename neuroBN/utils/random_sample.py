@@ -10,7 +10,7 @@ with or without evidence.
 
 __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
-from pyBN.classes.factor import Factor
+from neuroBN.classes.factor import Factor
 import numpy as np
 from copy import deepcopy
 

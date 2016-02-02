@@ -12,7 +12,7 @@ import os
 from os.path import dirname
 import numpy as np
 
-from pyBN.independence.constraint_tests import mi_test
+from neuroBN.independence.constraint_tests import mi_test
 
 class ConstraintTestsTestCase(unittest.TestCase):
 
