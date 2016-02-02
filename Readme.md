@@ -19,7 +19,7 @@ reducing the dimensionality of a large dataset.
 
 <h2>Data</h2>
 
-The goal is to achieve full availability of state-of-the-art Bayesian network functionality for seamless use with all types of neuroscience data:
+The goal is to achieve full availability of state-of-the-art Bayesian network functionality for seamless use with all types of neuroscience data.
 - Morphological Data
 - Electrophysiological Data
 - Genomics/Proteomics/Transcriptomics Data
@@ -31,7 +31,7 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 	- ECoG, EMG, JME, TCD, DTI, PET
 
 <h2>Call for Researchers</h2>
-If you are a neuroscience researcher or student who thinks the incredible learning/classification/inference functionality of Bayesian networks can add value to your work, please contact me and I will either a) answer questions or give advice on how to get the most out of neuroBN or b) work with you to build custom functionality that integrates your work with the neuroBN code. Email me at ncullen.th@dartmouth.edu.
+If you are a neuroscience researcher or student who thinks the incredible learning/classification/inference functionality of Bayesian networks can add value to your work or want to see support for a specific type of data, please contact me and I will either a) answer questions or give advice on how to get the most out of neuroBN or b) work with you to build custom functionality that integrates your work with the neuroBN code. Email me at ncullen.th@dartmouth.edu.
 
 
 <h2>References</h2>
