@@ -40,8 +40,9 @@ If you are a neuroscience researcher or student who thinks the incredible learni
 - [3] Bielza, C., Li, G., Larranaga, P. "Multi-dimensional classification with Bayesian networks"
 - [4] Pham, D., Ruz, G. "Unsupervised training of Bayesian networks for data clustering"
 
-<h2>Example</h2>
-BNs with morphological data.
+<h2>Survey of Existing Literature</h2>
+Below is a set of tables highlighting the use of Bayesian networks in the existing neuroscience literature. Please note that these tables are adapted directly from Bielza, C., and Larranaga, P. "Bayesian networks in neuroscience: a survey" [1]. Absolutely all credit for the following tables belongs to those two researchers.
+<h4>BNs with Morphological Data</h4>
 
 | Researchers | BN model | Aim | Application |
 | ----------- | -------- | --- | ----------- |
