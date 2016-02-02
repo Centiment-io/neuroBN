@@ -42,6 +42,7 @@ If you are a neuroscience researcher or student who thinks the incredible learni
 
 <h2>Example</h2>
 BNs with morphological data.
+
 | Researchers | BN model | Aim | Application |
 | ----------- | -------- | --- | ----------- |
 | DeFelipe et al., 2013 | BN and naive Bayes | Assoc. and supervised class | Classification and naming of GABAergic interneurons |
