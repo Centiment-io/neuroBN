@@ -10,6 +10,7 @@ known in the more general case as "Association Discovery".
 reducing the dimensionality of a large dataset.
 - Supervised Classification : predict class labels of new data from training data.
 - Unsupervised Classification : learning from data where the ground truth is unknown. One example of this task is "clustering" - assigning data into clusters of similar observations.
+- Inference : answering marginal or conditional probability queries, such as "what is the probability a person will develop dimentia given that he/she is 60 years old and had a stroke within the last five years?"
 
 <h2>Data</h2>
 
