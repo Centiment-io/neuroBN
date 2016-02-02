@@ -22,12 +22,7 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 	- MRI
 	- EEG
 - Others
-	- ECoG
-	- EMG
-	- JME
-	- TCD
-	- DTI
-	- PET
+	- ECoG, EMG, JME, TCD, DTI, PET
 
 <h2>Call for Researchers</h2>
 If you are a neuroscience researcher or student who thinks the incredible learning/classification/inference functionality of Bayesian networks can add value to your work, please contact me and I will either a) answer questions or give advice on how to get the most out of neuroBN or b) work with you to build custom functionality that integrates your work with the neuroBN code. Email me at ncullen.th@dartmouth.edu.
