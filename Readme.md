@@ -47,12 +47,8 @@ BNs with morphological data.
 | ----------- | -------- | --- | ----------- |
 | DeFelipe et al., 2013 | BN and naive Bayes | Assoc. and supervised class | Classification and naming of GABAergic interneurons |
 | Lopez-Cruz et al., 2014 | BN and BN multinet | Assoc. and inference and cluster | Consensus model for interneuron classification |
-|Mihaljevic et al.,
-in press |
-Naive Bayes and TAN | Supervised class | Classification of cortical GABAergic interneurons |
-|Mihaljevic et al., Under
-review |
-MBC | Multi-dimensional class | Simultaneous classification of six axonal class variables |
+|Mihaljevic et al., in press | Naive Bayes and TAN | Supervised class | Classification of cortical GABAergic interneurons |
+|Mihaljevic et al., Under review | MBC | Multi-dimensional class | Simultaneous classification of six axonal class variables |
 |Guerra et al., 2011 | Naive Bayes | Supervised class | Pyramidal neuron vs. interneuron |
 |Lopez-Cruz et al., 2011 | BN | Inference, associations | Model and simulation of dendritic trees |
 
