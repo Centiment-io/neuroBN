@@ -41,7 +41,7 @@ If you are a neuroscience researcher or student who thinks the incredible learni
 - [4] Pham, D., Ruz, G. "Unsupervised training of Bayesian networks for data clustering"
 
 <h2>Survey of Existing Literature</h2>
-Below is a set of tables highlighting the use of Bayesian networks in the existing neuroscience literature. Please note that these tables are adapted directly from Bielza, C., and Larranaga, P. "Bayesian networks in neuroscience: a survey" [1]. Absolutely all credit for the following tables belongs to those two researchers.
+Below is a set of tables highlighting the use of Bayesian networks in the existing neuroscience literature. Please note that these tables are adapted directly from <i>Bielza, C., and Larranaga, P. "Bayesian networks in neuroscience: a survey"</i> ([1]) and are permitted under the Creative Commons License. Absolutely all credit for the following tables belongs to those two researchers.
 <h4>BNs with Morphological Data</h4>
 
 | Researchers | BN model | Aim | Application |
@@ -53,6 +53,13 @@ Below is a set of tables highlighting the use of Bayesian networks in the existi
 |Guerra et al., 2011 | Naive Bayes | Supervised class | Pyramidal neuron vs. interneuron |
 |Lopez-Cruz et al., 2011 | BN | Inference, associations | Model and simulation of dendritic trees |
 
+<h4>BNs with Electrophysical Data</h4>
+| Researchers | BN model | Aim | Application |
+| ----------- | -------- | --- | ----------- |
+| Smith et al., 2006 | Dynamic BN | Association | Infer non-linear neural information flow networks |
+| Eldawlatly et al., 2010 | Dynamic BN | Association | Infer effective and time-varying connectivity between spiking cortical neurons |
+| Jung et al., 2010 | BN | Association | Neuronal synchrony from electrode signal recordings |
+| Pecevski et al., 2011 | BN | Inference | Emulate probabilistic inference through networks of spiking neurons |
 
 
 
