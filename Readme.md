@@ -4,7 +4,7 @@
 Many research fields have benefit from the flexibility and expressiveness of the Bayesian Network framework - medicine, economics, artificial intelligence, social science, and many more. Still, Bayesian networks have failed to penetrate the field of neuroscience, where they could be of incredible use. With that in mind, this project is aimed at making Bayesian Networks more accessible to neuroscientists. The motivation for this project is very much derived from the review paper by Bielza and Larranaga - "Bayesian networks in neuroscience: a survey."
 
 As it relates to neuroscience, this code base aims to perform the following general tasks:
-- Function Connectivity Mapping : looking for network-based relationships among variables of interest. This is
+- <b>Function Connectivity Mapping</b> : looking for network-based relationships among variables of interest. This is
 known in the more general case as "Association Discovery".
 - Feature Selection : choosing the appropriate features (variables) to use in classifying a target variable, or otherwise
 reducing the dimensionality of a large dataset.
