@@ -96,6 +96,16 @@ class CliqueTree(object):
         for vertex, clique in self.C.items():
             yield vertex, clique
 
+    def parents(self, v):
+        p = []
+        for rv in self.V:
+            if v in self.E[rv]:
+                p.append(v)
+        return p
+
+    def children(self, n):
+        return self.E[n]
+
     def initialize_tree(self):
         """
         Initialize the structure of a clique tree, using
@@ -148,7 +158,7 @@ class CliqueTree(object):
 
 
 
-        
+
 
 class Clique(object):
     """

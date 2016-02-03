@@ -23,6 +23,3 @@ def topsort(E):
 			visited.append(vertex)
 			queue.extend(E[vertex]) # add all vertex's children
 	return visited
-
-def dfs_postorder(E):
-	pass

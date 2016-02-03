@@ -120,29 +120,29 @@ def marginal_ctbp_e(bn, target=None, evidence=None):
 
 	#tree_graph = nx.dfs_tree(G,root)
 	#clique_ordering = list(nx.dfs_postorder_nodes(tree_graph,root))
-	clique_ordering = topsort(ctree.E)
+	clique_ordering = list(reversed(topsort(ctree.E)))
 
 	# UPWARD PASS
 	# send messages up the tree from the leaves to the single root
 	for i in clique_ordering:
 		clique = ctree.V[i]
-		for j in tree_graph.predecessors(i):
-			clique.send_message(ctree.V[j])
+		for j in ctree.parents(i):
+			clique.send_message(ctree.C[j])
 		# if root node, collect its beliefs
-		if len(tree_graph.predecessors(i)) == 0:
-			ctree.V[root].collect_beliefs()
+		if len(ctree.parents(i)) == 0:
+			ctree.C[root].collect_beliefs()
 
 	# DOWNWARD PASS
 	# send messages down the tree from the root to the leaves
 	# (not needed unless *target* involves more than one variable)
 	new_ordering = list(reversed(clique_ordering))
 	for j in new_ordering:
-		clique = ctree.V[j]
-		for i in tree_graph.successors(j):
-			clique.send_message(ctree.V[i])
+		clique = ctree.C[j]
+		for i in ctree.children(j):
+			clique.send_message(ctree.C[i])
 		# if leaf node, collect its beliefs
-		if len(tree_graph.successors(j)) == 0:                    
-			ctree.V[j].collect_beliefs()
+		if len(ctree.children(j)) == 0:                    
+			ctree.C[j].collect_beliefs()
 
 	return ctree.beliefs
 
