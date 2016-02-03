@@ -89,6 +89,7 @@ class CliqueTree(object):
         
         """
         self.bn = bn
+        self._F = Factorization(bn)
         self.initialize_tree()
 
     def initialize_tree(self):
@@ -128,26 +129,19 @@ class CliqueTree(object):
         self.V = mst_G.keys() # list
         self.C = C
 
-        # set C - key = rv, value = clique object
-        self.assign_factors() # factors who have a var in clique's scope
+        # ASSIGN FACTORS TO A UNIQUE CLIQUE
+        v_a = dict([(rv, False) for rv in self.V])
+        for clique in self.C.values():
+            temp_scope = []
+            for var in self.V:
+                if v_a[var] == False and self.bn.scope(var).issubset(clique.scope):
+                    temp_scope.append(var)
+                    v_a[var] = True
+            clique._F = Factorization(temp_scope)
+
         for clique in self.V.values():
             clique.compute_psi()
-
-        #return V, E, C
-
-    def assign_factors(self):
-        """
-        This clearly needs to be changed       
-
-        """
-        _F = Factorization(self.bn)
-        for factor in _F:
-            assigned=False # factor can be assigned to only one clique
-            for clique in self.C.values():
-                if factor.scope.issubset(clique.scope):
-                    if assigned==False:
-                        clique.factors.append(f)
-                        assigned=True
+        
 
     def message_passing(self, target=None, evidence=None, downward_pass=True):
         """
@@ -185,9 +179,9 @@ class CliqueTree(object):
         # 4: Propagation of probabilities using message passing
 
         # creates clique tree and assigns factors, thus satisfying steps 1-3
-        ctree = copy.copy(self)
+        ctree = copy(self)
         G = ctree.G
-        #cliques = copy.copy(ctree.V)
+        #cliques = copy(ctree.V)
 
         # select a clique as root where target is in scope of root
         root=np.random.randint(0,len(ctree.V))
@@ -224,6 +218,12 @@ class CliqueTree(object):
 class Clique(object):
     """
     Clique Class
+
+    *scope* : a set of variables in the clique's scope
+
+    *_f* : a factorization object that contains only the
+        factors of variables in the clique's scope
+
     """
 
     def __init__(self, scope):
@@ -238,28 +238,45 @@ class Clique(object):
 
 
         """
-        self.scope=scope
-        self.factors = Factorization(bn, list(self.scope))
-        self.factors = []
+        self.scope = scope
+        self._F = None
+        
         self.psi = None # Psi should never change -> Factor object
         self.belief = None
+        
         self.messages_received = []
         self.is_ready = False
 
     def __repr__(self):
         return str(self.scope)
 
+    def compute_psi(self):
+        """
+        Compute a new psi (cpt) in order to 
+        set the clique's belief. This involves
+        multiplying the factors in the Clique together.
+        """
+        assert (len(self.factors) != 0), 'No Factors assigned to this clique.'
+
+        if len(self.factors) == 1:
+            self.psi = copy(self.factors[0])
+        else:
+            self.psi = max(self.factors, key=lambda x: len(x.cpt))
+            for f in self.factors:
+                self.psi *= f
+            #self.psi.merge_multiply(self.factors)
+            self.belief = copy(self.psi)
+
     def send_initial_message(self, other_clique):
         """
         Send the first message to another clique.
-
 
         Arguments
         ---------
         *other_clique* : a different Clique object
 
         """
-        psi_copy = copy.copy(self.psi)
+        psi_copy = copy(self.psi)
         sepset = self.sepset(other_clique)
         sumout_vars = self.scope.difference(sepset)
         # sum out variables not in the sepset of other_clique
@@ -271,7 +288,7 @@ class Clique(object):
         print 'Init Msg: \n', psi_copy.cpt
         other_clique.messages_received.append(psi_copy)
 
-        self.belief = copy.copy(self.psi)
+        self.belief = copy(self.psi)
 
     def sepset(self, other_clique):
         """
@@ -285,24 +302,6 @@ class Clique(object):
 
         """
         return self.scope.intersection(other_clique.scope)
-
-    def compute_psi(self):
-        """
-        Compute a new psi (cpt) in order to 
-        set the clique's belief.
-        """
-        if len(self.factors) == 0:
-            print 'No factors assigned to this clique!'
-            return None
-
-        if len(self.factors) == 1:
-            self.psi = copy.copy(self.factors[0])
-        else:
-            self.psi = max(self.factors, key=lambda x: len(x.cpt))
-            for f in self.factors:
-                self.psi *= f
-            #self.psi.merge_multiply(self.factors)
-            self.belief = copy.copy(self.psi)
 
     def send_message(self, parent):
         """
@@ -319,17 +318,17 @@ class Clique(object):
         if len(self.messages_received) > 0:
             # if there are messages received, mutliply them in to psi first
             if not self.belief:
-                self.belief = copy.copy(self.psi)
+                self.belief = copy(self.psi)
             for msg in self.messages_received:
                 self.belief.multiply(msg)
             #self.belief.merge_multiply(self.messages_received)
         else:
             # if there are no messages received, simply move on with psi
             if not self.belief:
-                self.belief = copy.copy(self.psi)
+                self.belief = copy(self.psi)
         # generate message as belief with Ci - Sij vars summed out
         vars_to_sumout = list(self.scope.difference(self.sepset(parent)))
-        message_to_send = copy.copy(self.belief)
+        message_to_send = copy(self.belief)
         message_to_send.sumout_var_list(vars_to_sumout)
         parent.messages_received.append(message_to_send)
 
@@ -354,7 +353,7 @@ class Clique(object):
         since the main algorithm is just sending messages for a while.
         """
         if len(self.messages_received) > 0:
-            self.belief = copy.copy(self.psi)
+            self.belief = copy(self.psi)
             for msg in self.messages_received:
                 self.belief.cpt.merge(msg.cpt)
                 #self.belief.normalize()
@@ -364,7 +363,7 @@ class Clique(object):
             #self.belief.normalize()
             self.messages_received = []
         else:
-            self.belief = copy.copy(self.belief)
+            self.belief = copy(self.belief)
             #print 'No Messages Received - Belief is just original Psi'
 
 
