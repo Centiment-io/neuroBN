@@ -1,7 +1,6 @@
 from neuroBN.utils.chordal_bn import *
 from neuroBN.utils.class_equivalence import *
 from neuroBN.utils.discretize import *
-from neuroBN.utils.elimination_ordering import *
 from neuroBN.utils.independence_tests import *
 from neuroBN.utils.markov_blanket import *
 from neuroBN.utils.mst import *
