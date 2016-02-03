@@ -127,9 +127,10 @@ def marginal_ctbp_e(bn, target=None, evidence=None):
 	# UPWARD PASS
 	# send messages up the tree from the leaves to the single root
 	for i in clique_ordering:
-		clique = ctree[i]
+		#clique = ctree[i]
 		for j in ctree.parents(i):
-			clique.send_message(ctree[j])
+			ctree[i] >> ctree[j]
+			#clique.send_message(ctree[j])
 		# if root node, collect its beliefs
 		if len(ctree.parents(i)) == 0:
 			ctree[root].collect_beliefs()
@@ -139,9 +140,8 @@ def marginal_ctbp_e(bn, target=None, evidence=None):
 	# (not needed unless *target* involves more than one variable)
 	new_ordering = list(reversed(clique_ordering))
 	for j in new_ordering:
-		clique = ctree[j]
 		for i in ctree.children(j):
-			clique.send_message(ctree[i])
+			ctree[j] >> ctree[i]
 		# if leaf node, collect its beliefs
 		if len(ctree.children(j)) == 0:                    
 			ctree[j].collect_beliefs()

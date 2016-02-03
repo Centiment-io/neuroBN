@@ -200,6 +200,18 @@ class Clique(object):
     def __repr__(self):
         return str(self.scope)
 
+    def __rshift__(self, other_clique):
+        """
+        Send a message from self to other_clique
+        """
+        self.send_message(other_clique)
+
+    def __lshift__(self, other_clique):
+        """
+        Send a message from other_clique to self
+        """
+        other_clique.send_message(self)
+
     def compute_psi(self):
         """
         Compute a new psi (cpt) in order to 
