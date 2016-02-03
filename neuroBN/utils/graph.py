@@ -11,7 +11,7 @@ import networkx as nx
 import numpy as np
 from copy import copy
 
-def topsort(edge_dict):
+def topsort(edge_dict, root=None):
 	"""
 	List of nodes in topological sort order from edge dict
 	where key = rv and value = list of rv's children
@@ -30,10 +30,10 @@ def topsort(edge_dict):
 		vertex = queue.pop(0)
 		if vertex not in visited:
 			visited.append(vertex)
-			queue.extend(E[vertex]) # add all vertex's children
+			queue.extend(edge_dict[vertex]) # add all vertex's children
 	return visited
 
-def dfs_postorder(edge_dict):
+def dfs_postorder(edge_dict, root):
 	return list(reversed(topsort(edge_dict)))
 
 def minimum_spanning_tree(edge_dict):

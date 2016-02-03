@@ -95,6 +95,12 @@ class CliqueTree(object):
         for vertex, clique in self.C.items():
             yield vertex, clique
 
+    def __getitem__(self, rv):
+        """
+        Returns Clique of passed-in rv
+        """
+        return self.C[rv]
+
     def parents(self, v):
         p = []
         for rv in self.V:
