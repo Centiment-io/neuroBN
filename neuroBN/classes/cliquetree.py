@@ -36,12 +36,12 @@ __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
 
 import numpy as np
-import pandas as pd
 import networkx as nx
-import copy
+from copy import copy, deepcopy
 
 from neuroBN.classes.bayesnet import BayesNet
 from neuroBN.classes.factor import Factor
+from neuroBN.classes.factorization import Factorization
 
 from neuroBN.utils.chordal_bn import make_chordal
 from neuroBN.utils.mst import minimum_spanning_tree
@@ -68,7 +68,8 @@ class CliqueTree(object):
         - Edges -> dictionary
 
     - C
-        - Cliques -> a list of Clique objects
+        - Cliques -> a dictionary where key = vertex idx,
+                value = Clique object
 
     """
 
@@ -88,7 +89,7 @@ class CliqueTree(object):
         
         """
         self.bn = bn
-        self.V,self.E,self.C = self.initialize_tree()
+        self.initialize_tree()
 
     def initialize_tree(self):
         """
@@ -125,26 +126,27 @@ class CliqueTree(object):
         # set E, V
         self.E = mst_G # dictionary
         self.V = mst_G.keys() # list
+        self.C = C
 
         # set C - key = rv, value = clique object
         self.assign_factors() # factors who have a var in clique's scope
         for clique in self.V.values():
             clique.compute_psi()
 
-        return V, E, C
+        #return V, E, C
 
     def assign_factors(self):
         """
         This clearly needs to be changed       
 
         """
-        factor_list = [Factor(bn,var) for var in self.bn.nodes()]
-        for factor in factor_list:
-            assigned=False
-            for v in self.C.values():
-                if f.scope.issubset(v.scope):
+        _F = Factorization(self.bn)
+        for factor in _F:
+            assigned=False # factor can be assigned to only one clique
+            for clique in self.C.values():
+                if factor.scope.issubset(clique.scope):
                     if assigned==False:
-                        v.factors.append(f)
+                        clique.factors.append(f)
                         assigned=True
 
     def message_passing(self, target=None, evidence=None, downward_pass=True):
@@ -237,7 +239,8 @@ class Clique(object):
 
         """
         self.scope=scope
-        self.factors=[]
+        self.factors = Factorization(bn, list(self.scope))
+        self.factors = []
         self.psi = None # Psi should never change -> Factor object
         self.belief = None
         self.messages_received = []
@@ -297,7 +300,7 @@ class Clique(object):
         else:
             self.psi = max(self.factors, key=lambda x: len(x.cpt))
             for f in self.factors:
-                self.psi.multiply(f)
+                self.psi *= f
             #self.psi.merge_multiply(self.factors)
             self.belief = copy.copy(self.psi)
 
