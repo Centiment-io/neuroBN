@@ -85,7 +85,7 @@ Labatut et al., 2004 | Gaussian dynamic BNs | Association | Phoneme task (normal
 | Zhang et al., 2005 | Mixed dynamic BNs (HMMs) | Association | Monetary reward task (drug addicted vs. healthy) | 
 | Rajapakse and Zhou, 2007 | Discretized dynamic BNs | Association | Silent reading and counting Stroop (normal subjects) | 
 | Sun et al., 2012 | Gaussian BNs | Association | Watching videos (normal subjects) | 
-| Neumann et al., 2010 | CPDAGs | Association Meta-analysis | 
+| Neumann et al., 2010 | CPDAGs | Association | Meta-analysis | 
 | Mitchell et al., 2004 | Gaussian naive Bayes | Sup. classification | Prediction of cognitive states | 
 | Raizada and Lee, 2013 | Gaussian naive Bayes | Sup. classification | Distinction of phoneme sounds | 
 | Ku et al., 2008 | Gaussian naive Bayes | Sup. classification | Prediction of which category a monkey is viewing | 
@@ -98,7 +98,7 @@ Labatut et al., 2004 | Gaussian dynamic BNs | Association | Phoneme task (normal
 | ----------- | -------- | --- | ----------- |
 | Joshi et al., 2010 | Gaussian BN | Association | Relationships between cortical surface areas | 
 | Wang et al., 2013 | Gaussian BN | Association | Interaction graphs for AD patients and controls | 
-| Chen et al., 2012a | Discretized dynamic BNs | Association Temporal interactions in normal aging and MCI | 
+| Chen et al., 2012a | Discretized dynamic BNs | Association | Temporal interactions in normal aging and MCI | 
 | Duering et al., 2013 | Gaussian BN | Association | Processing speed deficits in VCI patients | 
 | Morales et al., 2013 | Naive Bayes, selective naive Bayes|  Sup. classification | Early diagnosis of Parkinson’s disease | 
 | Diciotti et al., 2012 | Naive Bayes | Sup. classification | Early diagnosis of AD | 
