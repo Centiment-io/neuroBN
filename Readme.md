@@ -42,7 +42,7 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 <h4>Inference</h4>
 | Exact Marginal Inference  | Approximate Marginal Inference  | Exact MAP Inference |
 | ------------- | ------------- | ----------------- |
-| Sum-Product Variable Elimination   | Forward Sampling    | Max-Sum Variable Elimination   |
+| Sum-Product Variable Elimination   | Forward Sampling    | Max-Product Variable Elimination   |
 | Clique Tree Message Passing  | Likelihood Weighted Sampling     |  Integer Linear Programming |   
 |				|		Gibbs (MCMC) Sampling 		| 			|
 |				|		Loopy Belief Propagation			| 		|
