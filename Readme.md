@@ -30,6 +30,62 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 - Others
 	- ECoG, EMG, JME, TCD, DTI, PET
 
+<h2>Current features</h2>
+
+<h4>FileIO and Drawing</h4>
+| Reading BNs   | Drawing BNs   |
+| ------------- | ------------- | 
+| BIF format    | Graphviz Engine  |
+| JSON format   | Networkx      |
+
+
+<h4>Inference</h4>
+| Exact Marginal Inference  | Approximate Marginal Inference  | Exact MAP Inference |
+| ------------- | ------------- | ----------------- |
+| Sum-Product Variable Elimination   | Forward Sampling    | Max-Sum Variable Elimination   |
+| Clique Tree Message Passing  | Likelihood Weighted Sampling     |  Integer Linear Programming |   
+|				|		Gibbs (MCMC) Sampling 		| 			|
+|				|		Loopy Belief Propagation			| 		|
+
+<h4>Structure Learning</h4>
+| Constraint-Based  | Tree-Based | Independence Tests |
+| ------------- | ------------- | ----------------- |
+| Path Condition (PC) Algorithm   | Naive Bayes   | Marginal Mutual Information (KL-Divergence)    |
+| Grow-Shrink (GS) Algorithm   | Tree-Augmented Naive Bayes    | Conditional Mutual Information (Cross Entropy)     |
+| 	IAMB Algorithm		|		Chow-Liu Algorithm		| Pearsion Chi-Square|
+| 	Lambda-IAMB Algorithm		|				| 			|
+| 	Fast-IAMB Algorithm		|				|			|
+
+<h4>Parameter Learning</h4>
+| Frequentist | Bayesian |
+| ----------- | -------- |
+| Maximum Likelihood Estimation | Dirichlet-Multinomial Estimation |
+
+
+<h4>Classification</h4>
+| Constrained (Tree) BNs  | General BNs
+| ------------- | --------- |
+| Naive Bayes    | MAP Inference Classification |
+| Tree-Augmented Naive Bayes   |  |
+
+<h4>Comparing Two Bayesian Networks</h4>
+| Structure-Based Distance Metrics   | Parameter-Based Distance Metrics  | 
+| ------------- | ------------- | 
+| Missing Edges   | KL-Divergence and JS-Divergence|
+| Extra Edges  | Manhattan and Euclidean |
+| Incorrect Edge Orientation				|Hellinger				| 
+|	Hamming Distance			|		Minkowski	| 
+
+<h4>Utility Functionality</h4>
+| BN Utility | Other |
+| ---------- | ----- |
+| 	Determine Class Equivalence| Discretize continuous data  |
+| Orient a PDAG from Markov Blanket or Block Set | Generate random sample dataset from a BN |
+| Elimination Ordering Heuristics | Topological Sort Algorithm |
+| Get Markov Blanket of a BN | Minimum Spanning Tree Algorithm |
+| Markov Blanket Fitness Metric |
+| Make a Chordal or Moral BN |
+
 <h2>Call for Researchers</h2>
 If you are a neuroscience researcher or student who thinks the incredible learning/classification/inference functionality of Bayesian networks can add value to your work or want to see support for a specific type of data, please contact me and I will either a) answer questions or give advice on how to get the most out of neuroBN or b) work with you to build custom functionality that integrates your work with the neuroBN code. Email me at ncullen.th@dartmouth.edu.
 
