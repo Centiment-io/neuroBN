@@ -92,6 +92,10 @@ class CliqueTree(object):
         self._F = Factorization(bn)
         self.initialize_tree()
 
+    def __iter__(self):
+        for vertex, clique in self.C.items():
+            yield vertex, clique
+
     def initialize_tree(self):
         """
         Initialize the structure of a clique tree, using
@@ -141,79 +145,10 @@ class CliqueTree(object):
 
         for clique in self.V.values():
             clique.compute_psi()
+
+
+
         
-
-    def message_passing(self, target=None, evidence=None, downward_pass=True):
-        """
-        Perform Message Passing (Belief Propagation) over a clique tree. This
-        includes an Upward Pass as shown in Koller p.353 along with
-        Downward Pass (Calibration) from Koller p.357 if target is list.
-
-        The result is a marginal distribution over the target rv(s).
-
-
-        Arguments
-        ---------
-        *target* : a string or a list of strings
-            The variables for which the marginal probabilities
-            are to be computed.
-
-        *evidence* : a dictionary, where
-            key = rv and value = rv's instantiation
-
-        Returns
-        -------
-        None
-
-        Effects
-        -------
-        - Sends messages
-
-        Notes
-        -----
-
-        """
-        # 1: Moralize the graph
-        # 2: Triangluate
-        # 3: Build a clique tree using max spanning
-        # 4: Propagation of probabilities using message passing
-
-        # creates clique tree and assigns factors, thus satisfying steps 1-3
-        ctree = copy(self)
-        G = ctree.G
-        #cliques = copy(ctree.V)
-
-        # select a clique as root where target is in scope of root
-        root=np.random.randint(0,len(ctree.V))
-        if target:
-            root = [node for node in G.nodes() if target in ctree.V[node].scope][0]
-
-        tree_graph = nx.dfs_tree(G,root)
-        clique_ordering = list(nx.dfs_postorder_nodes(tree_graph,root))
-
-        # SEND MESSAGES UP THE TREE FROM THE LEAVES TO THE SINGLE ROOT
-        for i in clique_ordering:
-            clique = ctree.V[i]
-            for j in tree_graph.predecessors(i):
-                clique.send_message(ctree.V[j])
-            # if root node, collect its beliefs
-            if len(tree_graph.predecessors(i)) == 0:
-                ctree.V[root].collect_beliefs()
-
-        if downward_pass:
-            # if target is a list, run downward pass
-            new_ordering = list(reversed(clique_ordering))
-            for j in new_ordering:
-                clique = ctree.V[j]
-                for i in tree_graph.successors(j):
-                    clique.send_message(ctree.V[i])
-                # if leaf node, collect its beliefs
-                if len(tree_graph.successors(j)) == 0:                    
-                    ctree.V[j].collect_beliefs()
-
-        self.bn.ctree = self
-
-        # beliefs hold the answers
 
 class Clique(object):
     """

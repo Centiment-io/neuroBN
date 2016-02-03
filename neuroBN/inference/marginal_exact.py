@@ -77,9 +77,11 @@ def marginal_ve_e(bn, target, evidence={}):
 	return np.round(final_phi.cpt,4)
 
 
-def marginal_bp_e(bn, target=None, evidence=None, downward_pass=True):
+def marginal_ctbp_e(bn, target=None, evidence=None):
 	"""
-	Perform Message Passing (Belief Propagation) over a Clique Tree.
+	Perform Belief Propagation (Message Passing) over a Clique Tree. This
+	is sometimes referred to as the "Junction Tree Algorithm" or
+	the "Hugin Algorithm".
 
 	It involves an Upward Pass (see [1] pg. 353) along with
 	Downward Pass (Calibration) ([1] pg. 357) if the target involves
@@ -106,7 +108,7 @@ def marginal_bp_e(bn, target=None, evidence=None, downward_pass=True):
 
 	# creates clique tree and assigns factors, thus satisfying steps 1-3
 	ctree = CliqueTree(bn) # might not be initialized?
-	G = ctree.G # ugh
+	#G = ctree.G
 	#cliques = copy.copy(ctree.V)
 
 	# select a clique as root where target is in scope of root
@@ -117,7 +119,8 @@ def marginal_bp_e(bn, target=None, evidence=None, downward_pass=True):
 	tree_graph = nx.dfs_tree(G,root)
 	clique_ordering = list(nx.dfs_postorder_nodes(tree_graph,root))
 
-	# SEND MESSAGES UP THE TREE FROM THE LEAVES TO THE SINGLE ROOT
+	# UPWARD PASS
+	# send messages up the tree from the leaves to the single root
 	for i in clique_ordering:
 		clique = ctree.V[i]
 		for j in tree_graph.predecessors(i):
@@ -126,16 +129,17 @@ def marginal_bp_e(bn, target=None, evidence=None, downward_pass=True):
 		if len(tree_graph.predecessors(i)) == 0:
 			ctree.V[root].collect_beliefs()
 
-	if downward_pass:
-		# if target is a list, run downward pass
-		new_ordering = list(reversed(clique_ordering))
-		for j in new_ordering:
-			clique = ctree.V[j]
-			for i in tree_graph.successors(j):
-				clique.send_message(ctree.V[i])
-			# if leaf node, collect its beliefs
-			if len(tree_graph.successors(j)) == 0:                    
-				ctree.V[j].collect_beliefs()
+	# DOWNWARD PASS
+	# send messages down the tree from the root to the leaves
+	# (not needed unless *target* involves more than one variable)
+	new_ordering = list(reversed(clique_ordering))
+	for j in new_ordering:
+		clique = ctree.V[j]
+		for i in tree_graph.successors(j):
+			clique.send_message(ctree.V[i])
+		# if leaf node, collect its beliefs
+		if len(tree_graph.successors(j)) == 0:                    
+			ctree.V[j].collect_beliefs()
 
 	return ctree.beliefs
 
