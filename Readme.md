@@ -41,93 +41,93 @@ Below is a set of tables highlighting the use of Bayesian networks in the existi
 
 <h4>BNs with Morphological Data</h4>
 
-|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|
+| Researchers | BN model | Aim | Application |
 |----------- |-------- |--- | ----------- |
-|<sub> DeFelipe et al., 2013 </sub>|<sub> BN and naive Bayes </sub>|<sub> Assoc. and supervised class </sub>| Classification and naming of GABAergic interneurons </sub>|
-|<sub> Lopez-Cruz et al., 2014 </sub>|<sub> BN and BN multinet </sub>|<sub> Assoc. and inference and cluster </sub>| <sub> Consensus model for interneuron classification </sub>|
-|<sub>Mihaljevic et al., in press </sub>|<sub> Naive Bayes and TAN </sub>|<sub> Supervised class </sub>|<sub> Classification of cortical GABAergic interneurons </sub>|
-|<sub>Mihaljevic et al., Under review </sub>|<sub> MBC </sub>|<sub> Multi-dimensional class </sub>|<sub> Simultaneous classification of six axonal class variables </sub>|
-|<sub>Guerra et al., 2011 </sub>|<sub> Naive Bayes </sub>|<sub> Supervised class </sub>|<sub> Pyramidal neuron vs. interneuron </sub>|
-|<sub>Lopez-Cruz et al., 2011 </sub>|<sub> BN </sub>|<sub> Inference, associations </sub>|<sub> Model and simulation of dendritic trees </sub>|
+| DeFelipe et al., 2013 | BN and naive Bayes | Assoc. and supervised class | Classification and naming of GABAergic interneurons |
+| Lopez-Cruz et al., 2014 | BN and BN multinet | Assoc. and inference and cluster |  Consensus model for interneuron classification |
+|Mihaljevic et al., in press | Naive Bayes and TAN | Supervised class | Classification of cortical GABAergic interneurons |
+|Mihaljevic et al., Under review | MBC | Multi-dimensional class | Simultaneous classification of six axonal class variables |
+|Guerra et al., 2011 | Naive Bayes | Supervised class | Pyramidal neuron vs. interneuron |
+|Lopez-Cruz et al., 2011 | BN | Inference, associations | Model and simulation of dendritic trees |
 
 <h4>BNs with Electrophysical Data</h4>
-</sub>|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|<sub>
-</sub>|<sub> ----------- </sub>|<sub> -------- </sub>|<sub> --- </sub>|<sub> ----------- </sub>|<sub>
-</sub>|<sub> Smith et al., 2006 </sub>|<sub> Dynamic BN </sub>|<sub> Association </sub>|<sub> Infer non-linear neural information flow networks </sub>|<sub>
-</sub>|<sub> Eldawlatly et al., 2010 </sub>|<sub> Dynamic BN </sub>|<sub> Association </sub>|<sub> Infer effective and time-varying connectivity between spiking cortical neurons </sub>|<sub>
-</sub>|<sub> Jung et al., 2010 </sub>|<sub> BN </sub>|<sub> Association </sub>|<sub> Neuronal synchrony from electrode signal recordings </sub>|<sub>
-</sub>|<sub> Pecevski et al., 2011 </sub>|<sub> BN </sub>|<sub> Inference </sub>|<sub> Emulate probabilistic inference through networks of spiking neurons </sub>|<sub>
+| Researchers | BN model | Aim | Application |
+| ----------- | -------- | --- | ----------- |
+| Smith et al., 2006 | Dynamic BN | Association | Infer non-linear neural information flow networks |
+| Eldawlatly et al., 2010 | Dynamic BN | Association | Infer effective and time-varying connectivity between spiking cortical neurons |
+| Jung et al., 2010 | BN | Association | Neuronal synchrony from electrode signal recordings |
+| Pecevski et al., 2011 | BN | Inference | Emulate probabilistic inference through networks of spiking neurons |
 
 <h4>BNs with 'Omics Data</h4>
-</sub>|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|<sub>
-</sub>|<sub> ----------- </sub>|<sub> -------- </sub>|<sub> --- </sub>|<sub> ----------- </sub>|<sub>
-</sub>|<sub> Armañanzas et al., 2012 </sub>|<sub> Ensemble of BN classifiers </sub>|<sub> Association </sub>|<sub> Transcripts in AD </sub>|<sub>
-</sub>|<sub> Hullam et al., 2012 </sub>|<sub> BN </sub>|<sub> Association </sub>|<sub> SNPs in depression </sub>|<sub>
-</sub>|<sub> Zeng et al., 2013 </sub>|<sub> BN </sub>|<sub> Association </sub>|<sub> Cytokines and mRNA in cerebral ischemia </sub>|<sub>
-</sub>|<sub> Liang et al., 2007 </sub>|<sub> BN </sub>|<sub> Association </sub>|<sub> SNPs in childhood absence epilepsy </sub>|<sub>
-</sub>|<sub> Zhang et al., 2010 </sub>|<sub> BN </sub>|<sub> Association </sub>|<sub> Regulation network of the neuron-specific factor Nova (mice) </sub>|<sub>
-</sub>|<sub> Jiang et al., 2011 </sub>|<sub> BN </sub>|<sub> Association </sub>|<sub> SNPs in late onset AD </sub>|<sub>
-</sub>|<sub> Han et al., 2012 </sub>|<sub> BN </sub>|<sub> Association </sub>|<sub> SNPs in early onset autism </sub>|<sub>
-</sub>|<sub> Wei et al., 2011 </sub>|<sub> Model-averaged NB, selective NB </sub>|<sub>Sup. classification </sub>|<sub> Prediction of AD from SNPs </sub>|<sub>
-</sub>|<sub> Gollapalli et al., 2012 </sub>|<sub> Selective NB </sub>|<sub> Sup. classification </sub>|<sub> Mass spectrometry for predicting glioblastoma </sub>|<sub>
-</sub>|<sub> Belgard et al., 2011 </sub>|<sub> Naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Distinguish sequenced transcriptomes among layers I-VIb </sub>|<sub>
+| Researchers | BN model | Aim | Application |
+| ----------- | -------- | --- | ----------- |
+| Armañanzas et al., 2012 | Ensemble of BN classifiers | Association | Transcripts in AD |
+| Hullam et al., 2012 | BN | Association | SNPs in depression |
+| Zeng et al., 2013 | BN | Association | Cytokines and mRNA in cerebral ischemia |
+| Liang et al., 2007 | BN | Association | SNPs in childhood absence epilepsy |
+| Zhang et al., 2010 | BN | Association | Regulation network of the neuron-specific factor Nova (mice) |
+| Jiang et al., 2011 | BN | Association | SNPs in late onset AD |
+| Han et al., 2012 | BN | Association | SNPs in early onset autism |
+| Wei et al., 2011 | Model-averaged NB, selective NB |Sup. classification | Prediction of AD from SNPs |
+| Gollapalli et al., 2012 | Selective NB | Sup. classification | Mass spectrometry for predicting glioblastoma |
+| Belgard et al., 2011 | Naive Bayes | Sup. classification | Distinguish sequenced transcriptomes among layers I-VIb |
 
 <h4>BNs with fMRI Data</h4>
-</sub>|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|<sub>
-</sub>|<sub> ----------- </sub>|<sub> -------- </sub>|<sub> --- </sub>|<sub> ----------- </sub>|<sub>
-</sub>|<sub> Iyer et al., 2013 </sub>|<sub> Gaussian BNs </sub>|<sub> Association </sub>|<sub> Resting-state (normal subjects)</sub>|<sub> 
-</sub>|<sub> Dawson et al., 2013 </sub>|<sub> Gaussian BNs </sub>|<sub> Association </sub>|<sub> Resting-state (normal subjects)</sub>|<sub> 
-</sub>|<sub> Li et al., 2011 </sub>|<sub> Gaussian BNs </sub>|<sub> Association </sub>|<sub> Resting-state (normal subjects)</sub>|<sub> 
-</sub>|<sub> Li et al., 2013 </sub>|<sub> Gaussian BNs </sub>|<sub> Association </sub>|<sub> Resting-state (aMCI vs. controls)</sub>|<sub> 
-Labatut et al., 2004 </sub>|<sub> Gaussian dynamic BNs </sub>|<sub> Association </sub>|<sub> Phoneme task (normal vs. dyslexic) </sub>|<sub> 
-</sub>|<sub> Li et al., 2008 </sub>|<sub> Gaussian dynamic BNs </sub>|<sub> Association </sub>|<sub> Bulb squeeze (healthy vs. Parkinsonian) </sub>|<sub> 
-</sub>|<sub> Kim et al., 2008 </sub>|<sub> Discretized dynamic BNs </sub>|<sub> Association </sub>|<sub> Auditory task (schizophrenia vs. controls) </sub>|<sub> 
-</sub>|<sub> Zhang et al., 2005 </sub>|<sub> Mixed dynamic BNs (HMMs) </sub>|<sub> Association </sub>|<sub> Monetary reward task (drug addicted vs. healthy) </sub>|<sub> 
-</sub>|<sub> Rajapakse and Zhou, 2007 </sub>|<sub> Discretized dynamic BNs </sub>|<sub> Association </sub>|<sub> Silent reading and counting Stroop (normal subjects) </sub>|<sub> 
-</sub>|<sub> Sun et al., 2012 </sub>|<sub> Gaussian BNs </sub>|<sub> Association </sub>|<sub> Watching videos (normal subjects) </sub>|<sub> 
-</sub>|<sub> Neumann et al., 2010 </sub>|<sub> CPDAGs </sub>|<sub> Association </sub>|<sub> Meta-analysis </sub>|<sub> 
-</sub>|<sub> Mitchell et al., 2004 </sub>|<sub> Gaussian naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Prediction of cognitive states </sub>|<sub> 
-</sub>|<sub> Raizada and Lee, 2013 </sub>|<sub> Gaussian naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Distinction of phoneme sounds </sub>|<sub> 
-</sub>|<sub> Ku et al., 2008 </sub>|<sub> Gaussian naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Prediction of which category a monkey is viewing </sub>|<sub> 
-</sub>|<sub> Douglas et al., 2011 </sub>|<sub> Naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Belief vs. disbelief states </sub>|<sub> 
-</sub>|<sub> Burge et al., 2009 </sub>|<sub> Discretized dynamic BNs </sub>|<sub> Association </sub>|<sub>  Healthy vs. demented elderly subjects </sub>|<sub> 
-</sub>|<sub> Chen and Herskovits, 2007 </sub>|<sub> Inverse-tree classifier </sub>|<sub> Sup. classification </sub>|<sub> Young vs. non-demented vs. demented older</sub>|<sub>
+| Researchers | BN model | Aim | Application |
+| ----------- | -------- | --- | ----------- |
+| Iyer et al., 2013 | Gaussian BNs | Association | Resting-state (normal subjects)| 
+| Dawson et al., 2013 | Gaussian BNs | Association | Resting-state (normal subjects)| 
+| Li et al., 2011 | Gaussian BNs | Association | Resting-state (normal subjects)| 
+| Li et al., 2013 | Gaussian BNs | Association | Resting-state (aMCI vs. controls)| 
+Labatut et al., 2004 | Gaussian dynamic BNs | Association | Phoneme task (normal vs. dyslexic) | 
+| Li et al., 2008 | Gaussian dynamic BNs | Association | Bulb squeeze (healthy vs. Parkinsonian) | 
+| Kim et al., 2008 | Discretized dynamic BNs | Association | Auditory task (schizophrenia vs. controls) | 
+| Zhang et al., 2005 | Mixed dynamic BNs (HMMs) | Association | Monetary reward task (drug addicted vs. healthy) | 
+| Rajapakse and Zhou, 2007 | Discretized dynamic BNs | Association | Silent reading and counting Stroop (normal subjects) | 
+| Sun et al., 2012 | Gaussian BNs | Association | Watching videos (normal subjects) | 
+| Neumann et al., 2010 | CPDAGs | Association | Meta-analysis | 
+| Mitchell et al., 2004 | Gaussian naive Bayes | Sup. classification | Prediction of cognitive states | 
+| Raizada and Lee, 2013 | Gaussian naive Bayes | Sup. classification | Distinction of phoneme sounds | 
+| Ku et al., 2008 | Gaussian naive Bayes | Sup. classification | Prediction of which category a monkey is viewing | 
+| Douglas et al., 2011 | Naive Bayes | Sup. classification | Belief vs. disbelief states | 
+| Burge et al., 2009 | Discretized dynamic BNs | Association |  Healthy vs. demented elderly subjects | 
+| Chen and Herskovits, 2007 | Inverse-tree classifier | Sup. classification | Young vs. non-demented vs. demented older|
 
 <h4>BNs with MRI Data</h4>
-</sub>|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|<sub>
-</sub>|<sub> ----------- </sub>|<sub> -------- </sub>|<sub> --- </sub>|<sub> ----------- </sub>|<sub>
-</sub>|<sub> Joshi et al., 2010 </sub>|<sub> Gaussian BN </sub>|<sub> Association </sub>|<sub> Relationships between cortical surface areas </sub>|<sub> 
-</sub>|<sub> Wang et al., 2013 </sub>|<sub> Gaussian BN </sub>|<sub> Association </sub>|<sub> Interaction graphs for AD patients and controls </sub>|<sub> 
-</sub>|<sub> Chen et al., 2012a </sub>|<sub> Discretized dynamic BNs </sub>|<sub> Association </sub>|<sub> Temporal interactions in normal aging and MCI </sub>|<sub> 
-</sub>|<sub> Duering et al., 2013 </sub>|<sub> Gaussian BN </sub>|<sub> Association </sub>|<sub> Processing speed deficits in VCI patients </sub>|<sub> 
-</sub>|<sub> Morales et al., 2013 </sub>|<sub> Naive Bayes, selective naive Bayes</sub>|<sub>  Sup. classification </sub>|<sub> Early diagnosis of Parkinson’s disease </sub>|<sub> 
-</sub>|<sub> Diciotti et al., 2012 </sub>|<sub> Naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Early diagnosis of AD </sub>|<sub> 
-</sub>|<sub> Zhang et al., 2014 </sub>|<sub> Naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> MCI vs. AD </sub>|<sub> 
-</sub>|<sub> Chen et al., 2012b </sub>|<sub> Ensemble of BNs </sub>|<sub> Sup. classification </sub>|<sub> Conversion from MCI to Alzheimer </sub>|<sub> 
+| Researchers | BN model | Aim | Application |
+| ----------- | -------- | --- | ----------- |
+| Joshi et al., 2010 | Gaussian BN | Association | Relationships between cortical surface areas | 
+| Wang et al., 2013 | Gaussian BN | Association | Interaction graphs for AD patients and controls | 
+| Chen et al., 2012a | Discretized dynamic BNs | Association | Temporal interactions in normal aging and MCI | 
+| Duering et al., 2013 | Gaussian BN | Association | Processing speed deficits in VCI patients | 
+| Morales et al., 2013 | Naive Bayes, selective naive Bayes|  Sup. classification | Early diagnosis of Parkinson’s disease | 
+| Diciotti et al., 2012 | Naive Bayes | Sup. classification | Early diagnosis of AD | 
+| Zhang et al., 2014 | Naive Bayes | Sup. classification | MCI vs. AD | 
+| Chen et al., 2012b | Ensemble of BNs | Sup. classification | Conversion from MCI to Alzheimer | 
 
 <h4>BNs with EEG Data</h4>
-</sub>|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|<sub>
-</sub>|<sub> ----------- </sub>|<sub> -------- </sub>|<sub> --- </sub>|<sub> ----------- </sub>|<sub>
-</sub>|<sub> Song et al., 2009 </sub>|<sub> Time-varying dynamic BNs </sub>|<sub> Association </sub>|<sub> Motor imagination task </sub>|<sub> 
-</sub>|<sub> De la Fuente et al., 2011 </sub>|<sub> BN </sub>|<sub> Association </sub>|<sub> Borderline personality disorder </sub>|<sub> 
-</sub>|<sub> Valenti et al., 2006 </sub>|<sub> Kernel naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Detection of interictal spikes (epilepsy)</sub>|<sub> 
-</sub>|<sub> Acharya et al., 2011 </sub>|<sub> Naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Normal/interictal/ictal (epileptic) signals </sub>|<sub> 
-</sub>|<sub> Rezaei et al., 2006 </sub>|<sub> HMM </sub>|<sub> Sup. classification</sub>|<sub>  Classification of mental states </sub>|<sub> 
-</sub>|<sub> Speier et al., 2012</sub>|<sub>  Gaussian naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> P300 Speller (virtual keyboard) </sub>|<sub> 
-</sub>|<sub> Speier et al., 2014 </sub>|<sub> HMM </sub>|<sub> Sup. classification </sub>|<sub> P300 Speller (virtual keyboard) </sub>|<sub> 
-</sub>|<sub> Zhang et al., 2006 </sub>|<sub> BN </sub>|<sub> Sup. classification </sub>|<sub> Hearing assessment and inference</sub>|<sub> 
-</sub>|<sub> Hausfeld et al., 2012 </sub>|<sub>  Gaussian naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Speech sound identification (speakers and vowels) </sub>|<sub> 
-</sub>|<sub> De Vico Fallani et al., 2011 </sub>|<sub> Gaussian naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Person identification (resting-state) </sub>|<sub> 
+| Researchers | BN model | Aim | Application |
+| ----------- | -------- | --- | ----------- |
+| Song et al., 2009 | Time-varying dynamic BNs | Association | Motor imagination task | 
+| De la Fuente et al., 2011 | BN | Association | Borderline personality disorder | 
+| Valenti et al., 2006 | Kernel naive Bayes | Sup. classification | Detection of interictal spikes (epilepsy)| 
+| Acharya et al., 2011 | Naive Bayes | Sup. classification | Normal/interictal/ictal (epileptic) signals | 
+| Rezaei et al., 2006 | HMM | Sup. classification|  Classification of mental states | 
+| Speier et al., 2012|  Gaussian naive Bayes | Sup. classification | P300 Speller (virtual keyboard) | 
+| Speier et al., 2014 | HMM | Sup. classification | P300 Speller (virtual keyboard) | 
+| Zhang et al., 2006 | BN | Sup. classification | Hearing assessment and inference| 
+| Hausfeld et al., 2012 |  Gaussian naive Bayes | Sup. classification | Speech sound identification (speakers and vowels) | 
+| De Vico Fallani et al., 2011 | Gaussian naive Bayes | Sup. classification | Person identification (resting-state) | 
 
 <h4>BNs with Other Data</h4>
-</sub>|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|<sub>
-</sub>|<sub> ----------- </sub>|<sub> -------- </sub>|<sub> --- </sub>|<sub> ----------- </sub>|<sub>
-</sub>|<sub> Wang et al., 2011 </sub>|<sub> Gaussian naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Distinction of semantic categories (epilepsy) </sub>|<sub> 
-</sub>|<sub> Goker et al., 2012 </sub>|<sub> Gaussian naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> ME vs. healthy. </sub>|<sub> 
-</sub>|<sub> Lu et al., 2014 </sub>|<sub> Gaussian selective naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Mental states (activation vs. rest) </sub>|<sub> 
-</sub>|<sub> Dyrba et al., 2013 </sub>|<sub> Gaussian selective naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> AD vs. controls </sub>|<sub> 
-</sub>|<sub> Ayhan et al., 2013 </sub>|<sub> Gaussian selective naive Bayes </sub>|<sub> Sup. classification </sub>|<sub> Levels of dementia in AD </sub>|<sub> 
-</sub>|<sub> Huang et al., 2011 </sub>|<sub> Sparse Gaussian BN </sub>|<sub> Association </sub>|<sub> Resting-state (AD vs. controls) </sub>|<sub> 
+| Researchers | BN model | Aim | Application |
+| ----------- | -------- | --- | ----------- |
+| Wang et al., 2011 | Gaussian naive Bayes | Sup. classification | Distinction of semantic categories (epilepsy) | 
+| Goker et al., 2012 | Gaussian naive Bayes | Sup. classification | ME vs. healthy. | 
+| Lu et al., 2014 | Gaussian selective naive Bayes | Sup. classification | Mental states (activation vs. rest) | 
+| Dyrba et al., 2013 | Gaussian selective naive Bayes | Sup. classification | AD vs. controls | 
+| Ayhan et al., 2013 | Gaussian selective naive Bayes | Sup. classification | Levels of dementia in AD | 
+| Huang et al., 2011 | Sparse Gaussian BN | Association | Resting-state (AD vs. controls) | 
 
 <h2>References</h2>
 - [1] Bielza, C., Larranaga, P. "Bayesian networks in neuroscience: a survey"
