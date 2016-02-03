@@ -98,7 +98,6 @@ def marginal_ctbp_e(bn, target=None, evidence=None):
 
 	Notes
 	-----
-	- Copied directly from CliqueTree class... not tested.
 
 	"""
 	# 1: Moralize the graph
@@ -113,11 +112,15 @@ def marginal_ctbp_e(bn, target=None, evidence=None):
 
 	# select a clique as root where target is in scope of root
 	root=np.random.randint(0,len(ctree.V))
-	if target:
-		root = [node for node in G.nodes() if target in ctree.V[node].scope][0]
+	if target is not None:
+		for v, c in ctree:
+			if target in c.scope:
+				root = v
+				break
 
-	tree_graph = nx.dfs_tree(G,root)
-	clique_ordering = list(nx.dfs_postorder_nodes(tree_graph,root))
+	#tree_graph = nx.dfs_tree(G,root)
+	#clique_ordering = list(nx.dfs_postorder_nodes(tree_graph,root))
+	clique_ordering = topsort(ctree.E)
 
 	# UPWARD PASS
 	# send messages up the tree from the leaves to the single root
