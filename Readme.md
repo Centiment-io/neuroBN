@@ -41,14 +41,14 @@ Below is a set of tables highlighting the use of Bayesian networks in the existi
 
 <h4>BNs with Morphological Data</h4>
 
-</|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|<sub>
-</sub>|<sub> ----------- </sub>|<sub> -------- </sub>|<sub> --- </sub>|<sub> ----------- </sub>|<sub>
-</sub>|<sub> DeFelipe et al., 2013 </sub>|<sub> BN and naive Bayes </sub>|<sub> Assoc. and supervised class </sub>|<sub> Classification and naming of GABAergic interneurons </sub>|<sub>
-</sub>|<sub> Lopez-Cruz et al., 2014 </sub>|<sub> BN and BN multinet </sub>|<sub> Assoc. and inference and cluster </sub>|<sub> Consensus model for interneuron classification </sub>|<sub>
-</sub>|<sub>Mihaljevic et al., in press </sub>|<sub> Naive Bayes and TAN </sub>|<sub> Supervised class </sub>|<sub> Classification of cortical GABAergic interneurons </sub>|<sub>
-</sub>|<sub>Mihaljevic et al., Under review </sub>|<sub> MBC </sub>|<sub> Multi-dimensional class </sub>|<sub> Simultaneous classification of six axonal class variables </sub>|<sub>
-</sub>|<sub>Guerra et al., 2011 </sub>|<sub> Naive Bayes </sub>|<sub> Supervised class </sub>|<sub> Pyramidal neuron vs. interneuron </sub>|<sub>
-</sub>|<sub>Lopez-Cruz et al., 2011 </sub>|<sub> BN </sub>|<sub> Inference, associations </sub>|<sub> Model and simulation of dendritic trees </sub>|<sub>
+|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|
+|<sub> ----------- </sub>|<sub> -------- </sub>|<sub> --- </sub>|<sub> ----------- </sub>|
+|<sub> DeFelipe et al., 2013 </sub>|<sub> BN and naive Bayes </sub>|<sub> Assoc. and supervised class </sub>| Classification and naming of GABAergic interneurons </sub>|
+|<sub> Lopez-Cruz et al., 2014 </sub>|<sub> BN and BN multinet </sub>|<sub> Assoc. and inference and cluster </sub>| <sub> Consensus model for interneuron classification </sub>|
+|<sub>Mihaljevic et al., in press </sub>|<sub> Naive Bayes and TAN </sub>|<sub> Supervised class </sub>|<sub> Classification of cortical GABAergic interneurons </sub>|
+|<sub>Mihaljevic et al., Under review </sub>|<sub> MBC </sub>|<sub> Multi-dimensional class </sub>|<sub> Simultaneous classification of six axonal class variables </sub>|
+|<sub>Guerra et al., 2011 </sub>|<sub> Naive Bayes </sub>|<sub> Supervised class </sub>|<sub> Pyramidal neuron vs. interneuron </sub>|
+|<sub>Lopez-Cruz et al., 2011 </sub>|<sub> BN </sub>|<sub> Inference, associations </sub>|<sub> Model and simulation of dendritic trees </sub>|
 
 <h4>BNs with Electrophysical Data</h4>
 </sub>|<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|<sub>
