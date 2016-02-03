@@ -13,7 +13,7 @@ an argument to that function.
 Exact MAP Inference Algorithms
 ------------------------------
 
-    - Max-Sum Variable Elimination
+    - Max-Product Variable Elimination
 
 
 References
@@ -56,7 +56,7 @@ def map_ve_e(bn,
     
     #### TRACEBACK MAP ASSIGNMENT ####
     max_assignment = _phi.traceback_map()
-    
+
     #### RETURN ####
     if prob:
         # multiply phi's together if there is evidence
@@ -74,7 +74,57 @@ def map_ve_e(bn,
             return max_assignment
     
 
-def map_opt_e(bn, evidence={}):
+def map_opt_e_1(bn, evidence={}):
+    """
+    Solve MAP Inference as an integer linear optimization
+    problem, as formulated in Sontag's notes:
+    http://cs.nyu.edu/~dsontag/courses/pgm12/slides/lecture6.pdf
+
+    Arguments
+    ---------
+    *bn* : a BayesNet object
+
+    *evidence* : a dictionary, where
+        key = rv and value = rv's value
+
+    Returns
+    -------
+    *sol* : a dictionary, where
+        key = rv and value = maximal assignment
+
+    Effects
+    -------
+    None
+
+    Notes
+    -----
+    objective = 
+    arg max_X Sum_i\inV Theta_i(x_i) + Sum_ij\inE Theta_ij(x_i,x_j)
+
+    Variables:
+    u_i(x_i) : one for each i \in V and state x_i
+
+    """
+
+    model = LpProblem("MAP Inference",LpMinimize)
+
+    # CREATE NODE VARIABLES
+    node_vars = dict([(rv,[LpVariable(str(str(rv)+'-'+str(i)),0,1,LpInteger) \
+        for i in bn.values(rv)]) for rv in bn.nodes()])
+
+    # CREATE EDGE VARIABLES
+    for rv in bn.nodes():
+        for child in bn.children(rv):
+            for 
+
+    # NODE CONSTRAINT
+    # one value from each rv
+    # GOOD
+    for rv, variables in node_vars.items():
+        model += sum(variables) == 1, 'Sum Constraint - ' + str(rv)
+
+
+def map_opt_e_2(bn, evidence={}):
     """
     Solve MAP Inference as a dynamic programming
     problem, where the solution is built up from
