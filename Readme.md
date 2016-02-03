@@ -39,13 +39,19 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 | JSON format   | Networkx      |
 
 
-<h4>Inference</h4>
-| Exact Marginal Inference  | Approximate Marginal Inference  | Exact MAP Inference |
+<h4>Marginal Inference</h4>
+| Exact Marginal Inference  | Approximate Marginal Inference  | 
 | ------------- | ------------- | ----------------- |
-| Sum-Product Variable Elimination   | Forward Sampling    | Max-Product Variable Elimination   |
-| Clique Tree Message Passing  | Likelihood Weighted Sampling     |  Integer Linear Programming |   
-|				|		Gibbs (MCMC) Sampling 		| 			|
-|				|		Loopy Belief Propagation			| 		|
+| Sum-Product Variable Elimination   | Forward Sampling    |
+| Clique Tree Message Passing  | Likelihood Weighted Sampling     |  
+|				|		Gibbs (MCMC) Sampling 		|
+|				|		Loopy Belief Propagation			| 
+
+<h4>MAP Inference</h4>
+| Exact MAP Inference | Approximate MAP Inference |
+| ------------------- | ------------------------- |
+| Max-Product Variable Elimination | LP Relaxation |
+| Integer Linear Programming	|			|
 
 <h4>Structure Learning</h4>
 | Constraint-Based  | Tree-Based | Independence Tests |
