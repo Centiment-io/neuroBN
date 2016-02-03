@@ -18,7 +18,7 @@ import copy
 
 from neuroBN.classes.bayesnet import BayesNet
 from neuroBN.classes.factor import Factor
-from neuroBN.utils.topsort import topsort
+from neuroBN.utils.graph import topsort
 
 
 def read_bn(path):

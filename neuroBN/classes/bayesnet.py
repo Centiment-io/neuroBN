@@ -40,7 +40,7 @@ __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
 import numpy as np
 from neuroBN.utils.class_equivalence import are_class_equivalent
-from neuroBN.utils.topsort import topsort
+from neuroBN.utils.graph import topsort
 
 class BayesNet(object):
     """

@@ -28,7 +28,7 @@ __author__ = """N. Cullen <ncullen.th@dartmouth.edu>"""
 
 from neuroBN.classes.bayesnet import BayesNet
 from neuroBN.classes.factor import Factor 
-from neuroBN.utils.topsort import topsort
+from neuroBN.utils.graph import topsort
 
 import numpy as np
 

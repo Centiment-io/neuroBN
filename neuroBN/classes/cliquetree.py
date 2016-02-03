@@ -43,8 +43,7 @@ from neuroBN.classes.bayesnet import BayesNet
 from neuroBN.classes.factor import Factor
 from neuroBN.classes.factorization import Factorization
 
-from neuroBN.utils.chordal_bn import make_chordal
-from neuroBN.utils.mst import minimum_spanning_tree
+from neuroBN.utils.graph import *
 
 
 

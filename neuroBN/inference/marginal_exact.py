@@ -27,6 +27,8 @@ __author__ = """N. Cullen <ncullen.th@dartmouth.edu>"""
 
 from neuroBN.classes.factor import Factor
 from neuroBN.classes.factorization import Factorization
+from neuroBN.utils.graph import *
+
 from copy import deepcopy, copy
 import numpy as np
 import json
@@ -120,7 +122,7 @@ def marginal_ctbp_e(bn, target=None, evidence=None):
 
 	#tree_graph = nx.dfs_tree(G,root)
 	#clique_ordering = list(nx.dfs_postorder_nodes(tree_graph,root))
-	clique_ordering = list(reversed(topsort(ctree.E)))
+	clique_ordering = dfs_postorder(ctree.E)
 
 	# UPWARD PASS
 	# send messages up the tree from the leaves to the single root
