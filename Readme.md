@@ -40,7 +40,7 @@ If you are a neuroscience researcher or student who thinks the incredible learni
 Below is a set of tables highlighting the use of Bayesian networks in the existing neuroscience literature. Please note that these tables are adapted directly from <i>Bielza, C., and Larranaga, P. "Bayesian networks in neuroscience: a survey"</i> ([1]) -- permitted under the Creative Commons License. Absolutely all credit for the following tables belongs to those two researchers.
 
 <h4>BNs with Morphological Data</h4>
-<sub>
+
 | Researchers | BN model | Aim | Application |
 | ----------- | -------- | --- | ----------- |
 | DeFelipe et al., 2013 | BN and naive Bayes | Assoc. and supervised class | Classification and naming of GABAergic interneurons |
@@ -49,7 +49,7 @@ Below is a set of tables highlighting the use of Bayesian networks in the existi
 |Mihaljevic et al., Under review | MBC | Multi-dimensional class | Simultaneous classification of six axonal class variables |
 |Guerra et al., 2011 | Naive Bayes | Supervised class | Pyramidal neuron vs. interneuron |
 |Lopez-Cruz et al., 2011 | BN | Inference, associations | Model and simulation of dendritic trees |
-</sub>
+
 <h4>BNs with Electrophysical Data</h4>
 | Researchers | BN model | Aim | Application |
 | ----------- | -------- | --- | ----------- |
