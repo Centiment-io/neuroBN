@@ -38,6 +38,7 @@ If you are a neuroscience researcher or student who thinks the incredible learni
 
 <h2>Survey of Existing Literature</h2>
 Below is a set of tables highlighting the use of Bayesian networks in the existing neuroscience literature. Please note that these tables are adapted directly from <i>Bielza, C., and Larranaga, P. "Bayesian networks in neuroscience: a survey"</i> ([1]) -- permitted under the Creative Commons License. Absolutely all credit for the following tables belongs to those two researchers.
+<div style='height:100px'>
 <h4>BNs with Morphological Data</h4>
 
 | Researchers | BN model | Aim | Application |
@@ -127,7 +128,7 @@ Labatut et al., 2004 | Gaussian dynamic BNs | Association | Phoneme task (normal
 | Dyrba et al., 2013 | Gaussian selective naive Bayes | Sup. classification | AD vs. controls | 
 | Ayhan et al., 2013 | Gaussian selective naive Bayes | Sup. classification | Levels of dementia in AD | 
 | Huang et al., 2011 | Sparse Gaussian BN | Association | Resting-state (AD vs. controls) | 
-
+</div>
 <h2>References</h2>
 - [1] Bielza, C., Larranaga, P. "Bayesian networks in neuroscience: a survey"
 - [2] Daly, R., Shen, Q., Aitken, S. "Learning Bayesian networks: approaches and issues"
