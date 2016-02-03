@@ -108,7 +108,7 @@ Labatut et al., 2004 | Gaussian dynamic BNs | Association | Phoneme task (normal
 <h4>BNs with EEG Data</h4>
 | Researchers | BN model | Aim | Application |
 | ----------- | -------- | --- | ----------- |
-| Song et al., 2009 | Time-varying dynamic BNs | Association | Motor imagination task | 
+<sub> | Song et al., 2009 | Time-varying dynamic BNs | Association | Motor imagination task | </sub>
 | De la Fuente et al., 2011 | BN | Association | Borderline personality disorder | 
 | Valenti et al., 2006 | Kernel naive Bayes | Sup. classification | Detection of interictal spikes (epilepsy)| 
 | Acharya et al., 2011 | Naive Bayes | Sup. classification | Normal/interictal/ictal (epileptic) signals | 
