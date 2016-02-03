@@ -26,7 +26,6 @@ __author__ = """N. Cullen <ncullen.th@dartmouth.edu>"""
 
 from copy import copy
 import numpy as np
-from pulp import *
 
 from neuroBN.classes.factor import Factor
 from neuroBN.classes.factorization import Factorization
@@ -89,8 +88,13 @@ def map_opt_e(bn, evidence={}):
         key = rv and value = rv's value
 
     """
+    try:
+        import pulp as pl
+    except ImportError:
+        print "You must 'pip install pulp' to use Map Optimization methods."
+        return
 
-    model = LpProblem("MAP Inference",LpMinimize)
+    model = pl.LpProblem("MAP Inference",pl.LpMinimize)
 
     # CREATE VARIABLE FOR EVERY CPT ENTRY
     var_dict = {} # key = rv, value = list of variables for each cpt entry
@@ -100,9 +104,9 @@ def map_opt_e(bn, evidence={}):
     for rv in bn.nodes():
         var_dict[rv] = {}
         for idx in xrange(len(bn.cpt(rv))):
-            #str_rep = bn.cpt_str_idx(rv,idx)
-            str_rep = str(rv)+'-'+str(idx)
-            new_var = LpVariable(str_rep,0,1,LpInteger)
+            str_rep = bn.cpt_str_idx(rv,idx)
+            #str_rep = str(rv)+'-'+str(idx)
+            new_var = pl.LpVariable(str_rep,0,1,pl.LpInteger)
             var_dict[rv][idx] = new_var
             var_list.append(new_var)
             weight_list.append(round(-np.log(bn.cpt(rv)[idx]),3))
@@ -148,13 +152,13 @@ def map_opt_e(bn, evidence={}):
                     sum([var_dict[p][pi] for p in bn.parents(rv) for pi in p_cpt[p]]), \
                     'IN-CPT Constraint - ' + str(k)
                 k+=1
-    print model
-
+    
+    #model.writeLP("MapInference.lp")
     model.solve()
 
-    #for v in model.variables():
-       # if v.varValue == 1.0:
-         #   print v.name
+    for v in model.variables():
+        if v.varValue == 1.0:
+            print v.name
 
     
 
