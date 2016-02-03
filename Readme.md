@@ -42,7 +42,7 @@ Below is a set of tables highlighting the use of Bayesian networks in the existi
 <h4>BNs with Morphological Data</h4>
 
 |<sub> Researchers </sub>|<sub> BN model </sub>|<sub> Aim </sub>|<sub> Application </sub>|
-|<sub> ----------- </sub>|<sub> -------- </sub>|<sub> --- </sub>|<sub> ----------- </sub>|
+|----------- |-------- |--- | ----------- |
 |<sub> DeFelipe et al., 2013 </sub>|<sub> BN and naive Bayes </sub>|<sub> Assoc. and supervised class </sub>| Classification and naming of GABAergic interneurons </sub>|
 |<sub> Lopez-Cruz et al., 2014 </sub>|<sub> BN and BN multinet </sub>|<sub> Assoc. and inference and cluster </sub>| <sub> Consensus model for interneuron classification </sub>|
 |<sub>Mihaljevic et al., in press </sub>|<sub> Naive Bayes and TAN </sub>|<sub> Supervised class </sub>|<sub> Classification of cortical GABAergic interneurons </sub>|
