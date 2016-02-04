@@ -92,8 +92,8 @@ class CliqueTree(object):
         self.initialize_tree()
 
     def __iter__(self):
-        for vertex, clique in self.C.items():
-            yield vertex, clique
+        for clique in self.C.values():
+            yield clique
 
     def __getitem__(self, rv):
         """
@@ -157,7 +157,9 @@ class CliqueTree(object):
 
         ### COMPUTE INITIAL POTENTIAL FOR EACH FACTOR ###
         # - i.e. multiply all of its assigned factors together
-        for clique in self.V.values():
+        for i, clique in self.C.items():
+            if len(self.parents(i)) == 0:
+                clique.is_ready = True
             clique.initialize_psi()
 
 
