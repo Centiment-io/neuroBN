@@ -8,6 +8,12 @@ involves finding the structure which maximizes
 some function of the likelihood of the data, given
 the structure and parameters of the learned BN.
 
+It is important to take advantage of the decomposability
+of the scores. That is, if you add/delete/reverse an edge,
+then you only need to re-calculate the score based on that
+local change (usually just the child node's CPT) to get the
+difference from the original graph. 
+
 Here are a few which can be implemented:
 
 Bayesian scoring functions:
@@ -31,10 +37,12 @@ http://www.lx.it.pt/~asmc/pub/publications/09-TA/09-c-ta.pdf
 """
 from __future__ import division
 
+from neuroBn.utils.independence_tests import mutual_information, entropy
+
 
 ##### INFORMATION-THEORETIC SCORING FUNCTIONS #####
 
-def log_likelihood(bn):
+def log_likelihood(bn, data):
 	"""
 	Determining log-likelihood of the parameters
 	of a Bayesian Network. This is a quite simple
@@ -49,6 +57,26 @@ def log_likelihood(bn):
 
 	However, for computational reasons it is best to take
 	advantage of the decomposability of the log-likelihood score.
+	
+	As an example, if you add an edge from A->B, then you simply
+	need to calculate LOG(P'(B|A)) - Log(P(B)), and if the value
+	is positive then the edge improves the fitness score and should
+	therefore be included. 
+
+	Even more, you can expand and manipulate terms to calculate the
+	difference between the new graph and the original graph as follows:
+		Score(G') - Score(G) = M * I(X,Y),
+		where M is the number of data points and I(X,Y) is
+		the marginal mutual information calculated using
+		the empirical distribution over the data.
+
+	In general, the likelihood score decomposes as follows:
+		LL(D | Theta_G, G) = 
+			M * Sum over Variables ( I ( X , Parents(X) ) ) - 
+			M * Sum over Variables ( H( X ) ),
+		where 'I' is mutual information and 'H' is the entropy,
+		and M is the number of data points
+
 
 	NOTE: This assumes the parameters have already
 	been learned for the BN's given structure.
@@ -61,7 +89,15 @@ def log_likelihood(bn):
 		Must have both structure and parameters
 		instantiated.
 	"""
-	return np.sum(np.log(bn.flat_cpt()))
+	NROW = data.shape[0]
+	mi_score = 0
+	ent_score = 0
+	for rv in bn.nodes():
+		cols = tuple([bn.V.index(rv)].extend([bn.V.index(p) for p in bn.parents(rv)]))
+		mi_score += mutual_information(data[:,cols])
+		ent_score += entropy(data[:,bn.V.index(rv)])
+	
+	return NROW * (mi_score - ent_score)
 
 def MDL(bn):
 	"""
