@@ -4,6 +4,43 @@ IAMB STRUCTURE
 LEARNING ALGORITHM
 ******************
 
+The IAMB algorithm - Incremental Association Markov Blanket - proceeds
+similar to the Grow-Shrink algorithm, where the growing phase adds
+random variables to a given node's markov blanket, and the shrinking
+phase performs a second pass of conditional independence tests to
+eliminate any variables from the markov blanket for which the given
+node is conditionally independent given any other node in the markov
+blanket (hence doesn't belong in the markov blanket).
+
+It significantly reduces the complexity compared to PC/GS, and is
+normally used in conjuction with the mutual information test for
+independence (I do so here) [2].
+
+Lastly, it can also be used as a feature selection algorithm for
+classification or general dimensionality reduction - simply return
+the markov blanket of a given node, which has been shown by Daphne
+Koller to be theoretically optimal for prediction [3]. 
+
+IAMB for Feature Selection (from [1]):	
+	Because the Markov blanket of a target attribute T renders
+	it statistically independent from all the remaining attributes
+	(see the Markov blanket definition below), all information
+	that may influence its value is stored in the values
+	of the attributes of its Markov blanket. Any attribute
+	from the feature set outside its Markov blanket can be effectively
+	ignored from the feature set without adversely affecting
+	the performance of any classifier that predicts the
+	value of T
+
+References
+----------
+[1] Yaramakala and Maragritis, "Speculative Markov Blanket 
+Discovery for Optimal Feature Selection"
+
+[2] Tsarmardinos, et al. "Algorithms for Large Scale 
+Markov Blanket Discovery" 
+
+[3] Koller "Toward Optimal Feature Selection."
 """
 
 import numpy as np
@@ -19,18 +56,17 @@ def iamb(data, alpha=0.05, feature_selection=None):
 	---------
 	*data* : a nested numpy array
 
-	*dag* : a boolean
-		Whether to return a Directed graph
-
-	*pdag* : a boolean
-		Whether to return a Partially Directed Graph.
-
 	*alpha* : a float
 		The type II error rate.
 
+	*feature_selection* : None or a string
+		Whether to use IAMB as a structure learning
+		or feature selection algorithm.
+
 	Returns
 	-------
-	*bn* : a BayesNet object
+	*bn* : a BayesNet object or
+	*mb* : the markov blanket of a node
 
 	Effects
 	-------

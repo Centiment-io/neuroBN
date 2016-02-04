@@ -79,7 +79,7 @@ def marginal_ve_e(bn, target, evidence={}):
 	return np.round(final_phi.cpt,4)
 
 
-def marginal_ctbp_e(bn, target=None, evidence=None):
+def marginal_bp_e(bn, target=None, evidence=None):
 	"""
 	Perform Belief Propagation (Message Passing) over a Clique Tree. This
 	is sometimes referred to as the "Junction Tree Algorithm" or
@@ -89,10 +89,22 @@ def marginal_ctbp_e(bn, target=None, evidence=None):
 	Downward Pass (Calibration) ([1] pg. 357) if the target involves
 	multiple random variables - i.e. is a list
 
+	Steps Involved:
+		1. Build a Clique Tree from a Bayesian Network
+			a. Moralize the BN
+			b. Triangulate the graph
+			c. Find maximal cliques and collapse into nodes
+			d. Create complete graph and make edge weights = sepset cardinality
+			e. Using Max Spanning Tree to create a tree of cliques
+		2. Assign each factor to only one clique
+		3. Compute the initial potentials of each clique
+			- multiply all of the clique's factors together
+		4. Perform belief propagation based on message passing protocol.
 
-	Parameters
-	----------
 
+	Arguments
+	---------
+	*bn* : a BayesNet object
 
 	Returns
 	-------
