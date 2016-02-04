@@ -33,13 +33,15 @@ def topsort(edge_dict, root=None):
 		vertex = queue.pop(0)
 		if vertex not in visited:
 			visited.append(vertex)
-			queue.extend(edge_dict[vertex]) # add all vertex's children
+			for nbr in edge_dict[vertex]:
+				queue.append(nbr)
+			#queue.extend(edge_dict[vertex]) # add all vertex's children
 	return visited
 
 def dfs_postorder(edge_dict, root=None):
-	return list(reversed(topsort(edge_dict=None)))
+	return list(reversed(topsort(edge_dict, root)))
 
-def mst(edge_dict, undirected=False):
+def mst(edge_dict):
 	"""
 	Calcuate Minimum Spanning Tree
 	for a weighted edge dictionary,
@@ -101,8 +103,8 @@ def mst(edge_dict, undirected=False):
 
 		# Add e to the minimum spanning tree
 		mst_G[source].append(sink)
-		if undirected == True:
-			mst_G[sink].append(source)
+		#if undirected == True:
+		#	mst_G[sink].append(source)
 
 		# Mark newly include node as reached
 		unreached.remove(sink)

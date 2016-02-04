@@ -87,14 +87,17 @@ class CliqueTree(object):
         just a watered down version of the Factor class)        
         
         """
-        self.bn = bn
-        self._F = Factorization(bn)
-        self.initialize_tree()
-
         ####
         self.V = None
         self.E = None
         self.C = None
+        ###
+        
+        self.bn = bn
+        self._F = Factorization(bn)
+        self.initialize_tree()
+
+        
 
     def __repr__(self):
         return self.C
