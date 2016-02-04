@@ -138,13 +138,13 @@ class CliqueTree(object):
                 if i!=j:
                     intersect_cardinality = len(C[i].sepset(C[j]))
                     weighted_edge_dict[i][j] = -1*intersect_cardinality
-        mst_G = minimum_spanning_tree(weighted_edge_dict)
-
+        mst_G = mst(weighted_edge_dict, undirected=True)
         ### SET V,E,C ###
         self.E = mst_G # dictionary
         self.V = mst_G.keys() # list
         self.C = C
 
+        return
         ### ASSIGN EACH FACTOR TO ONE CLIQUE ONLY ###
         v_a = dict([(rv, False) for rv in self.V])
         for clique in self.C.values():

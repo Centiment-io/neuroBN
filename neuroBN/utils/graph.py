@@ -17,13 +17,16 @@ def topsort(edge_dict, root=None):
 	where key = rv and value = list of rv's children
 	"""
 	queue = []
-	for rv in edge_dict.keys():
-		prior=True
-		for p in edge_dict.keys():
-			if rv in edge_dict[p]:
-				prior=False
-		if prior==True:
-			queue.append(rv)
+	if root is not None:
+		queue = [root]
+	else:
+		for rv in edge_dict.keys():
+			prior=True
+			for p in edge_dict.keys():
+				if rv in edge_dict[p]:
+					prior=False
+			if prior==True:
+				queue.append(rv)
 	
 	visited = []
 	while queue:
@@ -33,10 +36,10 @@ def topsort(edge_dict, root=None):
 			queue.extend(edge_dict[vertex]) # add all vertex's children
 	return visited
 
-def dfs_postorder(edge_dict, root):
-	return list(reversed(topsort(edge_dict)))
+def dfs_postorder(edge_dict, root=None):
+	return list(reversed(topsort(edge_dict=None)))
 
-def minimum_spanning_tree(edge_dict):
+def mst(edge_dict, undirected=False):
 	"""
 	Calcuate Minimum Spanning Tree
 	for a weighted edge dictionary,
@@ -98,11 +101,13 @@ def minimum_spanning_tree(edge_dict):
 
 		# Add e to the minimum spanning tree
 		mst_G[source].append(sink)
+		if undirected == True:
+			mst_G[sink].append(source)
 
 		# Mark newly include node as reached
 		unreached.remove(sink)
 		reached.append(sink)
-
+	
 	return mst_G
 
 def make_chordal(bn, v=None,e=None):
