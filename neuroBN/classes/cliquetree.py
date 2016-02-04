@@ -91,6 +91,14 @@ class CliqueTree(object):
         self._F = Factorization(bn)
         self.initialize_tree()
 
+        ####
+        self.V = None
+        self.E = None
+        self.C = None
+
+    def __repr__(self):
+        return self.C
+
     def __iter__(self):
         for clique in self.C.values():
             yield clique
@@ -144,16 +152,16 @@ class CliqueTree(object):
         self.V = mst_G.keys() # list
         self.C = C
 
-        return
+        
         ### ASSIGN EACH FACTOR TO ONE CLIQUE ONLY ###
-        v_a = dict([(rv, False) for rv in self.V])
+        v_a = dict([(rv, False) for rv in self.bn.nodes()])
         for clique in self.C.values():
             temp_scope = []
-            for var in self.V:
-                if v_a[var] == False and self.bn.scope(var).issubset(clique.scope):
+            for var in v_a:
+                if v_a[var] == False and set(self.bn.scope(var)).issubset(clique.scope):
                     temp_scope.append(var)
                     v_a[var] = True
-            clique._F = Factorization(temp_scope)
+            clique._F = Factorization(self.bn, temp_scope)
 
         ### COMPUTE INITIAL POTENTIAL FOR EACH FACTOR ###
         # - i.e. multiply all of its assigned factors together
@@ -270,20 +278,20 @@ class Clique(object):
         #message_to_send.sumout_var_list(vars_to_sumout)
         parent.messages_received.append(message_to_send)
 
-    def intialize_psi(self):
+    def initialize_psi(self):
         """
         Compute a new psi (cpt) in order to 
         set the clique's belief. This involves
         multiplying the factors in the Clique together.
         """
-        assert (len(self.factors) != 0), 'No Factors assigned to this clique.'
+        assert (len(self._F) != 0), 'No Factors assigned to this clique.'
 
-        if len(self.factors) == 1:
+        if len(self._F) == 1:
             self.psi = copy(self._F[0])
             self.belief = copy(self.psi)
         else:
             self.psi = max(self._F, key=lambda x: len(x.cpt))
-            for f in self.factors:
+            for f in self._F:
                 self.psi *= f
             self.belief = copy(self.psi)
 
