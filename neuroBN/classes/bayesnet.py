@@ -140,8 +140,13 @@ class BayesNet(object):
 
     def edges(self):
         for u in self.nodes():
-            for v in self.children(u):
+            for v in self.E[u]:
                 yield (u,v)
+    def num_edges(self):
+        num = 0
+        for u in self.nodes():
+            num += len(self.E[u])
+        return num
 
     def moralized_edges(self):
         """

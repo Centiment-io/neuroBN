@@ -99,8 +99,8 @@ class CliqueTree(object):
 
         
 
-    def __repr__(self):
-        return self.C
+    #def __repr__(self):
+       # return self.C
 
     def __iter__(self):
         for clique in self.C.values():
@@ -378,9 +378,9 @@ class Clique(object):
             The target random variable.
 
         """
-        self.belief.sumout_var_list(list(self.scope.difference({target})))
-
-
+        blf = copy(self.belief)
+        blf.sumover_var(target)
+        return blf
 
 
 
