@@ -92,7 +92,7 @@ class CliqueTree(object):
         self.E = None
         self.C = None
         ###
-        
+
         self.bn = bn
         self._F = Factorization(bn)
         self.initialize_tree()
@@ -122,6 +122,12 @@ class CliqueTree(object):
     def children(self, n):
         return self.E[n]
 
+    def dfs_postorder(self, root):
+        G = nx.Graph(self.E)
+        tree_graph = nx.dfs_tree(G,root)
+        clique_ordering = list(nx.dfs_postorder_nodes(tree_graph,root))
+        return clique_ordering
+
     def initialize_tree(self):
         """
         Initialize the structure of a clique tree, using
@@ -149,7 +155,7 @@ class CliqueTree(object):
                 if i!=j:
                     intersect_cardinality = len(C[i].sepset(C[j]))
                     weighted_edge_dict[i][j] = -1*intersect_cardinality
-        mst_G = mst(weighted_edge_dict, undirected=True)
+        mst_G = mst(weighted_edge_dict)
         ### SET V,E,C ###
         self.E = mst_G # dictionary
         self.V = mst_G.keys() # list
@@ -279,7 +285,7 @@ class Clique(object):
             msg_to_send /= var_to_sumout
         #message_to_send = copy(self.belief)
         #message_to_send.sumout_var_list(vars_to_sumout)
-        parent.messages_received.append(message_to_send)
+        parent.messages_received.append(msg_to_send)
 
     def initialize_psi(self):
         """

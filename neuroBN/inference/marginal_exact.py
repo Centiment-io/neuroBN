@@ -132,9 +132,8 @@ def marginal_bp_e(bn, target=None, evidence=None):
 				root = v
 				break
 
-	#tree_graph = nx.dfs_tree(G,root)
-	#clique_ordering = list(nx.dfs_postorder_nodes(tree_graph,root))
-	clique_ordering = dfs_postorder(ctree.E, root=root)
+	
+	clique_ordering = ctree.dfs_postorder()
 
 	# UPWARD PASS
 	# send messages up the tree from the leaves to the single root
