@@ -43,6 +43,8 @@ Markov Blanket Discovery"
 [3] Koller "Toward Optimal Feature Selection."
 """
 
+__author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
+
 import numpy as np
 from neuroBN.utils.independence_tests import are_independent
 from neuroBN.utils.orient_edges import orient_edges_MB
