@@ -15,8 +15,7 @@ Local search - possible moves:
 from scipy.optimize import *
 import numpy as np
 
-from neuroBN.parameter_learn.mle import mle_estimator
-from neuroBN.parameter_learn.bayes import bayes_estimator
+from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 
 
@@ -50,7 +49,7 @@ def hill_climbing(data, metric='BIC', MAX_ITER=1000):
 			- BIC / MDL
 			- LL (log-likelihood)
 	"""
-	nrow = data.shape[0]
+	NROW = data.shape[0]
 	ncol = data.shape[1]
 	if names is None:
 		names = range(ncol)
@@ -72,29 +71,67 @@ def hill_climbing(data, metric='BIC', MAX_ITER=1000):
 
 	while improvement:
 		improvement = False
-		temp_max = max_score
+		max_diff = 0
 
 		# Test Arc Additions
 		# bn.add_edge(u,v)
 		for u in bn.nodes():
 			for v in bn.nodes():
 				if not would_cause_cycle(bn, u, v):
-					# THIS ONLY WORKS IF mle_estimator
-					# DOESNT ALTER BN DATA DIRECTLY... fix that.
-					old_cpt = bn.cpt(v)
-					bn.add_edge(u, v)
-					mle_estimator(bn, data, v)
-					new_cpt = bn.cpt(v)
-					score_difference = None
+					#old_cols = 
+					mi_old = mutual_information(data[:,old_cols])
+					mi_new = mutual_inforamtion(data[:,new_cols])
+					penalty_new = np.log(1) / 2 * added_params
+					diff = NROW * (mi_old - mi_new - penalty_new)
+
+					if diff > max_diff:
+						max_diff = diff
+						max_operation = 'Arc Addition'
+						max_arc = (u,v)
 
 		# Test Arc Deletions
 		# bn.remove_edge(u,v)
+		for u in bn.nodes():
+			for v in bn.nodes():
+				if not would_cause_cycle(bn, u, v):
+					#old_cols = 
+					mi_old = mutual_information(data[:,old_cols])
+					mi_new = mutual_inforamtion(data[:,new_cols])
+					penalty_new = np.log(1) / 2 * added_params
+					diff = NROW * (mi_old - mi_new - penalty_new)
+
+					if diff > max_diff:
+						max_diff = diff
+						max_operation = 'Arc Deletion'
+						max_arc = (u,v)
 
 		# Test Edge Reversals
 		# bn.reverse_edge(u,v)
+		for u in bn.nodes():
+			for v in bn.nodes():
+				if not would_cause_cycle(bn, u, v):
+					#old_cols = 
+					mi_old = mutual_information(data[:,old_cols])
+					mi_new = mutual_inforamtion(data[:,new_cols])
+					penalty_new = np.log(1) / 2 * added_params
+					diff = NROW * (mi_old - mi_new - penalty_new)
 
-		if temp_max != max_score:
+					if diff > max_diff:
+						max_diff = diff
+						max_operation = 'Arc Reversal'
+						max_arc = (u, v)
+
+		if max_diff != 0:
 			improvement = True
+			u,v = max_arc
+			if max_operation == 'Arc Addition':
+				bn.add_edge(u,v)
+			elif max_operation == 'Arc Deletion':
+				bn.remove_edge(u,v)
+			elif max_operation == 'Arc Reversal':
+				bn.reverse_edge(u, v)
+			
+			mle_estimator(bn, data, v)
 		
 		if _iter > MAX_ITER:
 			break
