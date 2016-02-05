@@ -78,6 +78,9 @@ def bayes_estimator(bn, data, equiv_sample=None, prior_dict=None, nodes=None):
 	if nodes is None:
 		nodes = list(bn.nodes())
 
+	for i, n in enumerate(nodes):
+		bn.F[n]['values'] = list(np.unique(data[:,i]))
+
 	obs_dict = dict([(rv,[]) for rv in nodes])
 	# set empty conditional probability table for each RV
 	for rv in nodes:

@@ -81,6 +81,9 @@ def mle_estimator(bn, data, nodes=None):
 		if not isinstance(nodes, list):
 			nodes = list(nodes)
 
+	for i, n in enumerate(nodes):
+		bn.F[n]['values'] = list(np.unique(data[:,i]))
+
 	obs_dict = dict([(rv,[]) for rv in nodes])
 	# set empty conditional probability table for each RV
 	for rv in nodes:
@@ -107,7 +110,7 @@ def mle_estimator(bn, data, nodes=None):
 		for i in range(0,len(bn.cpt(rv)),bn.card(rv)):
 			temp_sum = float(np.sum(cpt[i:(i+bn.card(rv))]))
 			for j in range(bn.card(rv)):
-				cpt[i+j] /= (temp_sum)
+				cpt[i+j] /= (temp_sum+1e-7)
 				cpt[i+j] = round(cpt[i+j],5)
 
 

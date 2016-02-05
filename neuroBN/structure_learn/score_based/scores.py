@@ -36,11 +36,12 @@ http://www.lx.it.pt/~asmc/pub/publications/09-TA/09-c-ta.pdf
 
 """
 from __future__ import division
+import numpy as np
 
 from neuroBN.utils.independence_tests import mutual_information, entropy
 
 
-def structure_score(bn, data, method='BIC'):
+def structure_score(bn, method='BIC'):
 	if method.upper() == 'LL':
 		score = log_likelihood(bn)
 	elif method.upper() == 'BIC':
@@ -51,9 +52,6 @@ def structure_score(bn, data, method='BIC'):
 		score = BIC(bn)
 
 	return score
-
-def score_difference(bn_old, bn_new, rv):
-	pass
 	
 
 ##### INFORMATION-THEORETIC SCORING FUNCTIONS #####
@@ -121,7 +119,7 @@ def log_likelihood(bn):
 	
 	return NROW * (mi_score - ent_score)
 	"""
-	return np.sum(np.log(bn.flat_cpt()))
+	return -np.sum(np.log(bn.flat_cpt()+1e-7))
 
 def MDL(bn):
 	"""
@@ -138,7 +136,7 @@ def BIC(bn):
 
 	"""
 	log_score = log_likelihood(bn)
-	penalty = bn.num_params() / 2 * np.log(bn.num_edges())
+	penalty = bn.num_params() / 2 * np.log(max(bn.num_edges(),1))
 	return log_score - penalty
 
 def AIC(bn):

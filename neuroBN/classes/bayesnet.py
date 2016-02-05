@@ -48,7 +48,7 @@ class BayesNet(object):
 
     """
 
-    def __init__(self,E=None,value_dict=None):
+    def __init__(self, E=None):
         """
         Initialize the BayesNet class.
 
@@ -71,8 +71,8 @@ class BayesNet(object):
         
         """
         if E is not None:
-            assert (value_dict is not None), 'Must set values if E is set.'
-            self.set_structure(E,value_dict)
+            #assert (value_dict is not None), 'Must set values if E is set.'
+            self.set_structure(E)
         else:
             self.V = list
             self.E = dict
@@ -103,7 +103,11 @@ class BayesNet(object):
             self.add_node(u)
         if not self.has_node(v):
             self.add_node(v)
-        self.E[u].append(v)
+        if self.has_edge(u,v):
+            print 'Edge already exists'
+        else:
+            self.E[u].append(v)
+            self.F[v]['parents'].append(u)
         #self.V = topsort(self.E)
         # HOW DO I RECALCULATE CPT?
 
@@ -111,6 +115,7 @@ class BayesNet(object):
     def remove_edge(self, u, v):
         if self.has_edge(u, v):
             self.E[u].remove(v)
+        self.F[v]['parents'].remove(u)
         # HOW DO I RECALCULATE CPT?
 
     def reverse_arc(self, u, v):
@@ -274,7 +279,7 @@ class BayesNet(object):
 
 
 
-    def set_structure(self, edge_dict, value_dict):
+    def set_structure(self, edge_dict):
         """
         Set the structure of a BayesNet object. This
         function is mostly used to instantiate a BN
@@ -316,7 +321,7 @@ class BayesNet(object):
             self.F[rv] = {
                 'parents':[p for p in self.nodes() if rv in self.children(p)],
                 'cpt': [],
-                'values': value_dict[rv]
+                'values': []
             }
 
     def adj_list(self):
