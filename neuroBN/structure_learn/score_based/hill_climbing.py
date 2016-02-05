@@ -25,11 +25,14 @@ from scipy.optimize import *
 import numpy as np
 from heapq import *
 
+from neuroBN.classes.bayesnet import BayesNet
+from neuroBN.parameter_learn.mle import mle_estimator
+from neuroBN.structure_learn.score_based.scores import structure_score
 from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 
 
-def hill_climbing(data, metric='BIC', MAX_ITER=1000):
+def hill_climbing(data, metric='AIC', MAX_ITER=5):
 	"""
 	Greedy Hill Climbing search proceeds by choosing the move
 	which maximizes the increase in fitness of the
@@ -72,10 +75,10 @@ def hill_climbing(data, metric='BIC', MAX_ITER=1000):
 			- BIC / MDL
 			- LL (log-likelihood)
 	"""
-	NROW = data.shape[0]
+	nrow = data.shape[0]
 	ncol = data.shape[1]
-	if names is None:
-		names = range(ncol)
+	
+	names = range(ncol)
 
 	# INITIALIZE NETWORK W/ NO EDGES
 	# maintain children and parents dict for fast lookups
@@ -84,12 +87,12 @@ def hill_climbing(data, metric='BIC', MAX_ITER=1000):
 	
 	# COMPUTE INITIAL LIKELIHOOD SCORE	
 	value_dict = dict([(n, np.unique(data[:,i])) for i,n in enumerate(names)])
-	bn = BayesNet(c_dict, value_dict)
+	bn = BayesNet(c_dict)
 	mle_estimator(bn, data)
-	max_score = structure_score(bn, data, metric)
+	max_score = structure_score(bn, nrow, metric)
 
 	# CREATE EMPIRICAL DISTRIBUTION OBJECT FOR CACHING
-	ED = EmpiricalDistribution(data,names)
+	#ED = EmpiricalDistribution(data,names)
 
 	
 
@@ -104,79 +107,39 @@ def hill_climbing(data, metric='BIC', MAX_ITER=1000):
 		# ONE FAMILY AFFECTED BY ARC ADDITION
 		for u in bn.nodes():
 			for v in bn.nodes():
-				if not would_cause_cycle(bn, u, v):
+				if v not in c_dict[u] and not would_cause_cycle(c_dict, u, v):
 					old_cols = (u,) + tuple(p_dict[u])
 					mi_old = mutual_information(data[:,old_cols])
 					new_cols = old_cols + (v,)
 					mi_new = mutual_information(data[:,new_cols])
-					penalty_new = np.log(1) / 2 * added_params
-					delta_score = NROW * (mi_old - mi_new - penalty_new)
+					delta_score = nrow * (mi_old - mi_new)
 
 					if delta_score > max_delta:
+						print 'Improvement: ' , (u,v) , '\n'
+						print 'Delta Score: ' , delta_score , '\n'
 						max_delta = delta_score
 						max_operation = 'Addition'
 						max_arc = (u,v)
 
-		### Test Arc Deletions ###
-		# ONE FAMILY AFFECTED BY ARC DELETION
-		for u in bn.nodes():
-			for v in bn.nodes():
-				if not would_cause_cycle(bn, u, v):
-					#old_cols = 
-					mi_old = mutual_information(data[:,old_cols])
-					mi_new = mutual_inforamtion(data[:,new_cols])
-					penalty_new = np.log(1) / 2 * added_params
-					delta_score = NROW * (mi_old - mi_new - penalty_new)
-
-					if delta > max_delta:
-						max_delta = delta
-						max_operation = 'Deletion'
-						max_arc = (u,v)
-
-		### Test Edge Reversals ###
-		# TWO FAMILIES ARE AFFECTED BY ARC REVERSAL
-		for u in bn.nodes():
-			for v in bn.nodes():
-				if not would_cause_cycle(bn, u, v):
-					#old_cols = 
-					mi_old = mutual_information(data[:,old_cols])
-					mi_new = mutual_inforamtion(data[:,new_cols])
-					penalty_new = np.log(1) / 2 * added_params
-
-					diff = NROW * (mi_old - mi_new - penalty_new)
-
-					if diff > max_diff:
-						max_diff = diff
-						max_operation = 'Reversal'
-						max_arc = (u, v)
 
 		# DETERMINE IF/WHERE IMPROVEMENT WAS MADE
-		if max_diff != 0:
+		if max_delta != 0:
 			improvement = True
+			print 'Adding: ' , max_arc
 			u,v = max_arc
 			if max_operation == 'Addition':
 				c_dict[u].append(v)
 				p_dict[v].append(u)
-				#bn.add_edge(u,v)
-			elif max_operation == 'Deletion':
-				c_dict[u].remove(v)
-				p_dict[v].remove(u)
-				bn.remove_edge(u,v)
-			elif max_operation == 'Reversal':
-				c_dict[u].remove(v)
-				c_dict[v].append(u)
-				p_dict[v].remove(u)
-				p_dict[v].append(u)
-				#bn.reverse_edge(u, v)
-			
-			# RECOMPUTE SUFFICIENT STATISTICS ?
-			#mle_estimator(bn, data, v)
+		else:
+			print 'No Improvement on Iter: ' , _iter
+
 		
 		_iter += 1
 		if _iter > MAX_ITER:
+			print 'Max Iteration Reached'
 			break
 
-	value_dict = dict([(n, np.unique(data[:,i])) for i,n in enumerate(names)])
+	
 	bn = BayesNet(c_dict, value_dict)
 
 	return bn

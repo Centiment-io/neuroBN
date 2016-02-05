@@ -41,22 +41,22 @@ import numpy as np
 from neuroBN.utils.independence_tests import mutual_information, entropy
 
 
-def structure_score(bn, method='BIC'):
+def structure_score(bn, nrow, method='BIC'):
 	if method.upper() == 'LL':
-		score = log_likelihood(bn)
+		score = log_likelihood(bn, nrow)
 	elif method.upper() == 'BIC':
-		score = BIC(bn)
+		score = BIC(bn, nrow)
 	elif method.upper() == 'AIC':
-		score = AIC(bn)
+		score = AIC(bn, nrow)
 	else:
-		score = BIC(bn)
+		score = BIC(bn, nrow)
 
 	return score
 	
 
 ##### INFORMATION-THEORETIC SCORING FUNCTIONS #####
 
-def log_likelihood(bn):
+def log_likelihood(bn, nrow):
 	"""
 	Determining log-likelihood of the parameters
 	of a Bayesian Network. This is a quite simple
@@ -119,34 +119,34 @@ def log_likelihood(bn):
 	
 	return NROW * (mi_score - ent_score)
 	"""
-	return -np.sum(np.log(bn.flat_cpt()+1e-7))
+	return np.sum(np.log(nrow* (bn.flat_cpt()+1e-7)))
 
-def MDL(bn):
+def MDL(bn, nrow):
 	"""
 	Minimum Description Length score - it is
 	equivalent to BIC
 	"""
-	return BIC(bn)
+	return BIC(bn, nrow)
 
-def BIC(bn):
+def BIC(bn, nrow):
 	"""
 	Bayesian Information Criterion.
 
 	BIC = LL - f(N)*|B|, where f(N) = log(N)/2
 
 	"""
-	log_score = log_likelihood(bn)
+	log_score = log_likelihood(bn, nrow)
 	penalty = bn.num_params() / 2 * np.log(max(bn.num_edges(),1))
 	return log_score - penalty
 
-def AIC(bn):
+def AIC(bn, nrow):
 	"""
 	Aikaike Information Criterion
 
 	AIC = LL - f(N)*|B|, where f(N) = 1
 
 	"""
-	log_score = log_likelihood(bn)
+	log_score = log_likelihood(bn, nrow)
 	penalty = len(bn.flat_cpt())
 	return log_score - penalty
 

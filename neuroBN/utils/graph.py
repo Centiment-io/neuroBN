@@ -11,12 +11,12 @@ import networkx as nx
 import numpy as np
 from copy import copy
 
-def would_cause_cycle(bn, u, v):
+def would_cause_cycle(e, u, v):
 	"""
 	Test if adding the edge u -> v to the BayesNet
 	object would create a DIRECTED (i.e. illegal) cycle.
 	"""
-	G = nx.DiGraph(bn.E)
+	G = nx.DiGraph(e)
 	G.add_edge(u,v)
 	try:
 		nx.find_cycle(G, source=u)

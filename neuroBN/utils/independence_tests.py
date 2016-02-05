@@ -29,7 +29,13 @@ def are_independent(data, method='mi_test',alpha=0.05):
 
 def mutual_information(data, conditional=True):
 	bins = np.amax(data, axis=0) # read levels for each variable
-	if len(bins)==2:
+	if len(bins) == 1:
+		hist,_ = np.histogramdd(data, bins=(bins)) # frequency counts
+		Px = hist/hist.sum()
+		MI = -1 * np.sum( Px * np.log( Px ) )
+		return round(MI, 4)
+		
+	if len(bins) == 2:
 		hist,_ = np.histogramdd(data, bins=bins[0:2]) # frequency counts
 
 		Pxy = hist / hist.sum()# joint probability distribution over X,Y,Z
