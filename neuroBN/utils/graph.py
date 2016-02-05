@@ -11,6 +11,21 @@ import networkx as nx
 import numpy as np
 from copy import copy
 
+def would_cause_cycle(bn, u, v):
+	"""
+	Test if adding the edge u -> v to the BayesNet
+	object would create a DIRECTED (i.e. illegal) cycle.
+	"""
+	G = nx.DiGraph(bn.E)
+	G.add_edge(u,v)
+	try:
+		nx.find_cycle(G, source=u)
+		return True
+	except:
+		return False
+
+
+
 def topsort(edge_dict, root=None):
 	"""
 	List of nodes in topological sort order from edge dict

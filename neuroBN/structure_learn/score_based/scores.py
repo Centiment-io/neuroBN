@@ -40,6 +40,21 @@ from __future__ import division
 from neuroBN.utils.independence_tests import mutual_information, entropy
 
 
+def structure_score(bn, data, method='BIC'):
+	if method.upper() == 'LL':
+		score = log_likelihood(bn, data)
+	elif method.upper() == 'BIC':
+		score = BIC(bn, data)
+	elif method.upper() == 'AIC':
+		score = AIC(bn, data)
+	else:
+		score = BIC(bn, data)
+
+	return score
+
+def score_difference(bn_old, bn_new, rv):
+	
+
 ##### INFORMATION-THEORETIC SCORING FUNCTIONS #####
 
 def log_likelihood(bn, data):

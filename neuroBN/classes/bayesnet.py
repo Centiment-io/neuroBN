@@ -94,12 +94,9 @@ class BayesNet(object):
         """
         return hash((str(self.V),str(self.E)))
 
-    def add_node(self, rv, values=None):
+    def add_node(self, rv, cpt=[], parents=[] values=[]):
         self.V.append(rv)
-        if values is not None:
-            self.F[rv] = {'cpt':[],'parents':[],'values':values}
-        else:
-            self.F[rv] = {'cpt':[],'parents':[],'values':[]}
+        self.F[rv] = {'cpt':cpt,'parents':parents,'values':values}
 
     def add_edge(self, u, v):
         if not self.has_node(u):
@@ -107,7 +104,20 @@ class BayesNet(object):
         if not self.has_node(v):
             self.add_node(v)
         self.E[u].append(v)
-        self.V = topsort(self.E)
+        #self.V = topsort(self.E)
+        # HOW DO I RECALCULATE CPT?
+
+
+    def remove_edge(self, u, v):
+        if self.has_edge(u, v):
+            self.E[u].remove(v)
+        # HOW DO I RECALCULATE CPT?
+
+    def reverse_arc(self, u, v):
+        if self has_edge(u,v):
+            self.E[u].remove(v)
+            self.E[v].append(u)
+        # HOW DO I RECALCULATE CPT?
 
     def set_data(self, rv, data):
         assert (isinstance(data, dict)), 'data must be dictionary'
