@@ -95,7 +95,7 @@ def bayes_estimator(bn, data, equiv_sample=None, prior_dict=None, nodes=None):
 		# loop through each RV and increment its observed parent-self value
 		for rv in nodes:
 			rv_dict= { n: obs_dict[n] for n in obs_dict if n in bn.scope(rv) }
-			offset = bn.cpt_indices(target=rv,val_dict=rv_dict)
+			offset = bn.cpt_indices(target=rv,val_dict=rv_dict)[0]
 			bn.F[rv]['cpt'][offset]+=1
 
 	

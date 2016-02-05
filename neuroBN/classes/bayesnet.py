@@ -113,16 +113,13 @@ class BayesNet(object):
 
 
     def remove_edge(self, u, v):
-        if self.has_edge(u, v):
-            self.E[u].remove(v)
+        self.E[u].remove(v)
         self.F[v]['parents'].remove(u)
-        # HOW DO I RECALCULATE CPT?
 
     def reverse_arc(self, u, v):
         if self.has_edge(u,v):
             self.E[u].remove(v)
             self.E[v].append(u)
-        # HOW DO I RECALCULATE CPT?
 
     def set_data(self, rv, data):
         assert (isinstance(data, dict)), 'data must be dictionary'
@@ -151,7 +148,7 @@ class BayesNet(object):
         return rv in self.V
 
     def has_edge(self, u, v):
-        return u in self.E[v]
+        return v in self.E[u]
 
     def edges(self):
         for u in self.nodes():

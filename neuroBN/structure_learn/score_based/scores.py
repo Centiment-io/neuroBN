@@ -41,12 +41,12 @@ import numpy as np
 from neuroBN.utils.independence_tests import mutual_information, entropy
 
 
-def structure_score(bn, nrow, method='BIC'):
-	if method.upper() == 'LL':
+def structure_score(bn, nrow, metric='BIC'):
+	if metric.upper() == 'LL':
 		score = log_likelihood(bn, nrow)
-	elif method.upper() == 'BIC':
+	elif metric.upper() == 'BIC':
 		score = BIC(bn, nrow)
-	elif method.upper() == 'AIC':
+	elif metric.upper() == 'AIC':
 		score = AIC(bn, nrow)
 	else:
 		score = BIC(bn, nrow)
@@ -119,7 +119,7 @@ def log_likelihood(bn, nrow):
 	
 	return NROW * (mi_score - ent_score)
 	"""
-	return np.sum(np.log(nrow* (bn.flat_cpt()+1e-7)))
+	return np.sum(np.log(nrow * (bn.flat_cpt()+1e-7)))
 
 def MDL(bn, nrow):
 	"""
