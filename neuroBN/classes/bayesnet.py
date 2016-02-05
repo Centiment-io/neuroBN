@@ -94,7 +94,7 @@ class BayesNet(object):
         """
         return hash((str(self.V),str(self.E)))
 
-    def add_node(self, rv, cpt=[], parents=[] values=[]):
+    def add_node(self, rv, cpt=[], parents=[], values=[]):
         self.V.append(rv)
         self.F[rv] = {'cpt':cpt,'parents':parents,'values':values}
 
@@ -114,7 +114,7 @@ class BayesNet(object):
         # HOW DO I RECALCULATE CPT?
 
     def reverse_arc(self, u, v):
-        if self has_edge(u,v):
+        if self.has_edge(u,v):
             self.E[u].remove(v)
             self.E[v].append(u)
         # HOW DO I RECALCULATE CPT?

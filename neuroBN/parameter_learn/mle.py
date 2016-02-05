@@ -86,16 +86,19 @@ def mle_estimator(bn, data, nodes=None):
 	for rv in nodes:
 		# get number of values in the CPT = product of scope vars' cardinalities
 		p_idx = int(np.prod([bn.card(p) for p in bn.parents(rv)])*bn.card(rv))
-		bn.F[rv]['cpt'] = [-1]*p_idx
+		bn.F[rv]['cpt'] = [0]*p_idx
 	
 	# loop through each row of data
 	for row in data:
 		# store the observation of each variable in the row
-		obs_dict = dict([(rv,row[rv]) for rv in nodes])
+		for rv in nodes:
+			obs_dict[rv] = row[rv]
+		
+		#obs_dict = dict([(rv,row[rv]) for rv in nodes])
 		# loop through each RV and increment its observed parent-self value
 		for rv in nodes:
 			rv_dict= { n: obs_dict[n] for n in obs_dict if n in bn.scope(rv) }
-			offset = bn.cpt_indices(target=rv,val_dict=rv_dict)
+			offset = bn.cpt_indices(target=rv,val_dict=rv_dict)[0]
 			bn.F[rv]['cpt'][offset]+=1
 
 	
