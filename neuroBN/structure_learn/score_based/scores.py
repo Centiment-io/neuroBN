@@ -136,7 +136,7 @@ def BIC(bn, nrow):
 
 	"""
 	log_score = log_likelihood(bn, nrow)
-	penalty = bn.num_params() / 2 * np.log(max(bn.num_edges(),1))
+	penalty = 0.5 * bn.num_params() * np.log(max(bn.num_edges(),1))
 	return log_score - penalty
 
 def AIC(bn, nrow):

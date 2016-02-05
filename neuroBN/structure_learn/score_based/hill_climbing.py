@@ -32,7 +32,7 @@ from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 
 
-def hill_climbing(data, metric='AIC', MAX_ITER=5, debug=False):
+def hill_climbing(data, metric='AIC', max_iter=5, debug=False):
 	"""
 	Greedy Hill Climbing search proceeds by choosing the move
 	which maximizes the increase in fitness of the
@@ -68,12 +68,23 @@ def hill_climbing(data, metric='AIC', MAX_ITER=5, debug=False):
 		The data from which the Bayesian network
 		structure will be learned.
 
-	*score* : a string
+	*metric* : a string
 		Which score metric to use.
 		Options:
 			- AIC
 			- BIC / MDL
 			- LL (log-likelihood)
+
+	*max_iter* : an integer
+		The maximum number of iterations of the
+		hill-climbing algorithm to run. Note that
+		the algorithm will terminate on its own if no
+		improvement is made in a given iteration.
+
+	*debug* : boolean
+		Whether to print the scores/moves of the
+		algorithm as its happening.
+		
 	"""
 	nrow = data.shape[0]
 	ncol = data.shape[1]
@@ -103,42 +114,103 @@ def hill_climbing(data, metric='AIC', MAX_ITER=5, debug=False):
 		improvement = False
 		max_delta = 0
 
-		### Test Arc Additions ###
-		# ONE FAMILY AFFECTED BY ARC ADDITION
+		if debug:
+			print 'ITERATION: ' , _iter
+
+		### TEST ARC ADDITIONS ###
 		for u in bn.nodes():
 			for v in bn.nodes():
-				if v not in c_dict[u] and not would_cause_cycle(c_dict, u, v):
-					old_cols = (u,) + tuple(p_dict[u])
+				if v not in c_dict[u] and u!=v and not would_cause_cycle(c_dict, u, v):
+					# SCORE FOR 'V' -> gaining a parent
+					old_cols = (v,) + tuple(p_dict[v]) # without 'u' as parent
 					mi_old = mutual_information(data[:,old_cols])
-					new_cols = old_cols + (v,)
+					new_cols = old_cols + (u,) # with'u' as parent
 					mi_new = mutual_information(data[:,new_cols])
 					delta_score = nrow * (mi_old - mi_new)
 
 					if delta_score > max_delta:
 						if debug:
-							print 'Improvement: ' , (u,v)
-							print 'Delta Score: ' , delta_score , '\n'
+							print 'Improved Arc Addition: ' , (u,v)
+							print 'Delta Score: ' , delta_score
 						max_delta = delta_score
 						max_operation = 'Addition'
 						max_arc = (u,v)
 
+		### TEST ARC DELETIONS ###
+		for u in bn.nodes():
+			for v in bn.nodes():
+				if v in c_dict[u]:
+					# SCORE FOR 'V' -> losing a parent
+					old_cols = (v,) + tuple(p_dict[v]) # with 'u' as parent
+					mi_old = mutual_information(data[:,old_cols])
+					new_cols = tuple([i for i in old_cols if i != u]) # without 'u' as parent
+					mi_new = mutual_information(data[:,new_cols])
+					delta_score = nrow * (mi_old - mi_new)
 
-		# DETERMINE IF/WHERE IMPROVEMENT WAS MADE
+					if delta_score > max_delta:
+						if debug:
+							print 'Improved Arc Deletion: ' , (u,v)
+							print 'Delta Score: ' , delta_score
+						max_delta = delta_score
+						max_operation = 'Deletion'
+						max_arc = (u,v)
+
+		### TEST ARC REVERSALS ###
+		for u in bn.nodes():
+			for v in bn.nodes():
+				if v in c_dict[u] and not would_cause_cycle(c_dict,v,u, reverse=True):
+					# SCORE FOR 'U' -> gaining 'v' as parent
+					old_cols = (u,) + tuple(p_dict[v]) # without 'v' as parent
+					mi_old = mutual_information(data[:,old_cols])
+					new_cols = old_cols + (v,) # with 'v' as parent
+					mi_new = mutual_information(data[:,new_cols])
+					delta1 = nrow * (mi_old - mi_new)
+					# SCORE FOR 'V' -> losing 'u' as parent
+					old_cols = (v,) + tuple(p_dict[v]) # with 'u' as parent
+					mi_old = mutual_information(data[:,old_cols])
+					new_cols = tuple([u for i in old_cols if i != u]) # without 'u' as parent
+					mi_new = mutual_information(data[:,new_cols])
+					delta2 = nrow * (mi_old - mi_new)
+					# COMBINED DELTA-SCORES
+					delta_score = delta1 + delta2
+
+					if delta_score > max_delta:
+						if debug:
+							print 'Improved Arc Reversal: ' , (u,v)
+							print 'Delta Score: ' , delta_score
+						max_delta = delta_score
+						max_operation = 'Reversal'
+						max_arc = (u,v)
+
+
+		### DETERMINE IF/WHERE IMPROVEMENT WAS MADE ###
 		if max_delta != 0:
 			improvement = True
-			if debug:
-				print 'Adding: ' , max_arc
 			u,v = max_arc
 			if max_operation == 'Addition':
+				if debug:
+					print 'ADDING: ' , max_arc , '\n'
 				c_dict[u].append(v)
 				p_dict[v].append(u)
+			elif max_operation == 'Deletion':
+				if debug:
+					print 'DELETING: ' , max_arc , '\n'
+				c_dict[u].remove(v)
+				p_dict[v].remove(u)
+			elif max_operation == 'Reversal':
+				if debug:
+					print 'REVERSING: ' , max_arc, '\n'
+					c_dict[u].remove(v)
+					p_dict[v].remove(u)
+					c_dict[v].append(u)
+					p_dict[u].append(v)
 		else:
 			if debug:
 				print 'No Improvement on Iter: ' , _iter
 
-		
+		### TEST FOR MAX ITERATION ###
 		_iter += 1
-		if _iter > MAX_ITER:
+		if _iter > max_iter:
 			if debug:
 				print 'Max Iteration Reached'
 			break
