@@ -1,4 +1,9 @@
 """
+**********************
+Greedy Hill-Climbing
+for Structure Learning
+**********************
+
 Code for Searching through the space of
 possible Bayesian Network structures.
 
@@ -21,9 +26,9 @@ Strategies to improve Greedy Hill-Climbing:
 	of these steps.
 """
 
-from scipy.optimize import *
+#from scipy.optimize import *
 import numpy as np
-from heapq import *
+#from heapq import *
 from copy import copy, deepcopy
 
 from neuroBN.classes.bayesnet import BayesNet
@@ -34,7 +39,7 @@ from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 
 
-def hill_climbing(data, metric='AIC', max_iter=5, debug=False):
+def hill_climbing(data, metric='AIC', max_iter=100, debug=False):
 	"""
 	Greedy Hill Climbing search proceeds by choosing the move
 	which maximizes the increase in fitness of the
