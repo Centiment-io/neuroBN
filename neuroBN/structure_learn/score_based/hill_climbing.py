@@ -311,7 +311,7 @@ def hc(data, metric='BIC', max_iter=20, debug=False):
 					# SCORE FOR 'V' -> gaining a parent
 					bn1 = deepcopy(bn)
 					bn1.remove_edge(u,v)
-					bayes_estimator(bn1, data)
+					mle_estimator(bn1, data)
 					new_score = structure_score(bn1, nrow, metric)
 					if new_score > max_score:
 						if debug:
@@ -328,7 +328,7 @@ def hc(data, metric='BIC', max_iter=20, debug=False):
 					# SCORE FOR 'V' -> gaining a parent
 					bn1 = deepcopy(bn)
 					bn1.add_edge(u,v)
-					bayes_estimator(bn1, data)
+					mle_estimator(bn1, data)
 					new_score = structure_score(bn1, nrow, metric)
 					if new_score > max_score:
 						if debug:
