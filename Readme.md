@@ -56,11 +56,11 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 <h4>Constraint-Based Structure Learning</h4>
 | Algorithms  | Independence Tests |
 | ------------- | ----------------- |
-| Path Condition (PC) Algorithm    | Marginal Mutual Information (KL-Divergence)    |
-| Grow-Shrink (GS) Algorithm    | Conditional Mutual Information (Cross Entropy)     |
-| 	IAMB Algorithm		| Pearsion Chi-Square|
-| 	Lambda-IAMB Algorithm		|				| 	
-| 	Fast-IAMB Algorithm		|				|		
+| Path Condition (PC)   | Marginal Mutual Information (KL-Divergence)    |
+| Grow-Shrink (GS)  | Conditional Mutual Information (Cross Entropy)     |
+| 	IAMB 	| Pearsion Chi-Square|
+| 	Lambda-IAMB 	|				| 	
+| 	Fast-IAMB 	|				|		
 
 <h4>Score-Based Structure Learning</h4>
 | Algorithms | Score Metrics |
