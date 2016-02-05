@@ -66,7 +66,8 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 | Algorithms | Score Metrics |
 | ---------- | ------------- |
 | Hill Climbing | Log-Likelihood |
-|				| AIC/BIC	|
+| Tabu List	| AIC/BIC	|
+| Random Restarts | 		|
 
 <h4>Tree-Based Structure Learning</h4>
 | Algorithms |
