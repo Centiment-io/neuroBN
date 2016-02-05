@@ -48,7 +48,7 @@ class BayesNet(object):
 
     """
 
-    def __init__(self, E=None):
+    def __init__(self, E=None, value_dict=None):
         """
         Initialize the BayesNet class.
 

@@ -32,7 +32,7 @@ from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 
 
-def hill_climbing(data, metric='AIC', MAX_ITER=5):
+def hill_climbing(data, metric='AIC', MAX_ITER=5, debug=False):
 	"""
 	Greedy Hill Climbing search proceeds by choosing the move
 	which maximizes the increase in fitness of the
@@ -115,8 +115,9 @@ def hill_climbing(data, metric='AIC', MAX_ITER=5):
 					delta_score = nrow * (mi_old - mi_new)
 
 					if delta_score > max_delta:
-						print 'Improvement: ' , (u,v) , '\n'
-						print 'Delta Score: ' , delta_score , '\n'
+						if debug:
+							print 'Improvement: ' , (u,v)
+							print 'Delta Score: ' , delta_score , '\n'
 						max_delta = delta_score
 						max_operation = 'Addition'
 						max_arc = (u,v)
@@ -125,22 +126,25 @@ def hill_climbing(data, metric='AIC', MAX_ITER=5):
 		# DETERMINE IF/WHERE IMPROVEMENT WAS MADE
 		if max_delta != 0:
 			improvement = True
-			print 'Adding: ' , max_arc
+			if debug:
+				print 'Adding: ' , max_arc
 			u,v = max_arc
 			if max_operation == 'Addition':
 				c_dict[u].append(v)
 				p_dict[v].append(u)
 		else:
-			print 'No Improvement on Iter: ' , _iter
+			if debug:
+				print 'No Improvement on Iter: ' , _iter
 
 		
 		_iter += 1
 		if _iter > MAX_ITER:
-			print 'Max Iteration Reached'
+			if debug:
+				print 'Max Iteration Reached'
 			break
 
 	
-	bn = BayesNet(c_dict, value_dict)
+	bn = BayesNet(c_dict)
 
 	return bn
 
