@@ -77,6 +77,11 @@ def log_likelihood(bn, data):
 		where 'I' is mutual information and 'H' is the entropy,
 		and M is the number of data points
 
+	Moreover, it is clear to see that H(X) is independent of the choice
+	of graph structure (G). Thus, we must only determine the difference
+	in the mutual information score of the original graph which had a given
+	node and its original parents, and the new graph which has a given node
+	and new parents.
 
 	NOTE: This assumes the parameters have already
 	been learned for the BN's given structure.
@@ -88,7 +93,8 @@ def log_likelihood(bn, data):
 	*bn* : a BayesNet object
 		Must have both structure and parameters
 		instantiated.
-	"""
+	Notes
+	-----
 	NROW = data.shape[0]
 	mi_score = 0
 	ent_score = 0
@@ -98,6 +104,8 @@ def log_likelihood(bn, data):
 		ent_score += entropy(data[:,bn.V.index(rv)])
 	
 	return NROW * (mi_score - ent_score)
+	"""
+	return np.sum(np.log(bn.flat_cpt()))
 
 def MDL(bn):
 	"""
@@ -114,7 +122,7 @@ def BIC(bn):
 
 	"""
 	log_score = log_likelihood(bn)
-	penalty = len(bn.flat_cpt()) / 2 * np.log(bn.num_edges())
+	penalty = bn.num_params() / 2 * np.log(bn.num_edges())
 	return log_score - penalty
 
 def AIC(bn):

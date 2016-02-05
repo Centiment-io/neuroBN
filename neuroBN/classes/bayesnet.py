@@ -148,29 +148,11 @@ class BayesNet(object):
             num += len(self.E[u])
         return num
 
-    def moralized_edges(self):
-        """
-        Moralized graph is the original graph PLUS
-        an edge between every set of common effect
-        structures -
-            i.e. all parents of a node are connected.
-
-        This function has be validated.
-
-        Returns
-        -------
-        *e* : a python list of parent-child tuples.
-
-        """
-        e = set()
+    def num_params(self):
+        num = 0
         for u in self.nodes():
-            for p1 in self.parents(u):
-                e.add((p1,u))
-                for p2 in self.parents(u):
-                    if p1!=p2 and (p2,p1) not in e:
-                        e.add((p1,p2))
-        return list(e)
-
+            num += len(self.F[u]['cpt'])
+        return num
 
     def scope_size(self, rv):
         return len(self.F[rv]['parents'])+1
@@ -338,6 +320,29 @@ class BayesNet(object):
         for u,v in self.edges():
             adj_list[vi_map[u]].append(vi_map[v])
         return adj_list
+
+    def moralized_edges(self):
+        """
+        Moralized graph is the original graph PLUS
+        an edge between every set of common effect
+        structures -
+            i.e. all parents of a node are connected.
+
+        This function has be validated.
+
+        Returns
+        -------
+        *e* : a python list of parent-child tuples.
+
+        """
+        e = set()
+        for u in self.nodes():
+            for p1 in self.parents(u):
+                e.add((p1,u))
+                for p2 in self.parents(u):
+                    if p1!=p2 and (p2,p1) not in e:
+                        e.add((p1,p2))
+        return list(e)
 
 
     
