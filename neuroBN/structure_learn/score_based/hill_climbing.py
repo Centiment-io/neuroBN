@@ -10,6 +10,15 @@ Local search - possible moves:
 - Add edge
 - Delete edge
 - Invert edge
+
+Strategies to improve Greedy Hill-Climbing:
+- Random Restarts
+	- when we get stuck, take some number of
+	random steps and then start climbing again.
+- Tabu List
+	- keep a list of the K steps most recently taken,
+	and say that the search cannt reverse (undo) any
+	of these steps.
 """
 
 from scipy.optimize import *
