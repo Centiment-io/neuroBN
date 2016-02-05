@@ -22,6 +22,17 @@ there it depends on how isolated the local maxima is and
 also depends on how long you want the algorithm to run.
 
 """
+#from scipy.optimize import *
+import numpy as np
+#from heapq import *
+from copy import copy, deepcopy
+
+from neuroBN.classes.bayesnet import BayesNet
+from neuroBN.parameter_learn.mle import mle_estimator
+from neuroBN.parameter_learn.bayes import bayes_estimator
+from neuroBN.structure_learn.score_based.scores import structure_score
+from neuroBN.utils.independence_tests import mutual_information
+from neuroBN.utils.graph import would_cause_cycle
 
 
 def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False):
@@ -171,17 +182,19 @@ def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False):
 			if _restarts < R:
 				improvement = True # make another pass of hill climbing
 				_iter=0 # reset iterations
-				print 'Restart - ' , r
-				for i in M:
+				if debug:
+					print 'Restart - ' , _restarts
+				_restarts+=1
+				for _ in range(M):
 					# 0 = Addition, 1 = Deletion, 2 = Reversal
 					operation = np.random.choice([0,1,2])
 					if operation == 0:
 						while True:
 							u,v = np.random.choice(list(bn.nodes()), size=2, replace=False)
 							# IF EDGE DOESN'T EXIST, ADD IT
-							if u not in p_dict[v]:
+							if u not in p_dict[v] and u!=v and not would_cause_cycle(c_dict,u,v):
 								if debug:
-									print 'RESTART - ADDING: ', u,v
+									print 'RESTART - ADDING: ', (u,v)
 								c_dict[u].append(v)
 								p_dict[v].append(u)
 								break
@@ -191,7 +204,7 @@ def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False):
 							# IF EDGE EXISTS, DELETE IT
 							if u in p_dict[v]:
 								if debug:
-									print 'RESTART - DELETING: ', u,v
+									print 'RESTART - DELETING: ', (u,v)
 								c_dict[u].remove(v)
 								p_dict[v].remove(u)
 								break
@@ -199,9 +212,9 @@ def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False):
 						while True:
 							u,v = np.random.choice(list(bn.nodes()), size=2, replace=False)
 							# IF EDGE EXISTS, REVERSE IT
-							if u in p_dict[v]:
+							if u in p_dict[v] and not would_cause_cycle(c_dict,v,u, reverse=True):
 								if debug:
-									print 'RESTART - REVERSING: ', u,v
+									print 'RESTART - REVERSING: ', (u,v)
 								c_dict[u].remove(v)
 								p_dict[v].remove(u)
 								c_dict[v].append(u)
