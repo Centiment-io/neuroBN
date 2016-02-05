@@ -36,7 +36,7 @@ Notes
 
 __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
-
+from copy import copy, deepcopy
 
 import numpy as np
 from neuroBN.utils.class_equivalence import are_class_equivalent
@@ -48,7 +48,7 @@ class BayesNet(object):
 
     """
 
-    def __init__(self, E=None, value_dict=None):
+    def __init__(self, E=None):
         """
         Initialize the BayesNet class.
 
@@ -93,6 +93,22 @@ class BayesNet(object):
         as keys in a dictionary (i.e. hashable)
         """
         return hash((str(self.V),str(self.E)))
+
+    def copy(self):
+        V = deepcopy(self.V)
+        E = deepcopy(self.E)
+        F = {}
+        for v in V:
+            F[v] = {}
+            F[v]['cpt'] = deepcopy(self.F[v]['cpt'])
+            F[v]['parents'] = deepcopy(self.F[v]['parents'])
+            F[v]['values'] = deepcopy(self.F[v]['values'])
+        bn = BayesNet()
+        bn.V = V
+        bn.E = E
+        bn.F = F
+
+        return bn
 
     def add_node(self, rv, cpt=[], parents=[], values=[]):
         self.V.append(rv)

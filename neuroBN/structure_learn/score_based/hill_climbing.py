@@ -225,33 +225,11 @@ def hill_climbing(data, metric='AIC', max_iter=5, debug=False):
 
 def hc(data, metric='BIC', max_iter=20, debug=False):
 	"""
-	Greedy Hill Climbing search proceeds by choosing the move
-	which maximizes the increase in fitness of the
-	network at the current step. It continues until
-	it reaches a point where there does not exist any
-	feasible single move that increases the network fitness.
-
-	It is called "greedy" because it simply does what is
-	best at the current iteration only, and thus does not
-	look ahead to what may be better later on in the search.
-
-	For computational saving, a Priority Queue (python's heapq) 
-	can be used	to maintain the best operators and reduce the
-	complexity of picking the best operator from O(n^2) to O(nlogn).
-	This works by maintaining the heapq of operators sorted by their
-	delta score, and each time a move is made, we only have to recompute
-	the O(n) delta-scores which were affected by the move. The rest of
-	the operator delta-scores are not affected.
-
-	For additional computational efficiency, we can cache the
-	sufficient statistics for various families of distributions - 
-	therefore, computing the mutual information for a given family
-	only needs to happen once.
-
-	The possible moves are the following:
-		- add edge
-		- delete edge
-		- invert edge
+	SLOWER VERSION OF HILL CLIMBING THAT COMPARES TOTAL
+	SCORES DIRECTLY AND UPDATES ENTIRE DISTRIBUTION EACH
+	ITERATION - CAN BE IMPROVED BY ONLY CHECKING FAMILY SCORES,
+	AND ONLY PERFORMING PARAMETER LEARNING OVER THE NEW FAMILY.
+		-> FIX "mle_estimator" and "structure_score" for this.
 
 	Arguments
 	---------
@@ -309,7 +287,7 @@ def hc(data, metric='BIC', max_iter=20, debug=False):
 			for v in bn.nodes():
 				if bn.has_edge(u,v):
 					# SCORE FOR 'V' -> gaining a parent
-					bn1 = deepcopy(bn)
+					bn1 = bn.copy()
 					bn1.remove_edge(u,v)
 					mle_estimator(bn1, data)
 					new_score = structure_score(bn1, nrow, metric)
@@ -326,7 +304,7 @@ def hc(data, metric='BIC', max_iter=20, debug=False):
 			for v in bn.nodes():
 				if not bn.has_edge(u,v) and u!=v and not would_cause_cycle(bn.E, u, v):
 					# SCORE FOR 'V' -> gaining a parent
-					bn1 = deepcopy(bn)
+					bn1 = bn.copy()
 					bn1.add_edge(u,v)
 					mle_estimator(bn1, data)
 					new_score = structure_score(bn1, nrow, metric)
@@ -348,13 +326,13 @@ def hc(data, metric='BIC', max_iter=20, debug=False):
 				if debug:
 					print 'ADDING: ' , max_arc , '\n'
 				bn.add_edge(u,v)
-				mle_estimator(bn, data, nodes=[v])
+				mle_estimator(bn, data)
 
 			elif max_operation == 'Deletion':
 				if debug:
 					print 'DELETING: ' , max_arc , '\n'
 				bn.remove_edge(u,v)
-				mle_estimator(bn, data, nodes=[v])
+				mle_estimator(bn, data)
 		else:
 			if debug:
 				print 'No Improvement on Iter: ' , _iter
