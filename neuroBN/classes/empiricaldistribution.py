@@ -24,6 +24,9 @@ class EmpiricalDistribution(object):
 		self.NVAR = data.shape[1]
 		if names is None:
 			self.names = range(data.shape[1])
+		else:
+			assert (len(names) == self.NVAR), 'Passed-in names length must equal number of data columns'
+			self.names = names
 
 		self.marginal = dict([(rv, np.sum(self.joint,axis=i)) for i,rv in enumerate(self.names)])
 
@@ -48,17 +51,15 @@ class EmpiricalDistribution(object):
 			tup = (x,) + **kwargs
 			_numer = self.jpd(tup)
 			_denom = self.jpd(**kwargs)
-			cpd = _numer / _denom
+			cpd = _numer / (_denom + 1e-7)
 		
 		return cpd
 
 
-class JPD(object):
-	
-	def __init__(self):
-		pass
 
-class CPD(object):
 
-	def __init__(self):
-		pass
+
+
+
+
+

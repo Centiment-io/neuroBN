@@ -37,7 +37,7 @@ http://www.lx.it.pt/~asmc/pub/publications/09-TA/09-c-ta.pdf
 """
 from __future__ import division
 
-from neuroBn.utils.independence_tests import mutual_information, entropy
+from neuroBN.utils.independence_tests import mutual_information, entropy
 
 
 ##### INFORMATION-THEORETIC SCORING FUNCTIONS #####
