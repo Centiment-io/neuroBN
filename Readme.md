@@ -53,14 +53,27 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 | Max-Product Variable Elimination | LP Relaxation |
 | Integer Linear Programming	|			|
 
-<h4>Structure Learning</h4>
-| Constraint-Based  | Tree-Based | Independence Tests |
-| ------------- | ------------- | ----------------- |
-| Path Condition (PC) Algorithm   | Naive Bayes   | Marginal Mutual Information (KL-Divergence)    |
-| Grow-Shrink (GS) Algorithm   | Tree-Augmented Naive Bayes    | Conditional Mutual Information (Cross Entropy)     |
-| 	IAMB Algorithm		|		Chow-Liu Algorithm		| Pearsion Chi-Square|
-| 	Lambda-IAMB Algorithm		|				| 			|
-| 	Fast-IAMB Algorithm		|				|			|
+<h4>Constraint-Based Structure Learning</h4>
+| Algorithms  | Independence Tests |
+| ------------- | ----------------- |
+| Path Condition (PC) Algorithm    | Marginal Mutual Information (KL-Divergence)    |
+| Grow-Shrink (GS) Algorithm    | Conditional Mutual Information (Cross Entropy)     |
+| 	IAMB Algorithm		| Pearsion Chi-Square|
+| 	Lambda-IAMB Algorithm		|				| 	
+| 	Fast-IAMB Algorithm		|				|		
+
+<h4>Score-Based Structure Learning</h4>
+| Algorithms | Score Metrics |
+| ---------- | ------------- |
+| Hill Climbing | Log-Likelihood |
+|				| AIC/BIC	|
+
+<h4>Tree-Based Structure Learning</h4>
+| Algorithms |
+| ---------- |
+| Naive Bayes |
+| Tree-Augmented Naive Bayes |
+| Chow-Liu	|
 
 <h4>Parameter Learning</h4>
 | Frequentist | Bayesian |
