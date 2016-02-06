@@ -20,14 +20,14 @@ __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 import numpy as np
 from scipy import stats
 
-def are_independent(data, method='mi_test',alpha=0.05):
+def are_independent(data, alpha=0.05, method='mi_test'):
 	pval = mi_test(data)
 	if pval < alpha:
 		return True
 	else:
 		return False
 
-def mutual_information(data, conditional=True):
+def mutual_information(data, conditional=False):
 	bins = np.amax(data, axis=0) # read levels for each variable
 	if len(bins) == 1:
 		hist,_ = np.histogramdd(data, bins=(bins)) # frequency counts
