@@ -7,7 +7,20 @@ Class
 
 Create, maintain, and perform operations
 over an empirical probability distribution
-derived from a dataset.
+derived from a dataset. This class is most
+useful for speeding up BN structure learning,
+where distribution calculations can be cached
+and therefore lookups become much faster over
+repeated iterations.
+
+References
+----------
+*** IMPORTANT ***
+Daly and Shen,
+"Methods to Accelerate the Learning of Bayesian Network Structures."
+http://citeseerx.ist.psu.edu/viewdoc/download?
+doi=10.1.1.127.7570&rep=rep1&type=pdf
+*****************
 """
 
 from __future__ import division
