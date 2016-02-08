@@ -227,12 +227,17 @@ class BayesNet(object):
             n_idx = self.parents(rv).index(n) + 1
             return int(np.prod(card_list[0:n_idx]))
 
-    def flat_cpt(self):
+    def flat_cpt(self, by_var=False, by_parents=False):
         """
         Return all cpt values in the BN as a flattened
         numpy array ordered by bn.nodes() - i.e. topsort
         """
-        cpt = np.array([val for rv in self.nodes() for val in self.cpt(rv)])
+        if by_var:
+            cpt = np.array([sum(self.cpt(rv)) for rv in self.nodes()])
+        elif by_parents:
+            cpt = np.array([sum(self.cpt(rv)[i:(i+self.card(rv))]) for rv in self.nodes() for i in range(len(self.cpt(rv))/self.card(rv))])
+        else:
+            cpt = np.array([val for rv in self.nodes() for val in self.cpt(rv)])
         return cpt
 
     def cpt_indices(self, target, val_dict):

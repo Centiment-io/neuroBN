@@ -11,7 +11,7 @@ __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
 import numpy as np
 
-def mle_estimator(bn, data, nodes=None):
+def mle_estimator(bn, data, nodes=None, counts=False):
 	"""
 	Maximum Likelihood Estimation is a frequentist
 	method for parameter learning, where there is NO

@@ -14,13 +14,7 @@ then you only need to re-calculate the score based on that
 local change (usually just the child node's CPT) to get the
 difference from the original graph. 
 
-Here are a few which can be implemented:
-
-Bayesian scoring functions:
-	BD (Bayesian Dirichlet) (1995)
-	BDe ("'e'" for likelihood-equivalence) (1995)
-	BDeu ("'u'" for uniform joint distribution) (1991)
-	K2 (1992)
+Here are a few which are (or can be) implemented:
 
 Information-theoretic scoring functions:
 	LL (Log-likelihood) (1912-22)
@@ -41,7 +35,7 @@ import numpy as np
 from neuroBN.utils.independence_tests import mutual_information, entropy
 
 
-def structure_score(bn, nrow, metric='BIC'):
+def info_score(bn, nrow, metric='BIC'):
 	if metric.upper() == 'LL':
 		score = log_likelihood(bn, nrow)
 	elif metric.upper() == 'BIC':
