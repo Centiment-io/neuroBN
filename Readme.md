@@ -83,6 +83,12 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 | Tree-Augmented Naive Bayes |
 | Chow-Liu	|
 
+<h4>Hybrid Structure Leanring</h4>
+| Algorithm |
+| --------- |
+| MMPC		|
+| MMHC		|
+
 <h4>Parameter Learning</h4>
 | Frequentist | Bayesian |
 | ----------- | -------- |
