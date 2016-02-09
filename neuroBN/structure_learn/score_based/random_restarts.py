@@ -35,7 +35,7 @@ from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 
 
-def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False):
+def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False, restriction=None):
 	"""
 	Arguments
 	---------
@@ -59,6 +59,10 @@ def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False):
 	*debug* : boolean
 		Whether to print the scores/moves of the
 		algorithm as its happening.
+
+	Returns
+	-------
+	*bn* : a BayesNet object
 	"""
 	nrow = data.shape[0]
 	ncol = data.shape[1]
@@ -92,20 +96,22 @@ def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False):
 		for u in bn.nodes():
 			for v in bn.nodes():
 				if v not in c_dict[u] and u!=v and not would_cause_cycle(c_dict, u, v):
-					# SCORE FOR 'V' -> gaining a parent
-					old_cols = (v,) + tuple(p_dict[v]) # without 'u' as parent
-					mi_old = mutual_information(data[:,old_cols])
-					new_cols = old_cols + (u,) # with'u' as parent
-					mi_new = mutual_information(data[:,new_cols])
-					delta_score = nrow * (mi_old - mi_new)
+					# FOR MMHC ALGORITHM -> Edge Restrictions
+					if restriction is None or (u,v) in restriction:
+						# SCORE FOR 'V' -> gaining a parent
+						old_cols = (v,) + tuple(p_dict[v]) # without 'u' as parent
+						mi_old = mutual_information(data[:,old_cols])
+						new_cols = old_cols + (u,) # with'u' as parent
+						mi_new = mutual_information(data[:,new_cols])
+						delta_score = nrow * (mi_old - mi_new)
 
-					if delta_score > max_delta:
-						if debug:
-							print 'Improved Arc Addition: ' , (u,v)
-							print 'Delta Score: ' , delta_score
-						max_delta = delta_score
-						max_operation = 'Addition'
-						max_arc = (u,v)
+						if delta_score > max_delta:
+							if debug:
+								print 'Improved Arc Addition: ' , (u,v)
+								print 'Delta Score: ' , delta_score
+							max_delta = delta_score
+							max_operation = 'Addition'
+							max_arc = (u,v)
 
 		### TEST ARC DELETIONS ###
 		for u in bn.nodes():

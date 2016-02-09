@@ -29,7 +29,8 @@ def mmpc(data, alpha=0.05):
 	*data* : a numpy ndarray
 
 	*alpha* : a float
-		Probability of Type II Error
+		Probability of Type II Error for
+		independence tests
 
 	Returns
 	-------
@@ -84,6 +85,13 @@ def mmpc(data, alpha=0.05):
 
 		# ADD CPC TO CPC_dict
 		CPC_dict[T] = CPC
+
+	# REMOVE FALSE POSITIVES
+	for T in nodes:
+		for X in CPC_dict[T]:
+			# If X is in CPC[T] but T is not in CPC[X], remove X.
+			if T not in CPC_dict[X]:
+				CPC_dict[T].remove(X)
 
 	return CPC_dict
 
