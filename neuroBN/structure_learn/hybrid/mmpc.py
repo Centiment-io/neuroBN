@@ -12,6 +12,11 @@ Max-Min Hill Climbing algorithm. In other
 words, MMPC can be viewed as a subroutine
 of MMHC.
 
+References
+----------
+[1] Tsamardinos, et al. "The max-min hill-climbing Bayesian
+network structure learning algorithm."
+
 """
 
 

@@ -1,6 +1,11 @@
 """
 Max-Min Hill Climbing Algorithm
 
+References
+----------
+[1] Tsamardinos, et al. "The max-min hill-climbing Bayesian
+network structure learning algorithm."
+
 """
 from neuroBN.structure_learn.hybrid.mmpc import mmpc
 
