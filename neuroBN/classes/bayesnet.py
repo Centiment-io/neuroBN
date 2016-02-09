@@ -48,7 +48,7 @@ class BayesNet(object):
 
     """
 
-    def __init__(self, E=None):
+    def __init__(self, E=None, value_dict=None):
         """
         Initialize the BayesNet class.
 
@@ -72,7 +72,7 @@ class BayesNet(object):
         """
         if E is not None:
             #assert (value_dict is not None), 'Must set values if E is set.'
-            self.set_structure(E)
+            self.set_structure(E, value_dict)
         else:
             self.V = list
             self.E = dict
@@ -297,7 +297,7 @@ class BayesNet(object):
 
 
 
-    def set_structure(self, edge_dict):
+    def set_structure(self, edge_dict, value_dict=None):
         """
         Set the structure of a BayesNet object. This
         function is mostly used to instantiate a BN
@@ -341,6 +341,8 @@ class BayesNet(object):
                 'cpt': [],
                 'values': []
             }
+            if value_dict is not None:
+                self.F[rv]['values'] = value_dict[rv]
 
     def adj_list(self):
         """

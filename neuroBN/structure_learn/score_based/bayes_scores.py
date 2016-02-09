@@ -9,45 +9,109 @@ Bayesian scoring functions:
 	BDeu ("'u'" for uniform joint distribution) (1991)
 	K2 (1992)
 """
+from __future__ import division
+
 import numpy as np
 from scipy.special import gamma, gammaln
-from neuroBN.parameter_lean.mle import mle_estimator
+from neuroBN.parameter_learn.mle import mle_estimator, mle_fast
+from neuroBN.classes.empiricaldistribution import EmpiricalDistribution
 
-
-def BDe(bn, data, ess): 
+def BDe(bn, data, ess=1, ed=None): 
 	"""
 	Unique Bayesian score with the property that I-equivalent
 	networks have the same score.
 
 	As Data Rows -> infinity, BDe score converges to the BIC score.
 
+	Arguments
+	---------
+	*bn* : a BayesNet object
+		Needed to get the parent relationships, etc.
+	
+	*data* : a numpy ndarray
+		Needed to learn the empirical distribuion
+	
+	*ess* : an integer
+		Equivalent sample size
 
-	NOTES
+	*ed* : an EmpiricalDistribution object
+		Used to cache multiple lookups in structure learning.
+
+	Notes
 	-----
-	r_i : the cardinality of variable i ==> bn.card(rv)
-	q_i : product of cardinalities of i's parents ==> len(bn.cpt(rv))/bn.card(rv)
-	Theta_ijk = fraction of instances for variable i where r_i=k and q_i=j
-	Theta_ij = sum of Theta_ijk over all states r_i of variable i where q_i=j
-	N_ijk = the number of cases in the data where x_i=k and q_i=j
-	N_ij = sum of N_ijk over all states r_i of variable i where q_i=j in the data
+	*a_ijk* : a vector
+		The number of times where x_i=k | parents(x_i)=j -> i.e. the mle counts
 
-	alpha : equivalent sample size
-	alpha(x, pa(x)) = alpha*P(x,pa(x))
+	*a_ij* : a vector summed over k's in a_ijk
+
+	*n_ijk* : a vector prior (sample size or calculation)
+		"ess" for BDe metric
+
+	*n_ij* : a vector prior summed over k's in n_ijk
+	
 	"""
-	cont_table = mle_estimator(bn, data, counts=True)
+	counts_dict = mle_fast(bn, data, counts=True)
+	a_ijk = []
+	for rv, value in counts_dict.items():
+		cpt = value['cpt']
+		a_ijk.extend(cpt)
+		a_ij.extend([sum(cpt[i:(i+bn.card(rv))]) for i in range(len(cpt)/bn.card(rv))])
+		n_ijk.extend([ess]*len(cpt))
+		n_ij.extend([ess*bn.card(rv)]*(len(cpt)/bn.card(rv)))
 
-	flat_cpt = equiv_sample*bn.flat_cpt()
-	flat_var_cpt = equiv_sample*bn.flat_cpt(by_parents=True)
+	lhs = np.prod(gamma(a_ij) / gamma(a_ij + n_ij))
+	rhs = np.prod(gamma(a_ijk + n_ijk) / gamma(a_ijk))
+	bde = lhs*rhs
 
-	bde = np.prod(gamma(flat_cpt) / (gamma(flat_cpt+1))) * np.prod(gamma(flat_cpt+1)/gamma(flat_cpt))
 	return bde
 
 
-def BDeu(bn):
+def BDeu(bn, data, ess=1, ed=None):
 	"""
-	Uniform prior on the structure.
-	"""
-	pass
+	Unique Bayesian score with the property that I-equivalent
+	networks have the same score.
 
-def K2(bn):
-	pass
+	As Data Rows -> infinity, BDe score converges to the BIC score.
+
+	Arguments
+	---------
+	*bn* : a BayesNet object
+		Needed to get the parent relationships, etc.
+	
+	*data* : a numpy ndarray
+		Needed to learn the empirical distribuion
+	
+	*ess* : an integer
+		Equivalent sample size
+
+	*ed* : an EmpiricalDistribution object
+		Used to cache multiple lookups in structure learning.
+
+	Notes
+	-----
+	*a_ijk* : a vector
+		The number of times where x_i=k | parents(x_i)=j -> i.e. the mle counts
+
+	*a_ij* : a vector summed over k's in a_ijk
+
+	*n_ijk* : a vector prior (sample size or calculation)
+		ess/(card(x_i)*len(cpt(x_i)/card(x_i))) for x_i for BDe metric
+
+	*n_ij* : a vector prior summed over k's in n_ijk
+	
+	"""
+	counts_dict = mle_fast(bn, data, counts=True)
+	a_ijk = []
+	for rv, value in counts_dict.items():
+		cpt = value['cpt']
+		a_ijk.extend(cpt)
+		a_ij.extend([sum(cpt[i:(i+bn.card(rv))]) for i in range(len(cpt)/bn.card(rv))])
+		_ess = ess / (bn.card(rv)*(len(cpt)/bn.card(rv)))
+		n_ijk.extend([_ess]*len(cpt))
+		n_ij.extend([_ess*bn.card(rv)]*(len(cpt)/bn.card(rv)))
+
+	lhs = np.prod(gamma(a_ij) / gamma(a_ij + n_ij))
+	rhs = np.prod(gamma(a_ijk + n_ijk) / gamma(a_ijk))
+	bde = lhs*rhs
+
+	return bde

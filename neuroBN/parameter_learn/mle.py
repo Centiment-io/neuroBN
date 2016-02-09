@@ -11,6 +11,56 @@ __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
 import numpy as np
 
+def mle_fast(bn, data, nodes=None, counts=False):
+	"""
+	Maximum Likelihood estimation that is about 100 times as
+	fast as the original mle_estimator function - but returns
+	the same result
+	"""
+	def merge_cols(data, cols):
+		if len(cols) == 1:
+			return data[:,cols[0]]
+		elif len(cols) > 1:
+			data = data[:,cols].astype('str')
+			ncols = len(cols)
+			for i in xrange(len(data)):
+				data[i,0] = ''.join(data[i,0:ncols])
+			data = data.astype('int')
+			return data[:,0]
+
+	if nodes is None:
+		nodes = list(bn.nodes())
+	else:
+		if not isinstance(nodes, list):
+			nodes = list(nodes)
+
+	F = dict([(rv, {}) for rv in nodes])
+	for i, n in enumerate(nodes):
+		F[n]['values'] = list(np.unique(data[:,i]))
+		bn.F[n]['values'] = list(np.unique(data[:,i]))
+
+	for rv in nodes:
+		parents = bn.parents(rv)
+		if len(parents)==0:
+			F[rv]['cpt'] = list(np.histogram(data[:,rv], bins=bn.card(rv))[0])
+		else:
+			F[rv]['cpt'] = list(np.histogram2d(merge_cols(data,parents),data[:,rv], 
+				bins=[np.prod([bn.card(p) for p in parents]),bn.card(rv)])[0].flatten())
+	if counts:
+		return F
+	else:
+		for rv in nodes:
+			F[rv]['parents'] = [var for var in nodes if rv in bn.E[var]]
+			for i in range(0,len(F[rv]['cpt']),bn.card(rv)):
+				temp_sum = float(np.sum(F[rv]['cpt'][i:(i+bn.card(rv))]))
+				for j in range(bn.card(rv)):
+					F[rv]['cpt'][i+j] /= (temp_sum+1e-7)
+					F[rv]['cpt'][i+j] = round(F[rv]['cpt'][i+j],5)
+		bn.F = F
+
+
+
+
 def mle_estimator(bn, data, nodes=None, counts=False):
 	"""
 	Maximum Likelihood Estimation is a frequentist
@@ -81,7 +131,9 @@ def mle_estimator(bn, data, nodes=None, counts=False):
 		if not isinstance(nodes, list):
 			nodes = list(nodes)
 
+	F = dict([(rv, {}) for rv in nodes])
 	for i, n in enumerate(nodes):
+		F[n]['values'] = list(np.unique(data[:,i]))
 		bn.F[n]['values'] = list(np.unique(data[:,i]))
 
 	obs_dict = dict([(rv,[]) for rv in nodes])
@@ -89,6 +141,7 @@ def mle_estimator(bn, data, nodes=None, counts=False):
 	for rv in nodes:
 		# get number of values in the CPT = product of scope vars' cardinalities
 		p_idx = int(np.prod([bn.card(p) for p in bn.parents(rv)])*bn.card(rv))
+		F[rv]['cpt'] = [0]*p_idx
 		bn.F[rv]['cpt'] = [0]*p_idx
 	
 	# loop through each row of data
@@ -102,16 +155,19 @@ def mle_estimator(bn, data, nodes=None, counts=False):
 		for rv in nodes:
 			rv_dict= { n: obs_dict[n] for n in obs_dict if n in bn.scope(rv) }
 			offset = bn.cpt_indices(target=rv,val_dict=rv_dict)[0]
-			bn.F[rv]['cpt'][offset]+=1
+			F[rv]['cpt'][offset]+=1
 
-	
-	for rv in nodes:
-		cpt = bn.cpt(rv)
-		for i in range(0,len(bn.cpt(rv)),bn.card(rv)):
-			temp_sum = float(np.sum(cpt[i:(i+bn.card(rv))]))
-			for j in range(bn.card(rv)):
-				cpt[i+j] /= (temp_sum+1e-7)
-				cpt[i+j] = round(cpt[i+j],5)
+	if counts:
+		return F
+	else:
+		for rv in nodes:
+			F[rv]['parents'] = [var for var in nodes if rv in bn.E[var]]
+			for i in range(0,len(F[rv]['cpt']),bn.card(rv)):
+				temp_sum = float(np.sum(F[rv]['cpt'][i:(i+bn.card(rv))]))
+				for j in range(bn.card(rv)):
+					F[rv]['cpt'][i+j] /= (temp_sum+1e-7)
+					F[rv]['cpt'][i+j] = round(F[rv]['cpt'][i+j],5)
+		bn.F = F
 
 
 
