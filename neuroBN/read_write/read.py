@@ -215,7 +215,7 @@ def read_json(path):
 
     return bn
 
-def read_mat(path):
+def read_mat(path, delim=' '):
     """
     Read an adjacency matrix into a BayesNet object.
 
@@ -229,7 +229,7 @@ def read_mat(path):
     _F = {}
     with open(path, 'r') as f:
         for line in f:
-            line = line.split(' ')
+            line = line.split(delim)
             rv = line[0]
             _E[rv] = []
 

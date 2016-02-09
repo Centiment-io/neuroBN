@@ -1,5 +1,7 @@
 """
-Wrapper for Structure Learning
+Wrapper for Structure Learning.
+
+NOTE: This is not currently updated.
 """
 
 from neuroBN.structure_learn import *

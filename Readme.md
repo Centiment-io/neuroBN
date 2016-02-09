@@ -84,10 +84,15 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 | Chow-Liu	|
 
 <h4>Hybrid Structure Leanring</h4>
-| Algorithm |
+| Algorithms |
 | --------- |
 | MMPC		|
 | MMHC		|
+
+<h4>Exact Structure Learning</h4>
+| Algorithms |
+| ---------- |
+| GOBNILP Solver |
 
 <h4>Parameter Learning</h4>
 | Frequentist | Bayesian |
