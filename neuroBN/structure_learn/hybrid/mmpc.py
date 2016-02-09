@@ -15,16 +15,97 @@ of MMHC.
 """
 
 
-def mmpc(data, names=None):
+def mmpc(data, alpha=0.05):
+	"""
+	Max-Min Parents and Children Algorithm
+	for determining the Parent-Children set
+	for all nodes. This returns an unoriented
+	graph that then must be oriented using
+	some set of rules or other orientation
+	algorithm.
+
+	Arguments
+	---------
+	*data* : a numpy ndarray
+
+	*alpha* : a float
+		Probability of Type II Error
+
+	Returns
+	-------
+	*CPC_dict* : a dictionary, where
+		key = rv, value = list of rv's children AND parents
+
+	Notes
+	-----
+	"""
+
 	nrow = data.shape[0]
 	ncol = data.shape[1]
 	
-	if names is not None:
-		names = range(ncol)
-	else:
-		assert(len(names)==ncol), 'names argument must be same length as data columns'
+	nodes = range(ncol)
 
-	edge_dict = dict([(n,[]) for n in names]) # rv -> children of rvs
-	value_dict = dict([(n, np.unique(data[:,i])) for i,n in enumerate(names)])
+	CPC_dict = dict([(n,[]) for n in nodes]) # rv -> children of rvs
+	value_dict = dict([(n, np.unique(data[:,i])) for i,n in enumerate(nodes)])
 
-	
+	# LEARN PARENT-CHILD SET FOR EACH NODE
+	for T in nodes:
+		
+		# GROW PHASE
+		CPC = []
+		changed=True
+		while changed:
+			changed=False
+			# MAX-MIN HEURISTIC
+			min_assoc = 1e9
+			min_node = None
+			for x in nodes:
+				if x!=T:
+					cols = (x,T) + tuple(CPC)
+					pval = mi_test(data[:,cols], test=True)
+				if pval < min_assoc:
+					min_assoc = pval
+					min_node = x
+			# only add node if it's small but still dependent
+			if min_assoc > alpha:
+				CPC.append(min_node)
+				changed=True
+
+		# SHRINK PHASE
+		for X in CPC:
+			cpc = [c for c in CPC if X!=c]
+			for i in len(cpc):
+				for S in itertools.combinations(cpc,i):
+					cols = (T,X) + S
+					pval = mi_test(data[:,cols])
+					# if I(X,T | S) = TRUE
+					if pval_xy_z > alpha:
+						CPC.remove(X)
+
+		# ADD CPC TO CPC_dict
+		CPC_dict[T] = CPC
+
+	return CPC_dict
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
