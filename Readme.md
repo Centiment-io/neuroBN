@@ -106,6 +106,15 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 | Naive Bayes    | MAP Inference Classification |
 | Tree-Augmented Naive Bayes   |  |
 
+<h4>Multi-Dimensional Classification</h4>
+| Class/Feature Sugraphs |
+| ---------------------- |
+| Empty |
+| Directed Tree |
+| Polytree |
+| Forest |
+| General DAG |
+
 <h4>Comparing Two Bayesian Networks</h4>
 | Structure-Based Distance Metrics   | Parameter-Based Distance Metrics  | 
 | ------------- | ------------- | 

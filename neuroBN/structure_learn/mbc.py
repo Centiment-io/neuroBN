@@ -49,13 +49,8 @@ __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 def mbc(data, f_cols, c_cols, f_struct='DAG', c_struct='DAG'):
 	"""
 
+	"""
 	pass
-
-
-
-
-
-
 
 
 
