@@ -101,12 +101,10 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 | Tree-Augmented Naive Bayes   |  |
 
 <h4>Multi-Dimensional Classification</h4>
-| Class/Feature Sugraphs |
+| Class/Feature Subgraphs |
 | ---------------------- |
 | Empty |
-| Directed Tree |
-| Polytree |
-| Forest |
+| Tree/Polytree/Forest |
 | General DAG |
 
 <h4>Comparing Two Bayesian Networks</h4>
