@@ -60,6 +60,9 @@ def tabu(data, k=5, metric='AIC', max_iter=100, debug=False, restriction=None):
 		Whether to print the scores/moves of the
 		algorithm as its happening.
 
+	*restriction* : a list of 2-tuples
+		For MMHC algorithm, the list of allowable edge additions.
+
 	Returns
 	-------
 	*bn* : a BayesNet object

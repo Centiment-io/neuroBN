@@ -35,7 +35,7 @@ from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 
 
-def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False, restriction=None):
+def hc_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False, restriction=None):
 	"""
 	Arguments
 	---------
@@ -59,6 +59,9 @@ def hill_climbing_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False, re
 	*debug* : boolean
 		Whether to print the scores/moves of the
 		algorithm as its happening.
+
+	*restriction* : a list of 2-tuples
+		For MMHC algorithm, the list of allowable edge additions.
 
 	Returns
 	-------

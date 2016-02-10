@@ -46,11 +46,72 @@ Network Classifiers."
 
 __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
-def mbc(data, f_cols, c_cols, f_struct='DAG', c_struct='DAG'):
+from neuroBN.structure_learn.score_based.hill_climbing import hc
+from neuroBN.structure_learn.score_based.random_restarts import hc_rr
+from neuroBN.structure_learn.score_based.tabu import tabu
+
+from neuroBN.classes.bayesnet import BayesNet
+
+
+def bridge(c_bn, f_bn, data):
 	"""
+	Bridge two Bayesian network structures by placing edges
+	from c_bn -> f_bn using a heuristic optimization procedure.
+
+	This can be used to create a Multi-Dimensional Bayesian
+	Network classifier from two already-learned Bayesian networks -
+	one of which is a BN containing all the class variables, the other
+	containing all the feature variables.
+
+	Arguments
+	---------
+	*c_bn* : a BayesNet object with known structure
+
+	*f_bn* : a BayesNet object with known structure.
+
+	Returns
+	-------
+	*m_bn* : a merged/bridge BayesNet object,
+		whose structure contains *c_bn*, *f_bn*, and some bridge
+		edges between them.
+	"""
+	restrict = []
+	for u in c_bn:
+		for v in f_bn:
+			restrict.append((u,v)) # only allow edges from c_bn -> f_bn
+
+	bridge_bn = hc_rr(data, restriction=restrict)
+
+	m_bn = bridge_bn.E
+	m_bn.update(c_bn.E)
+	m_bn.update(f_bn.E)
+
+	mbc_bn = BayesNet(E=m_bn)
+
+	
+
+def mbc(data, f_cols, c_cols, f_struct='DAG', c_struct='DAG', wrapper=False):
+	"""
+	Learn the structure of a Multi-Dimensional Bayesian Network
+	Classifier.
+
+	Note that this structure does not have to be used for classification,
+	since it simply returns a Bayesian Network - albeit with a more
+	unqiue structure than tradiitonally found. If there are any other
+	applications of this bipartite-like BN structure learning, this
+	algorithm can certainly be used.
 
 	"""
-	pass
+	f_data = data[:,f_cols]
+	c_data = data[:,c_cols]
+
+	f_bn = hc_rr(f_data)
+	c_bn = hc_rr(c_data)
+
+	mbc_bn = bridge(c_bn=c_bn, f_bn=f_bn, data=data)
+
+	return mbc_bn
+
 
 
 

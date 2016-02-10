@@ -13,7 +13,7 @@ from __future__ import division
 import numpy as np
 from neuroBN.inference.marginal_approx import marginal_lws_a
 
-def mbc_predict(data, targets, classifier=None, c_struct='DAG',f_struct='DAG'):
+def mbc_predict(data, targets, classifier=None, c_struct='DAG',f_struct='DAG', wrapper=False):
 	pass
 
 def predict(data, target, classifier=None, method='nb'):
