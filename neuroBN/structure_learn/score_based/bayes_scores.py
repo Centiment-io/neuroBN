@@ -8,6 +8,12 @@ Bayesian scoring functions:
 	BDe ("'e'" for likelihood-equivalence) (1995)
 	BDeu ("'u'" for uniform joint distribution) (1991)
 	K2 (1992)
+
+References
+----------
+[1] Daly, et al. Learning Bayesian Network Equivalence Classes 
+with Ant Colony Optimization.
+
 """
 from __future__ import division
 
@@ -15,6 +21,7 @@ import numpy as np
 from scipy.special import gamma, gammaln
 from neuroBN.parameter_learn.mle import mle_estimator, mle_fast
 from neuroBN.classes.empiricaldistribution import EmpiricalDistribution
+
 
 def BDe(bn, data, ess=1, ed=None): 
 	"""
@@ -50,20 +57,18 @@ def BDe(bn, data, ess=1, ed=None):
 	*n_ij* : a vector prior summed over k's in n_ijk
 	
 	"""
-	counts_dict = mle_fast(bn, data, counts=True)
+	counts_dict = mle_fast(bn, data, counts=True, np=True)
 	a_ijk = []
+	bdeu = 1
 	for rv, value in counts_dict.items():
-		cpt = value['cpt']
-		a_ijk.extend(cpt)
-		a_ij.extend([sum(cpt[i:(i+bn.card(rv))]) for i in range(len(cpt)/bn.card(rv))])
-		n_ijk.extend([ess]*len(cpt))
-		n_ij.extend([ess*bn.card(rv)]*(len(cpt)/bn.card(rv)))
+		nijk = value['cpt']
+		nijk_prime = ess
+		k2 *= gamma(nijk+nijk_prime)/gamma(nijk_prime)
+		nij_prime = nijk_prime*(len(cpt)/bn.card(rv))
+		nij = np.mean(nijk.reshape(-1, bn.card(rv)), axis=1) # sum along parents
+		k2 *= gamma(nij_prime) / gamma(nij+nij_prime)
 
-	lhs = np.prod(gamma(a_ij) / gamma(a_ij + n_ij))
-	rhs = np.prod(gamma(a_ijk + n_ijk) / gamma(a_ijk))
-	bde = lhs*rhs
-
-	return bde
+	return bdeu
 
 
 def BDeu(bn, data, ess=1, ed=None):
@@ -72,6 +77,8 @@ def BDeu(bn, data, ess=1, ed=None):
 	networks have the same score.
 
 	As Data Rows -> infinity, BDe score converges to the BIC score.
+
+	Nijk_prime = ess/len(bn.cpt(rv))
 
 	Arguments
 	---------
@@ -100,18 +107,42 @@ def BDeu(bn, data, ess=1, ed=None):
 	*n_ij* : a vector prior summed over k's in n_ijk
 	
 	"""
-	counts_dict = mle_fast(bn, data, counts=True)
+	counts_dict = mle_fast(bn, data, counts=True, np=True)
 	a_ijk = []
+	bdeu = 1
 	for rv, value in counts_dict.items():
-		cpt = value['cpt']
-		a_ijk.extend(cpt)
-		a_ij.extend([sum(cpt[i:(i+bn.card(rv))]) for i in range(len(cpt)/bn.card(rv))])
-		_ess = ess / (bn.card(rv)*(len(cpt)/bn.card(rv)))
-		n_ijk.extend([_ess]*len(cpt))
-		n_ij.extend([_ess*bn.card(rv)]*(len(cpt)/bn.card(rv)))
+		nijk = value['cpt']
+		nijk_prime = ess / len(nijk)
+		k2 *= gamma(nijk+nijk_prime)/gamma(nijk_prime)
+		nij_prime = nijk_prime*(len(cpt)/bn.card(rv))
+		nij = np.mean(nijk.reshape(-1, bn.card(rv)), axis=1) # sum along parents
+		k2 *= gamma(nij_prime) / gamma(nij+nij_prime)
 
-	lhs = np.prod(gamma(a_ij) / gamma(a_ij + n_ij))
-	rhs = np.prod(gamma(a_ijk + n_ijk) / gamma(a_ijk))
-	bde = lhs*rhs
+	return bdeu
 
-	return bde
+def K2(bn, data, ed=None):
+	"""
+	K2 is bayesian posterior probability of structure given the data,
+	where N'ijk = 1.
+	"""
+	counts_dict = mle_fast(bn, data, counts=True, np=True)
+	a_ijk = []
+	k2 = 1
+	for rv, value in counts_dict.items():
+		nijk = value['cpt']
+		nijk_prime = 1
+		k2 *= gamma(nijk+nijk_prime)/gamma(nijk_prime)
+		nij_prime = nijk_prime*(len(cpt)/bn.card(rv))
+		nij = np.mean(nijk.reshape(-1, bn.card(rv)), axis=1) # sum along parents
+		k2 *= gamma(nij_prime) / gamma(nij+nij_prime)
+
+	return k2
+
+
+
+
+
+
+
+
+

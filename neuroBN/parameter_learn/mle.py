@@ -11,7 +11,7 @@ __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
 import numpy as np
 
-def mle_fast(bn, data, nodes=None, counts=False):
+def mle_fast(bn, data, nodes=None, counts=False, np=False):
 	"""
 	Maximum Likelihood estimation that is about 100 times as
 	fast as the original mle_estimator function - but returns
@@ -42,10 +42,17 @@ def mle_fast(bn, data, nodes=None, counts=False):
 	for rv in nodes:
 		parents = bn.parents(rv)
 		if len(parents)==0:
-			F[rv]['cpt'] = list(np.histogram(data[:,rv], bins=bn.card(rv))[0])
+			if np:
+				F[rv]['cpt'] = np.histogram(data[:,rv], bins=bn.card(rv))[0]
+			else:
+				F[rv]['cpt'] = list(np.histogram(data[:,rv], bins=bn.card(rv))[0])
 		else:
-			F[rv]['cpt'] = list(np.histogram2d(merge_cols(data,parents),data[:,rv], 
-				bins=[np.prod([bn.card(p) for p in parents]),bn.card(rv)])[0].flatten())
+			if np:
+				F[rv]['cpt'] = np.histogram2d(merge_cols(data,parents),data[:,rv], 
+				bins=[np.prod([bn.card(p) for p in parents]),bn.card(rv)])[0].flatten()
+			else:
+				F[rv]['cpt'] = list(np.histogram2d(merge_cols(data,parents),data[:,rv], 
+					bins=[np.prod([bn.card(p) for p in parents]),bn.card(rv)])[0].flatten())
 	if counts:
 		return F
 	else:
