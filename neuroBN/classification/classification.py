@@ -10,6 +10,8 @@ classifiers.
 """
 from __future__ import division
 
+__author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
+
 import numpy as np
 from neuroBN.inference.marginal_approx import marginal_lws_a
 

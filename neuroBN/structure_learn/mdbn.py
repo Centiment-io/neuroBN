@@ -55,8 +55,10 @@ from neuroBN.classes.bayesnet import BayesNet
 
 def bridge(c_bn, f_bn, data):
 	"""
-	Bridge two Bayesian network structures by placing edges
-	from c_bn -> f_bn using a heuristic optimization procedure.
+	Make a Multi-Dimensional Bayesian Network by
+	bridging two Bayesian network structures. This happens by
+	placing edges from c_bn -> f_bn using a heuristic 
+	optimization procedure.
 
 	This can be used to create a Multi-Dimensional Bayesian
 	Network classifier from two already-learned Bayesian networks -
@@ -88,25 +90,10 @@ def bridge(c_bn, f_bn, data):
 
 	mbc_bn = BayesNet(E=m_bn)
 
-def wrapper(mbc, data):
+def mdbn(data, f_cols, c_cols, f_struct='DAG', c_struct='DAG', wrapper=False):
 	"""
-	Use hill climbing (or another optimization technique) to add/delete/reverse
-	arcs in a Multi-Dimensional Bayesian Network Classifier such that the move
-	with the highest increase in classifier accuracy is chosen. If there is no
-	move that increases the accuracy of the classifier, the algorithm terminates.
-
-	Clearly, this algorithm is different than traditional structure learning
-	approaches because it tunes explicitly for classifier accuracy. By the same
-	token, it is not clear the extent to which the wrapper algorithm encourages
-	or even causes overfitting and thus lack of classifier generalization. That
-	is an interesting question to research.
-	"""
-	pass
-
-def mbc(data, f_cols, c_cols, f_struct='DAG', c_struct='DAG', wrapper=False):
-	"""
-	Learn the structure of a Multi-Dimensional Bayesian Network
-	Classifier.
+	Learn the structure of a Multi-Dimensional Bayesian Network - 
+	typically used for Classification.
 
 	Note that this structure does not have to be used for classification,
 	since it simply returns a Bayesian Network - albeit with a more

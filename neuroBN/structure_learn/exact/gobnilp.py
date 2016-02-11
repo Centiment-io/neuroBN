@@ -21,10 +21,10 @@ requirements).
 __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
 def learn_gobnilp(data, settings=None, edge_reqs=None, nonedge_reqs=None, ind_reqs=None):
-	try:
-		from pyGOBN import *
-	except ImportError:
-		print 'Failed to import pyGOBN.'
+	#try:
+	#	from pyGOBN import *
+	#except ImportError:
+	#	print 'Failed to import pyGOBN.'
 
 	gobn = GOBN()
 	gobn.set_settings(settings)
