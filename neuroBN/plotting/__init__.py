@@ -1,1 +1,1 @@
-from neuroBN.plotting.draw import *
+from neuroBN.plotting.plot import *
