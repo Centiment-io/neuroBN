@@ -74,9 +74,9 @@ class BayesNet(object):
             #assert (value_dict is not None), 'Must set values if E is set.'
             self.set_structure(E, value_dict)
         else:
-            self.V = list
-            self.E = dict
-            self.F = dict
+            self.V = []
+            self.E = {}
+            self.F = {}
 
     def __eq__(self, y):
         """
