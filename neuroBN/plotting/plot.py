@@ -1,9 +1,9 @@
 """
-*******
-Drawing 
-*******
+********
+Plotting 
+********
 
-Code for drawing BayesNet objects, built on
+Code for plotting BayesNet objects, built on
 the graphviz framework.
 """
 
@@ -49,26 +49,26 @@ def plot_inline(bn, h=350, w=450):
 		else:
 			return False, output
 
-	cmd = ['mkdir' , 'neuroBN/drawing/images']
+	cmd = ['mkdir' , 'neuroBN/plotting/images']
 	p = execute(cmd)
 
 	G = nx.DiGraph(bn.E)
-	write_dot(G,"neuroBN/drawing/images/bn.dot")
+	write_dot(G,"neuroBN/plotting/images/bn.dot")
 
 	cmd = ['/usr/local/bin/dot', '-Tpng' , 
-	'neuroBN/drawing/images/bn.dot', 
-	'>neuroBN/drawing/images/bn.png']
+	'neuroBN/plotting/images/bn.dot', 
+	'>neuroBN/plotting/images/bn.png']
 	p = execute(cmd)
 	
-	im = Image.open("neuroBN/drawing/images/bn.png")
+	im = Image.open("neuroBN/plotting/images/bn.png")
 	out = im.resize((w,h))
 
-	cmd = ['rm' , '-r', 'neuroBN/drawing/images']
+	cmd = ['rm' , '-r', 'neuroBN/plotting/images']
 	p = execute(cmd)
 
 	return out
 
-def plot_gv(bn):
+def plot_gv(bn, save=False):
 	def execute(command):
 		command = ' '.join(command)
 		process = subprocess.Popen(command, 
@@ -84,25 +84,26 @@ def plot_gv(bn):
 		else:
 			return False, output
 
-	cmd = ['mkdir' , 'neuroBN/drawing/images']
+	cmd = ['mkdir' , 'neuroBN/plotting/images']
 	p = execute(cmd)
 
 	G = nx.DiGraph(bn.E)
-	write_dot(G,"neuroBN/drawing/images/bn.dot")
+	write_dot(G,"neuroBN/plotting/images/bn.dot")
 
 	cmd = ['/usr/local/bin/dot', '-Tpng' , 
-	'neuroBN/drawing/images/bn.dot', 
-	'>neuroBN/drawing/images/bn.png']
+	'neuroBN/plotting/images/bn.dot', 
+	'>neuroBN/plotting/images/bn.png']
 
 	p = execute(cmd)
 	plt.figure(facecolor="white")
-	img=mpimg.imread('neuroBN/drawing/images/bn.png')
+	img=mpimg.imread('neuroBN/plotting/images/bn.png')
 	_img = plt.imshow(img, aspect='auto')
 	plt.axis('off')
 	plt.show(_img)
 
-	cmd = ['rm' , '-r', 'neuroBN/drawing/images']
-	p = execute(cmd)
+	if not save:
+		cmd = ['rm' , '-r', 'neuroBN/plotting/images']
+		p = execute(cmd)
 
 
 
