@@ -21,6 +21,8 @@ import subprocess
 import sys
 from PIL import Image
 		
+def plot(bn, save=False):
+	plot_gv(bn, save=save)
 
 def plot_nx(bn,**kwargs):
 	"""
@@ -33,7 +35,10 @@ def plot_nx(bn,**kwargs):
 	plt.axis('off')
 	plt.show()
 
-def plot_inline(bn, h=350, w=450):
+def iplot(bn, h=350, w=450):
+	"""
+	Inline Plotting of a BayesNet object
+	"""
 	def execute(command):
 		command = ' '.join(command)
 		process = subprocess.Popen(command, 
@@ -103,6 +108,9 @@ def plot_gv(bn, save=False):
 
 	if not save:
 		cmd = ['rm' , '-r', 'neuroBN/plotting/images']
+		p = execute(cmd)
+	else:
+		cmd = ['rm', '-r', 'neuroBN/plotting/images/bn.dot']
 		p = execute(cmd)
 
 

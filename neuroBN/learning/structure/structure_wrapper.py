@@ -4,7 +4,7 @@ Wrapper for Structure Learning.
 NOTE: This is not currently updated.
 """
 
-from neuroBN.structure_learn import *
+from neuroBN.learning.structure import *
 
 
 def learn_structure(data, method, target=None, feature_selection=None):

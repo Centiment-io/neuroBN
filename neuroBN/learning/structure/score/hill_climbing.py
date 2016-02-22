@@ -34,7 +34,7 @@ from copy import copy, deepcopy
 from neuroBN.classes.bayesnet import BayesNet
 from neuroBN.learning.parameter.mle import mle_estimator
 from neuroBN.learning.parameter.bayes import bayes_estimator
-#from neuroBN.structure_learn.score_based.scores import structure_score
+from neuroBN.learning.structure.score.info_scores import info_score
 from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 
@@ -114,7 +114,7 @@ def hill_climbing(data, metric='AIC', max_iter=100, debug=False, restriction=Non
 	value_dict = dict([(n, np.unique(data[:,i])) for i,n in enumerate(names)])
 	bn = BayesNet(c_dict)
 	mle_estimator(bn, data)
-	max_score = structure_score(bn, nrow, metric)
+	max_score = info_score(bn, nrow, metric)
 
 	# CREATE EMPIRICAL DISTRIBUTION OBJECT FOR CACHING
 	#ED = EmpiricalDistribution(data,names)
@@ -243,7 +243,7 @@ def hc(data, metric='BIC', max_iter=20, debug=False):
 	SCORES DIRECTLY AND UPDATES ENTIRE DISTRIBUTION EACH
 	ITERATION - CAN BE IMPROVED BY ONLY CHECKING FAMILY SCORES,
 	AND ONLY PERFORMING PARAMETER LEARNING OVER THE NEW FAMILY.
-		-> FIX "mle_estimator" and "structure_score" for this.
+		-> FIX "mle_estimator" and "info_score" for this.
 
 	Arguments
 	---------
@@ -283,7 +283,7 @@ def hc(data, metric='BIC', max_iter=20, debug=False):
 	value_dict = dict([(n, np.unique(data[:,i])) for i,n in enumerate(names)])
 	bn = BayesNet(c_dict)
 	mle_estimator(bn, data)
-	max_score = structure_score(bn, nrow, metric)
+	max_score = info_score(bn, nrow, metric)
 
 	_iter = 0
 	improvement = True
@@ -304,7 +304,7 @@ def hc(data, metric='BIC', max_iter=20, debug=False):
 					bn1 = bn.copy()
 					bn1.remove_edge(u,v)
 					mle_estimator(bn1, data)
-					new_score = structure_score(bn1, nrow, metric)
+					new_score = info_score(bn1, nrow, metric)
 					if new_score > max_score:
 						if debug:
 							print 'Improved Arc Deletion: ' , (u,v)
@@ -321,7 +321,7 @@ def hc(data, metric='BIC', max_iter=20, debug=False):
 					bn1 = bn.copy()
 					bn1.add_edge(u,v)
 					mle_estimator(bn1, data)
-					new_score = structure_score(bn1, nrow, metric)
+					new_score = info_score(bn1, nrow, metric)
 					if new_score > max_score:
 						if debug:
 							print 'Improved Arc Addition: ' , (u,v)

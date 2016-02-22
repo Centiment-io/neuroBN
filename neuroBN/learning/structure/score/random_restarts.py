@@ -30,7 +30,7 @@ from copy import copy, deepcopy
 from neuroBN.classes.bayesnet import BayesNet
 from neuroBN.learning.parameter.mle import mle_estimator
 from neuroBN.learning.parameter.bayes import bayes_estimator
-#from neuroBN.learning.structure.score.scores import structure_score
+from neuroBN.learning.structure.score.info_scores import info_score
 from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 
@@ -81,7 +81,7 @@ def hc_rr(data, M=5, R=3, metric='AIC', max_iter=100, debug=False, restriction=N
 	value_dict = dict([(n, np.unique(data[:,i])) for i,n in enumerate(names)])
 	bn = BayesNet(c_dict)
 	mle_estimator(bn, data)
-	max_score = structure_score(bn, nrow, metric)
+	max_score = info_score(bn, nrow, metric)
 	
 
 	_iter = 0

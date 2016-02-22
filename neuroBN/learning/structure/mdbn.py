@@ -46,9 +46,9 @@ Network Classifiers."
 
 __author__ = """Nicholas Cullen <ncullen.th@dartmouth.edu>"""
 
-from neuroBN.structure_learn.score_based.hill_climbing import hc
-from neuroBN.structure_learn.score_based.random_restarts import hc_rr
-from neuroBN.structure_learn.score_based.tabu import tabu
+from neuroBN.learning.structure.score.hill_climbing import hc
+from neuroBN.learning.structure.score.random_restarts import hc_rr
+from neuroBN.learning.structure.score.tabu import tabu
 
 from neuroBN.classes.bayesnet import BayesNet
 
