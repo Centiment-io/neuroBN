@@ -28,9 +28,9 @@ import numpy as np
 from copy import copy, deepcopy
 
 from neuroBN.classes.bayesnet import BayesNet
-from neuroBN.parameter_learn.mle import mle_estimator
-from neuroBN.parameter_learn.bayes import bayes_estimator
-from neuroBN.structure_learn.score_based.scores import structure_score
+from neuroBN.learning.parameter.mle import mle_estimator
+from neuroBN.learning.parameter.bayes import bayes_estimator
+#from neuroBN.learning.structure.score.scores import structure_score
 from neuroBN.utils.independence_tests import mutual_information
 from neuroBN.utils.graph import would_cause_cycle
 

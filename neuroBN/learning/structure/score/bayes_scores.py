@@ -19,7 +19,7 @@ from __future__ import division
 
 import numpy as np
 from scipy.special import gamma, gammaln
-from neuroBN.parameter_learn.mle import mle_estimator, mle_fast
+from neuroBN.learning.parameter.mle import mle_estimator, mle_fast
 from neuroBN.classes.empiricaldistribution import EmpiricalDistribution
 
 
