@@ -48,7 +48,7 @@ class BayesNet(object):
 
     """
 
-    def __init__(self, file=None, E=None, value_dict=None):
+    def __init__(self, E=None, value_dict=None, file=None):
         """
         Initialize the BayesNet class.
 
@@ -337,7 +337,6 @@ class BayesNet(object):
         -----
 
         """
-        from neuroBN.utils.topsort import topsort
 
         self.V = topsort(edge_dict)
         self.E = edge_dict

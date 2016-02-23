@@ -1,4 +1,5 @@
 from neuroBN.utils.class_equivalence import *
+from neuroBN.utils.data import *
 from neuroBN.utils.discretize import *
 from neuroBN.utils.graph import *
 from neuroBN.utils.hybrid_distance import *
