@@ -10,6 +10,7 @@ string values back into the underlying representation
 after the learning occurs..
 """
 import numpy as np
+from copy import copy
 
 def replace_strings(data, return_values=False):
 	"""
@@ -20,13 +21,19 @@ def replace_strings(data, return_values=False):
 	string values so that they can be mapped back in
 	the actual BayesNet object when necessary.
 	"""
+	data = copy(data)
 	i = 0
+	value_dict = {}
 	for col in data.T:
-		a,b,c, = np.unique(col, True, True)
-		_,ret = np.unique(b[c], False, True)
+		vals,_,ret, = np.unique(col, True, True)
 		data[:,i] = ret
+		value_dict[i] = list(vals)
 		i+=1
-	return np.array(data,dtype=np.int32)
+
+	if return_values:
+		return np.array(data,dtype=np.int32), value_dict
+	else:
+		return np.array(data, dtype=np.int32)
 
 def unique_bins(data):
 	"""

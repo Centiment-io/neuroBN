@@ -169,7 +169,8 @@ def mi_test(data, test=True):
 	if len(bins)==2:
 		hist,_ = np.histogramdd(data, bins=bins[0:2]) # frequency counts
 
-		Pxy = hist / hist.sum()# joint probability distribution over X,Y,Z
+		#Pxy = hist / hist.sum()# joint probability distribution over X,Y,Z
+		Pxy = hist / data.shape[0]
 		Px = np.sum(Pxy, axis = 1) # P(X,Z)
 		Py = np.sum(Pxy, axis = 0) # P(Y,Z)	
 
@@ -197,7 +198,8 @@ def mi_test(data, test=True):
 		bins = unique_bins(data)
 		hist,_ = np.histogramdd(data, bins=bins) # frequency counts
 
-		Pxyz = hist / hist.sum()# joint probability distribution over X,Y,Z
+		#Pxyz = hist / hist.sum()# joint probability distribution over X,Y,Z
+		Pxyz = hist / data.shape[0]
 		Pz = np.sum(Pxyz, axis = (0,1)) # P(Z)
 		Pxz = np.sum(Pxyz, axis = 1) # P(X,Z)
 		Pyz = np.sum(Pxyz, axis = 0) # P(Y,Z)	
