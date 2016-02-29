@@ -58,9 +58,13 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 - Fast-IAMB	
 
 <h4>Score-Based Structure Learning</h4>
-- Greedy Hill Climbing
-- Tabu Search
-- Random Restarts
+- Algorithms
+	- Greedy Hill Climbing
+	- Tabu Search
+	- Random Restarts
+- Scoring Functions
+	- BIC/AIC/MDL
+	- BDe/BDeu/K2
 
 <h4>Tree-Based Structure Learning</h4>
 - Naive Bayes
