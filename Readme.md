@@ -113,6 +113,16 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 - Generate random sample dataset from a BN
 - Markov Blanket operations
 
+<h2>Usage</h2>
+To use this package, do the following:
+- download the zip file from the button in the upper-right corner of this page
+- unzip the folder
+- from the command line, change directories to be in the main neuroBN directory
+- install the package by running the following command:
+	- if you're using ipython shell, type "run setup.py install --user"
+	- if you're using normal command line, type "python setup.py install --user"
+	
+
 <h2>Call for Researchers</h2>
 If you are a neuroscience researcher or student who thinks the incredible learning/classification/inference functionality of Bayesian networks can add value to your work or want to see support for a specific type of data, please contact me and I will either a) answer questions or give advice on how to get the most out of neuroBN or b) work with you to build custom functionality that integrates your work with the neuroBN code. Email me at ncullen.th@dartmouth.edu.
 

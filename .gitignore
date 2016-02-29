@@ -7,3 +7,15 @@
 .spyderproject
 *.txt
 examples/
+
+
+# setup.py working directory
+build
+# sphinx build directory
+doc/_build
+# setup.py dist directory
+dist
+# Egg metadata
+*.egg-info
+.eggs
+neuroBN.egg-info
