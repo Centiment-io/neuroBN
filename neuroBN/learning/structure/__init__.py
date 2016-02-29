@@ -6,4 +6,3 @@ from neuroBN.learning.structure.score import *
 from neuroBN.learning.structure.tree import *
 
 from neuroBN.learning.structure.mdbn import *
-from neuroBN.learning.structure.structure_wrapper import *
