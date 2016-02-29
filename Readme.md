@@ -54,9 +54,7 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 - Algorithms
 	- PC
 	- Grow-Shrink
-	- IAMB
-	- Lambda-IAMB
-	- Fast-IAMB	
+	- IAMB/Lambda-IAMB/Fast-IAMB
 - Independence Tests
 	- Marginal Mutual Information
 	- Conditional Mutual Information
