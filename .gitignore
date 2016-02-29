@@ -8,6 +8,8 @@
 *.txt
 examples/*
 */examples
+data/*
+*/data
 
 
 # setup.py working directory
