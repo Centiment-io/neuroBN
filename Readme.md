@@ -51,11 +51,16 @@ The goal is to achieve full availability of state-of-the-art Bayesian network fu
 	- LP Relaxation
 
 <h4>Constraint-Based Structure Learning</h4>
-- PC Algorithm
-- Grow-Shrink
-- IAMB
-- Lambda-IAMB
-- Fast-IAMB	
+- Algorithms
+	- PC
+	- Grow-Shrink
+	- IAMB
+	- Lambda-IAMB
+	- Fast-IAMB	
+- Independence Tests
+	- Marginal Mutual Information
+	- Conditional Mutual Information
+	- Pearson Chi-Square
 
 <h4>Score-Based Structure Learning</h4>
 - Algorithms
