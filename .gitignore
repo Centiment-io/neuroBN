@@ -6,7 +6,8 @@
 .spyderworkspace
 .spyderproject
 *.txt
-examples/
+examples/*
+*/examples
 
 
 # setup.py working directory
